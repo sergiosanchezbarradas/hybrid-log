@@ -799,8 +799,46 @@ header {
   .header-stats { display:none; }
 }
 </style>
+<!-- Firebase CDN -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
+<!-- Loading overlay -->
+<div id="sync-overlay" style="
+  position:fixed; inset:0; z-index:9999;
+  background:rgba(5,7,9,0.97);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:16px;
+">
+  <div style="
+    font-family:'Unbounded',sans-serif;
+    font-size:14px; font-weight:900;
+    letter-spacing:4px; color:#00e5ff;
+  ">HYBRID<span style='color:#ff6b35'>.</span>LOG</div>
+  <div style="
+    font-family:'Space Mono',monospace;
+    font-size:11px; letter-spacing:3px;
+    color:#3a4d5e; text-transform:uppercase;
+  " id="sync-status">SYNCING WITH CLOUD...</div>
+  <div style="
+    width:120px; height:2px; background:#1c2530;
+    border-radius:1px; overflow:hidden; margin-top:4px;
+  ">
+    <div style="
+      width:40%; height:100%; background:#00e5ff;
+      animation: syncPulse 1.2s ease-in-out infinite;
+    "></div>
+  </div>
+</div>
+<style>
+  @keyframes syncPulse {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(350%); }
+  }
+</style>
+
 
 <!-- HEADER -->
 <header>
@@ -1121,7 +1159,32 @@ const DAYS = [
 // ══════════════════════════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════════════════════════
-let state = JSON.parse(localStorage.getItem('hybridLog') || '{}');
+// ══════════════════════════════════════════════════════════════
+// FIREBASE SETUP
+// ══════════════════════════════════════════════════════════════
+const firebaseConfig = {
+  apiKey: "AIzaSyDqD24vNHsjvMv268TEgXMKvX8Nv8Rh_Es",
+  authDomain: "training-log-50ca5.firebaseapp.com",
+  projectId: "training-log-50ca5",
+  storageBucket: "training-log-50ca5.firebasestorage.app",
+  messagingSenderId: "463715022923",
+  appId: "1:463715022923:web:625c799851a8edc2aeb5ce"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const DOC_REF = db.collection('trainingLogs').doc('main');
+
+// Flags for sync control
+let isLocalSave = false;
+let saveTimer = null;
+
+// Clean undefined values (Firestore rejects undefined)
+function cleanForFirestore(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+let state = {};
 /*
 state = {
   currentWeek: 1,
@@ -1146,7 +1209,17 @@ if (!state.streak)      state.streak      = 0;
 if (!state.streakDates) state.streakDates = [];
 
 function save() {
+  // Always save to localStorage immediately (fast local cache)
   localStorage.setItem('hybridLog', JSON.stringify(state));
+
+  // Debounced save to Firestore (300ms)
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    isLocalSave = true;
+    DOC_REF.set(cleanForFirestore(state))
+      .then(() => { /* synced */ })
+      .catch(err => console.warn('Firestore save failed:', err));
+  }, 300);
 }
 
 function sessionKey(week, day) { return `w${week}_d${day}`; }
@@ -1648,7 +1721,102 @@ function init() {
   }, 400);
 }
 
-init();
+// ══════════════════════════════════════════════════════════════
+// ASYNC LOAD FROM FIRESTORE, THEN INIT
+// ══════════════════════════════════════════════════════════════
+(async function boot() {
+  const overlay = document.getElementById('sync-overlay');
+  const status  = document.getElementById('sync-status');
+
+  let loaded = false;
+
+  try {
+    status.textContent = 'CONNECTING TO CLOUD...';
+    const doc = await DOC_REF.get();
+    if (doc.exists) {
+      const remote = doc.data();
+      // Merge remote into state
+      Object.assign(state, remote);
+      status.textContent = 'CLOUD DATA LOADED ✓';
+      loaded = true;
+    } else {
+      status.textContent = 'NO CLOUD DATA — CHECKING LOCAL...';
+    }
+  } catch (err) {
+    console.warn('Firestore load failed, using localStorage fallback:', err);
+    status.textContent = 'OFFLINE MODE — USING LOCAL DATA';
+  }
+
+  // Fallback to localStorage if Firestore was empty or failed
+  if (!loaded) {
+    try {
+      const local = JSON.parse(localStorage.getItem('hybridLog') || '{}');
+      Object.assign(state, local);
+    } catch(e) { /* ignore */ }
+  }
+
+  // Ensure defaults
+  if (!state.currentWeek) state.currentWeek = 1;
+  if (!state.currentDay)  state.currentDay  = 0;
+  if (!state.sessions)    state.sessions    = {};
+  if (!state.prs)         state.prs         = {};
+  if (!state.streak)      state.streak      = 0;
+  if (!state.streakDates) state.streakDates = [];
+
+  // Save to both (ensures local + cloud are in sync)
+  save();
+
+  // Remove loading overlay
+  setTimeout(() => {
+    if (overlay) {
+      overlay.style.transition = 'opacity 0.4s';
+      overlay.style.opacity = '0';
+      setTimeout(() => overlay.remove(), 400);
+    }
+  }, loaded ? 400 : 800);
+
+  // Initialize the app
+  init();
+
+  // ── REAL-TIME LISTENER ──
+  // Listens for changes from OTHER devices and updates this one
+  DOC_REF.onSnapshot(snapshot => {
+    if (isLocalSave) {
+      // This change came from us — skip re-render
+      isLocalSave = false;
+      return;
+    }
+    if (snapshot.exists) {
+      const remote = snapshot.data();
+      // Update state with remote data
+      state.currentWeek  = remote.currentWeek  || state.currentWeek;
+      state.sessions     = remote.sessions     || state.sessions;
+      state.prs          = remote.prs          || state.prs;
+      state.streak       = remote.streak       || state.streak;
+      state.streakDates  = remote.streakDates  || state.streakDates;
+
+      // Keep currentDay local (don't switch another device's view)
+      // state.currentDay stays as-is
+
+      // Update localStorage cache
+      localStorage.setItem('hybridLog', JSON.stringify(state));
+
+      // Re-render everything
+      renderWeekGrid();
+      renderSession();
+      renderStreak();
+      renderPRs();
+      renderHistory();
+      updateHeaderStats();
+      updateDeadliftChart();
+
+      showToast('☁️ SYNCED FROM ANOTHER DEVICE');
+    }
+  }, err => {
+    console.warn('Snapshot listener error:', err);
+  });
+
+})();
 </script>
 </body>
 </html>
