@@ -1,166 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Training Log — Hybrid Program</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Unbounded:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hybrid Log</title>
 
 <style>
-:root {
-  --bg: #050709;
-  --surface: #0a0e12;
-  --card: #0e1318;
-  --card2: #121820;
-  --border: #1c2530;
-  --border2: #243040;
-  --cyan: #00e5ff;
-  --orange: #ff6b35;
-  --green: #39ff14;
-  --yellow: #ffe030;
-  --red: #ff2d55;
-  --purple: #bf5fff;
-  --text: #e0eaf4;
-  --muted: #3a4d5e;
-  --muted2: #1e2d3a;
-  --lift: #1a0e06;
-  --run: #061a0e;
-  --vo2: #040e18;
-  --rest: #0a0e14;
-}
-
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Space Mono', monospace;
-  font-size: 13px;
-  min-height: 100vh;
-  overflow-x: hidden;
+  background:#050709;
+  color:#e0eaf4;
+  font-family: monospace;
+  padding:20px;
 }
 
-/* ── Scanline overlay ── */
-body::before {
-  content:'';
-  position:fixed; inset:0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,229,255,0.012) 2px, rgba(0,229,255,0.012) 4px);
-  pointer-events:none; z-index:1000;
+button {
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  border:none;
+  background:#00e5ff;
+  color:black;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-/* ── Corner glow ── */
-body::after {
-  content:'';
-  position:fixed;
-  top:-200px; right:-200px;
-  width:500px; height:500px;
-  background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%);
-  pointer-events:none; z-index:0;
+.card {
+  background:#0e1318;
+  padding:16px;
+  border:1px solid #1c2530;
+  max-width:300px;
 }
 
-/* ══════════════════════════ HEADER ══════════════════════════ */
-header {
-  position: sticky; top:0; z-index: 200;
-  background: rgba(5,7,9,0.95);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  padding: 0 24px;
-  display: flex; align-items:center; justify-content:space-between;
-  height: 56px;
+h2 {
+  color:#00e5ff;
+  font-size:12px;
+  letter-spacing:2px;
 }
+</style>
 
-.logo {
-  font-family: 'Unbounded', sans-serif;
-  font-weight: 900;
-  font-size: 14px;
-  letter-spacing: 2px;
-  color: var(--cyan);
-}
-.logo span { color: var(--orange); }
+</head>
 
-.header-stats {
-  display: flex; gap: 24px; align-items: center;
-}
+<body>
 
-.hstat {
-  display: flex; flex-direction: column; align-items:flex-end; gap:1px;
-}
-.hstat-val {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 12px; font-weight: 700;
-  color: var(--cyan);
-}
-.hstat-lbl { font-size: 8px; letter-spacing:2px; color: var(--muted); text-transform:uppercase; }
+<h1>HYBRID LOG ✅</h1>
 
-.week-selector {
-  display: flex; align-items: center; gap: 8px;
-}
-.week-btn {
-  background: var(--card); border: 1px solid var(--border);
-  color: var(--text); cursor: pointer; padding: 6px 12px;
-  font-family: 'Space Mono', monospace; font-size: 11px;
-  transition: all 0.15s;
-}
-.week-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+<div class="card">
+  <h2>FITNESS COPILOT</h2>
 
-#week-display {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 13px; font-weight: 700;
-  color: var(--yellow); min-width: 70px; text-align:center;
-}
-
-/* ══════════════════════════ HERO ══════════════════════════ */
-.hero {
-  position: relative; z-index:1;
-  padding: 48px 24px 36px;
-  max-width: 960px; margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 32px;
-  align-items: end;
-}
-
-.hero-eyebrow {
-  font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--orange); margin-bottom: 12px;
-  display: flex; align-items:center; gap: 10px;
-}
-.hero-eyebrow::before { content:''; width:32px; height:1px; background: var(--orange); }
-
-.hero-title {
-  font-family: 'Unbounded', sans-serif;
-  font-weight: 900;
-  font-size: clamp(32px, 6vw, 60px);
-  line-height: 1;
-  letter-spacing: -2px;
-  margin-bottom: 4px;
-}
-.hero-title .dim { color: var(--muted); font-weight: 300; }
-.hero-title .hi  { color: var(--cyan); }
-.hero-title .hi2 { color: var(--orange); }
-
-.hero-sub {
-  font-size: 11px; color: var(--muted);
-  margin-top: 14px; line-height: 1.9;
-}
-
-/* VO2 gauge */
-.vo2-gauge {
-  display: flex; flex-direction:column; align-items:center; gap:8px;
-  padding: 20px; background: var(--card); border: 1px solid var(--border2);
-  position: relative;
-}
-.gauge-ring { width: 100px; height: 100px; position: relative; }
-.gauge-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.gauge-bg { fill:none; stroke: var(--border); stroke-width:6; }
-.gauge-fill {
-  fill:none; stroke: var(--cyan); stroke-width:6;
-  stroke-linecap: round;
-  stroke-dasharray: 283;
-  stroke-dashoffset: 85;
-  transition: stroke-dashoffset 1.5s cubic-bezier(0.4,0,0.2,1);
-  filter: drop-shadow(0 0 6px rgba(0,229,255,0.6));
-}
-.gauge-val {
-  position:absolute; inset:0;
