@@ -942,7 +942,13 @@ header {
 
   <!-- SIDEBAR -->
   <div class="sidebar">
+<div style="background:#0e1318;padding:14px;border:1px solid #1c2530">
+  <h3 style="font-size:10px;letter-spacing:2px;color:#00e5ff;">FITNESS COPILOT</h3>
 
+  <button onclick="AI.run('coach')" style="width:100%;margin:6px 0;">Coach Review</button>
+  <button onclick="AI.run('workout')" style="width:100%;margin:6px 0;">Generate Tomorrow</button>
+  <button onclick="AI.run('nutrition')" style="width:100%;margin:6px 0;">Meals & Macros</button>
+</div>
     <!-- Garmin -->
     <div class="garmin-card">
       <div class="garmin-title">📡 Garmin Status</div>
@@ -1035,6 +1041,72 @@ header {
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
+// ===============================
+// FITNESS COPILOT SYSTEM
+// ===============================
+
+const DATA = {
+  getRecentSessions(n=5) {
+    return Object.values(state.sessions || {})
+      .filter(s => s.saved)
+      .slice(-n);
+  }
+};
+
+const LOGIC = {
+  computeReadiness() {
+    let score = 100;
+
+    if (state.streak > 7) score -= 15;
+
+    const sessions = DATA.getRecentSessions(5);
+    if (sessions.length >= 5) score -= 10;
+
+    return Math.max(50, score);
+  }
+};
+
+const AI = {
+  run(type) {
+    const readiness = LOGIC.computeReadiness();
+
+    const prompt = `
+You are an elite hybrid coach.
+
+User:
+- 45 years old
+- 71kg
+- Goal: build muscle + lose fat
+- VO2max: 48 → 52
+
+Readiness: ${readiness}/100
+
+Recent sessions:
+${JSON.stringify(DATA.getRecentSessions(), null, 2)}
+
+Task:
+${this.getTask(type)}
+`;
+
+    navigator.clipboard.writeText(prompt);
+    alert("✅ Copied → paste into Copilot");
+    window.open("https://copilot.microsoft.com", "_blank");
+  },
+
+  getTask(type) {
+    switch(type) {
+      case "coach":
+        return "Review progress and give feedback + adjustments";
+      case "workout":
+        return "Generate tomorrow workout under 60 min";
+      case "nutrition":
+        return "Generate meals + macros";
+      default:
+        return "Help optimise training";
+    }
+  }
+};
+  
 <script>
 // ══════════════════════════════════════════════════════════════
 // DATA
