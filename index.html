@@ -35,9 +35,7 @@ button {
   cursor:pointer;
 }
 
-h1 {
-  letter-spacing:2px;
-}
+h1 { letter-spacing:2px; }
 
 h2 {
   color:#00e5ff;
@@ -52,7 +50,7 @@ h2 {
 
 <div class="container">
 
-<h1>HYBRID LOG</h1>
+<h1>HYBRID LOG ✅</h1>
 
 <div class="card">
   <p>✅ System is working</p>
@@ -73,27 +71,29 @@ h2 {
 // ===============================
 // STATE
 // ===============================
-
 let state = {
   streak: 5,
   sessions: []
 };
 
 // ===============================
-// COPILOT
+// FITNESS COPILOT
 // ===============================
-
 const FIT = {
   computeReadiness() {
     let score = 100;
 
     if (state.streak > 7) score -= 15;
 
-    return score;
+    if (state.sessions.length >= 5) score -= 10;
+
+    return Math.max(50, score);
   }
 };
 
-// IMPORTANT: make global
+// ===============================
+// AI SYSTEM (GLOBAL)
+// ===============================
 window.AI = {
   run(type) {
 
@@ -106,4 +106,30 @@ User:
 - 45 years old
 - 71kg
 - Goal: muscle + fat loss
-- VO2max: 
+- VO2max: 48 → 52 target
+
+Readiness: ${readiness}/100
+
+Task:
+${this.getTask(type)}
+`;
+
+    alert("✅ Copilot working — opening now");
+
+    window.open("https://copilot.microsoft.com", "_blank");
+  },
+
+  getTask(type) {
+    if (type === "coach") return "Review progress and give feedback + adjustments";
+    if (type === "workout") return "Generate tomorrow workout under 60 min";
+    if (type === "nutrition") return "Generate meals + macros";
+    return "Help optimise training";
+  }
+};
+
+console.log("✅ APP LOADED SUCCESSFULLY");
+
+</script>
+
+</body>
+</html>
