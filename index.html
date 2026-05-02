@@ -1973,27 +1973,25 @@ async function callFitnessCopilotAPI(task){
 if(window.AI && typeof window.AI.run === 'function'){
   const _oldRun = window.AI.run.bind(window.AI);
   window.AI.run = async function(task){
-    try{
-      const ep = AIUI.getEndpoint();
-      if(ep){
-        AIUI.open('Fitness Copilot', 'Working…', 'Calling your secure endpoint.');
-        const data = await callFitnessCopilotAPI(task);
-        const text = (data && (data.text || data.result || data.message)) ? (data.text || data.result || data.message) : JSON.stringify(data, null, 2);
-        AIUI.open('Fitness Copilot', text, 'Source: your endpoint (AI inside app).');
-        return;
-      }
-    } catch(e){
-      console.warn(e);
-AIUI.open(
-  'Fitness Copilot',
-  'API call failed. Falling back to copy/paste mode. ' + (e.message || e),
-  'Fix: check endpoint URL + CORS + function logs.'
-);
-    }
-    // fallback
-    _oldRun(task);
-  };
+   try {
+  const ep = AIUI.getEndpoint();
+  if(ep){
+    AIUI.open('Fitness Copilot', 'Working...', 'Calling your secure endpoint.');
+    const data = await callFitnessCopilotAPI(task);
+    const text = (data && (data.text || data.result || data.message)) ? (data.text || data.result || data.message) : JSON.stringify(data, null, 2);
+    AIUI.open('Fitness Copilot', text, 'Source: your endpoint (AI inside app).');
+    return;
+  }
+} catch(e) {
+  console.warn(e);
+
+  AIUI.open(
+    'Fitness Copilot',
+    'API call failed. Falling back to copy/paste mode. ' + (e.message || e),
+    'Fix: check endpoint URL + CORS + function logs.'
+  );
 }
+
 </script>
 
 <!-- AI RESULT MODAL -->
