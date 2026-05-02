@@ -13,6 +13,17 @@ body {
   padding:20px;
 }
 
+.container {
+  max-width:900px;
+}
+
+.card {
+  background:#0e1318;
+  padding:16px;
+  border:1px solid #1c2530;
+  margin-top:20px;
+}
+
 button {
   width:100%;
   padding:12px;
@@ -20,15 +31,12 @@ button {
   border:none;
   background:#00e5ff;
   color:black;
-  cursor:pointer;
   font-weight:bold;
+  cursor:pointer;
 }
 
-.card {
-  background:#0e1318;
-  padding:16px;
-  border:1px solid #1c2530;
-  max-width:300px;
+h1 {
+  letter-spacing:2px;
 }
 
 h2 {
@@ -42,8 +50,60 @@ h2 {
 
 <body>
 
-<h1>HYBRID LOG ✅</h1>
+<div class="container">
+
+<h1>HYBRID LOG</h1>
+
+<div class="card">
+  <p>✅ System is working</p>
+</div>
 
 <div class="card">
   <h2>FITNESS COPILOT</h2>
 
+  <button onclick="AI.run('coach')">Coach Review</button>
+  <button onclick="AI.run('workout')">Generate Tomorrow</button>
+  <button onclick="AI.run('nutrition')">Meals & Macros</button>
+</div>
+
+</div>
+
+<script>
+
+// ===============================
+// STATE
+// ===============================
+
+let state = {
+  streak: 5,
+  sessions: []
+};
+
+// ===============================
+// COPILOT
+// ===============================
+
+const FIT = {
+  computeReadiness() {
+    let score = 100;
+
+    if (state.streak > 7) score -= 15;
+
+    return score;
+  }
+};
+
+// IMPORTANT: make global
+window.AI = {
+  run(type) {
+
+    const readiness = FIT.computeReadiness();
+
+    const prompt =
+`You are an elite hybrid coach.
+
+User:
+- 45 years old
+- 71kg
+- Goal: muscle + fat loss
+- VO2max: 
