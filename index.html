@@ -1,5 +1,3 @@
-<h1 style="color:red;">NEW VERSION TEST ✅</h1>
-``
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -800,28 +798,6 @@ header {
   .set-row { grid-template-columns:24px 1fr 1fr 1fr auto; }
   .header-stats { display:none; }
 }
-
-
-/* ───────────────────────────
-   AI INSIDE APP (modal + settings)
-   ─────────────────────────── */
-.ai-settings{margin-top:10px;display:flex;flex-direction:column;gap:6px;}
-.ai-settings input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:10px;padding:8px 10px;outline:none;}
-.ai-settings input:focus{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(0,229,255,0.08);} 
-.ai-settings .mini{font-size:9px;color:var(--muted);line-height:1.5;}
-.ai-settings .save{background:var(--cyan);border:none;color:var(--bg);padding:8px 10px;font-family:'Unbounded',sans-serif;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;}
-.ai-settings .save:hover{background:white;}
-
-.ai-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9999;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);} 
-.ai-modal.show{display:flex;}
-.ai-modal-card{width:min(980px,92vw);max-height:86vh;overflow:auto;background:var(--card);border:1px solid var(--border2);} 
-.ai-modal-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;background:var(--card2);border-bottom:1px solid var(--border);} 
-.ai-modal-title{font-family:'Unbounded',sans-serif;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);} 
-.ai-modal-btn{background:var(--bg);border:1px solid var(--border);color:var(--text);cursor:pointer;padding:6px 10px;font-family:'Space Mono',monospace;font-size:11px;} 
-.ai-modal-btn:hover{border-color:var(--cyan);color:var(--cyan);} 
-.ai-modal-body{padding:14px;} 
-.ai-modal-pre{white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px solid var(--border);padding:12px;font-size:11px;line-height:1.7;} 
-.ai-modal-foot{margin-top:10px;font-size:9px;color:var(--muted);line-height:1.6;} 
 </style>
 <!-- Firebase CDN -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -829,8 +805,13 @@ header {
 </head>
 <body>
 <!-- Loading overlay -->
-<!-- sync disabled -->
-
+<div id="sync-overlay" style="
+  position:fixed; inset:0; z-index:9999;
+  background:rgba(5,7,9,0.97);
+  display:none; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:16px;
+">
   <div style="
     font-family:'Unbounded',sans-serif;
     font-size:14px; font-weight:900;
@@ -961,19 +942,7 @@ header {
 
   <!-- SIDEBAR -->
   <div class="sidebar">
-<div style="background:#0e1318;padding:14px;border:1px solid #1c2530;margin-bottom:12px;">
-  <h3 style="font-size:10px;letter-spacing:2px;color:#00e5ff;">🧠 FITNESS COPILOT</h3>
 
-  <input id="ai-endpoint"
-         placeholder="Paste your Azure function URL"
-         style="width:100%;padding:8px;margin:8px 0;background:#050709;color:#e0eaf4;border:1px solid #1c2530;" />
-
-  <button onclick="saveEndpoint()">Save endpoint</button>
-
-  <button onclick="AI.run('coach')">Coach Review</button>
-  <button onclick="AI.run('workout')">Generate Tomorrow</button>
-  <button onclick="AI.run('nutrition')">Meals & Macros</button>
-</div>
     <!-- Garmin -->
     <div class="garmin-card">
       <div class="garmin-title">📡 Garmin Status</div>
@@ -1071,37 +1040,6 @@ header {
 // DATA
 // ══════════════════════════════════════════════════════════════
 
-function saveEndpoint(){
-  const val = document.getElementById("ai-endpoint").value;
-  localStorage.setItem("api", val);
-  alert("✅ Endpoint saved");
-}
-
-window.AI = {
-  run(type){
-    const endpoint = localStorage.getItem("api");
-
-    if(!endpoint){
-      alert("Paste endpoint first");
-      return;
-    }
-
-    fetch(endpoint,{
-      method:"POST",
-      headers:{ "Content-Type":"application/json"},
-      body: JSON.stringify({task:type, readiness:70})
-    })
-    .then(r=>r.json())
-    .then(d=>{
-      alert(d.text);
-    })
-    .catch(e=>{
-      alert("Error calling API");
-      console.log(e);
-    });
-  }
-}
-  
 const DAYS = [
   {
     name: "Monday", code:"MON", type:"lift", badge:"badge-lift", label:"Upper Hypertrophy",
@@ -1766,7 +1704,6 @@ function renderHistory() {
 // INIT
 // ══════════════════════════════════════════════════════════════
 function init() {
-  try { AIUI.init(); } catch(e) {}
   renderWeekGrid();
   renderSession();
   renderStreak();
@@ -1880,136 +1817,6 @@ function init() {
   });
 
 })();
-
-
-// ══════════════════════════════════════════════════════════════
-// AI INSIDE APP — UI + API MODE
-// ══════════════════════════════════════════════════════════════
-
-const AIUI = {
-  lastText: '',
-  open(title, text, foot){
-    this.lastText = text || '';
-    const modal = document.getElementById('ai-modal');
-    const t = document.getElementById('ai-modal-title');
-    const c = document.getElementById('ai-modal-content');
-    const f = document.getElementById('ai-modal-foot');
-    if(t) t.textContent = title || 'Fitness Copilot';
-    if(c) c.textContent = text || '—';
-    if(f) f.textContent = foot || '';
-    if(modal) modal.classList.add('show');
-  },
-  close(){
-    const modal = document.getElementById('ai-modal');
-    if(modal) modal.classList.remove('show');
-  },
-  copy(){
-    const txt = this.lastText || '';
-    if(!txt) return;
-    if(navigator.clipboard && window.isSecureContext){
-      navigator.clipboard.writeText(txt).then(()=>showToast('COPIED ✓')).catch(()=>showToast('COPY FAILED'));
-    } else {
-      window.prompt('Copy:', txt);
-    }
-  },
-  getEndpoint(){
-    return localStorage.getItem('fitnessCopilotEndpoint') || '';
-  },
-  saveEndpoint(){
-    const inp = document.getElementById('ai-endpoint');
-    const val = (inp && inp.value || '').trim();
-    if(!val){
-      localStorage.removeItem('fitnessCopilotEndpoint');
-      this.updateEndpointStatus();
-      showToast('ENDPOINT CLEARED');
-      return;
-    }
-    localStorage.setItem('fitnessCopilotEndpoint', val);
-    this.updateEndpointStatus();
-    showToast('ENDPOINT SAVED');
-  },
-  updateEndpointStatus(){
-    const status = document.getElementById('ai-endpoint-status');
-    const ep = this.getEndpoint();
-    if(status) status.textContent = ep ? 'Mode: AI inside app (endpoint set)' : 'Mode: Copy/Paste (no endpoint set)';
-  },
-  init(){
-    const inp = document.getElementById('ai-endpoint');
-    const ep = this.getEndpoint();
-    if(inp && ep) inp.value = ep;
-    this.updateEndpointStatus();
-  }
-};
-
-async function callFitnessCopilotAPI(task){
-  const endpoint = AIUI.getEndpoint();
-  if(!endpoint) return null;
-
-  const payload = {
-    task,
-    readiness: (typeof computeReadinessScore === 'function') ? computeReadinessScore() : null,
-    recentSessions: (typeof getRecentSavedSessions === 'function') ? getRecentSavedSessions(8) : [],
-    currentWeek: state.currentWeek,
-    currentDay: state.currentDay,
-    dayLabel: (typeof DAYS !== 'undefined' && DAYS[state.currentDay]) ? DAYS[state.currentDay].label : null,
-    prs: state.prs || {}
-  };
-
-  const res = await fetch(endpoint, {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify(payload)
-  });
-
-  if(!res.ok){
-    const t = await res.text();
-    throw new Error('API error: ' + res.status + ' ' + t);
-  }
-  const data = await res.json();
-  return data;
-}
-
-// Wrap AI.run: prefer API mode; fallback to Copilot prompt
-if(window.AI && typeof window.AI.run === 'function'){
-  const _oldRun = window.AI.run.bind(window.AI);
-  window.AI.run = async function(task){
-   try {
-  const ep = AIUI.getEndpoint();
-  if(ep){
-    AIUI.open('Fitness Copilot', 'Working...', 'Calling your secure endpoint.');
-    const data = await callFitnessCopilotAPI(task);
-    const text = (data && (data.text || data.result || data.message)) ? (data.text || data.result || data.message) : JSON.stringify(data, null, 2);
-    AIUI.open('Fitness Copilot', text, 'Source: your endpoint (AI inside app).');
-    return;
-  }
-} catch(e) {
-  console.warn(e);
-
-  AIUI.open(
-    'Fitness Copilot',
-    'API call failed. Falling back to copy/paste mode. ' + (e.message || e),
-    'Fix: check endpoint URL + CORS + function logs.'
-  );
-}
-
 </script>
-
-<!-- AI RESULT MODAL -->
-<div class="ai-modal" id="ai-modal" role="dialog" aria-modal="true">
-  <div class="ai-modal-card">
-    <div class="ai-modal-h">
-      <div class="ai-modal-title" id="ai-modal-title">Fitness Copilot</div>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <button class="ai-modal-btn" onclick="AIUI.copy()">COPY</button>
-        <button class="ai-modal-btn" onclick="AIUI.close()">CLOSE</button>
-      </div>
-    </div>
-    <div class="ai-modal-body">
-      <div class="ai-modal-pre" id="ai-modal-content">—</div>
-      <div class="ai-modal-foot" id="ai-modal-foot">—</div>
-    </div>
-  </div>
-</div>
-
 </body>
 </html>
