@@ -798,6 +798,29 @@ header {
   .set-row { grid-template-columns:24px 1fr 1fr 1fr auto; }
   .header-stats { display:none; }
 }
+
+
+/* ───────────────────────────
+   Azure Fitness Copilot Panel
+   ─────────────────────────── */
+.azure-copilot-input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:11px;padding:8px 10px;outline:none;}
+.azure-copilot-input:focus{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(0,229,255,0.10);} 
+.azure-copilot-btn{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);cursor:pointer;padding:9px 10px;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;transition:all .15s;}
+.azure-copilot-btn:hover{border-color:var(--cyan);color:var(--cyan);} 
+.azure-copilot-btn.primary{background:var(--cyan);border:none;color:var(--bg);} 
+.azure-copilot-btn.primary:hover{background:white;}
+.azure-copilot-mini{margin-top:8px;font-size:9px;color:var(--muted);line-height:1.6;}
+
+.ai-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9999;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);} 
+.ai-modal.show{display:flex;}
+.ai-modal-card{width:min(980px,92vw);max-height:86vh;overflow:auto;background:var(--card);border:1px solid var(--border2);} 
+.ai-modal-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;background:var(--card2);border-bottom:1px solid var(--border);} 
+.ai-modal-title{font-family:'Unbounded',sans-serif;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);} 
+.ai-modal-btn{background:var(--bg);border:1px solid var(--border);color:var(--text);cursor:pointer;padding:6px 10px;font-family:'Space Mono',monospace;font-size:11px;} 
+.ai-modal-btn:hover{border-color:var(--cyan);color:var(--cyan);} 
+.ai-modal-body{padding:14px;} 
+.ai-modal-pre{white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px solid var(--border);padding:12px;font-size:11px;line-height:1.7;} 
+.ai-modal-foot{margin-top:10px;font-size:9px;color:var(--muted);line-height:1.6;} 
 </style>
 <!-- Firebase CDN -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -808,7 +831,7 @@ header {
 <div id="sync-overlay" style="
   position:fixed; inset:0; z-index:9999;
   background:rgba(5,7,9,0.97);
-  display:none; flex-direction:column;
+  display:flex; flex-direction:column;
   align-items:center; justify-content:center;
   gap:16px;
 ">
@@ -943,6 +966,18 @@ header {
   <!-- SIDEBAR -->
   <div class="sidebar">
 
+    <!-- AZURE FITNESS COPILOT -->
+    <div class="pr-card" id="azure-copilot-card" style="border:1px solid var(--cyan);">
+      <div class="pr-card-title" style="color:var(--cyan);">🧠 Fitness Copilot</div>
+      <input class="azure-copilot-input" id="azure-copilot-endpoint" placeholder="Paste Azure Function URL (https://.../api/HttpTrigger1)" />
+      <button class="azure-copilot-btn primary" onclick="AzureCopilot.saveEndpoint()">Save endpoint</button>
+      <button class="azure-copilot-btn" onclick="AzureCopilot.run('coach')">Coach Review</button>
+      <button class="azure-copilot-btn" onclick="AzureCopilot.run('workout')">Generate Tomorrow</button>
+      <button class="azure-copilot-btn" onclick="AzureCopilot.run('nutrition')">Meals & Macros</button>
+      <div class="azure-copilot-mini" id="azure-copilot-status">Mode: Not connected</div>
+    </div>
+
+
     <!-- Garmin -->
     <div class="garmin-card">
       <div class="garmin-title">📡 Garmin Status</div>
@@ -1033,6 +1068,25 @@ header {
 </div>
 
 <!-- TOAST -->
+
+
+<!-- AI RESULT MODAL -->
+<div class="ai-modal" id="ai-modal" role="dialog" aria-modal="true">
+  <div class="ai-modal-card">
+    <div class="ai-modal-h">
+      <div class="ai-modal-title" id="ai-modal-title">Fitness Copilot</div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="ai-modal-btn" onclick="AzureCopilot.copy()">COPY</button>
+        <button class="ai-modal-btn" onclick="AzureCopilot.close()">CLOSE</button>
+      </div>
+    </div>
+    <div class="ai-modal-body">
+      <div class="ai-modal-pre" id="ai-modal-content">—</div>
+      <div class="ai-modal-foot" id="ai-modal-foot">—</div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1817,66 +1871,105 @@ function init() {
   });
 
 })();
+
+
+// ══════════════════════════════════════════════════════════════
+// AzureCopilot — calls your Azure Function and shows result inside the app
+// ══════════════════════════════════════════════════════════════
+const AzureCopilot = {
+  endpointKey: 'fitnessCopilotEndpoint',
+  lastText: '',
+  getEndpoint(){ return localStorage.getItem(this.endpointKey) || ''; },
+  init(){
+    const ep = this.getEndpoint();
+    const inp = document.getElementById('azure-copilot-endpoint');
+    if(inp && ep) inp.value = ep;
+    this.setStatus(ep ? 'Mode: Connected (AI inside app)' : 'Mode: Not connected');
+  },
+  setStatus(msg){
+    const s = document.getElementById('azure-copilot-status');
+    if(s) s.textContent = msg;
+  },
+  saveEndpoint(){
+    const inp = document.getElementById('azure-copilot-endpoint');
+    const val = (inp && inp.value || '').trim();
+    if(!val){
+      localStorage.removeItem(this.endpointKey);
+      this.setStatus('Mode: Not connected');
+      showToast('ENDPOINT CLEARED');
+      return;
+    }
+    localStorage.setItem(this.endpointKey, val);
+    this.setStatus('Mode: Connected (AI inside app)');
+    showToast('ENDPOINT SAVED');
+  },
+  open(title, text, foot){
+    this.lastText = text || '';
+    const m=document.getElementById('ai-modal');
+    const t=document.getElementById('ai-modal-title');
+    const c=document.getElementById('ai-modal-content');
+    const f=document.getElementById('ai-modal-foot');
+    if(t) t.textContent = title || 'Fitness Copilot';
+    if(c) c.textContent = text || '—';
+    if(f) f.textContent = foot || '';
+    if(m) m.classList.add('show');
+  },
+  close(){ const m=document.getElementById('ai-modal'); if(m) m.classList.remove('show'); },
+  copy(){
+    const txt=this.lastText||'';
+    if(!txt) return;
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(txt).then(()=>showToast('COPIED ✓')).catch(()=>showToast('COPY FAILED'));
+    } else {
+      window.prompt('Copy:', txt);
+    }
+  },
+  async run(task){
+    const ep = this.getEndpoint();
+    if(!ep){
+      showToast('PASTE ENDPOINT FIRST');
+      return;
+    }
+    const payload = {
+      task,
+      readiness: (state && typeof state.streak === 'number') ? state.streak : 70,
+      recentSessions: Object.values((state && state.sessions) || {}).filter(s=>s && s.saved).slice(-8),
+      currentWeek: state.currentWeek,
+      currentDay: state.currentDay,
+      dayLabel: (typeof DAYS !== 'undefined' && DAYS[state.currentDay]) ? DAYS[state.currentDay].label : null,
+      prs: state.prs || {}
+    };
+    this.open('Fitness Copilot', 'Working...', 'Calling your Azure Function endpoint');
+    try{
+      const res = await fetch(ep, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      const raw = await res.text();
+      let data;
+      try{ data = JSON.parse(raw); } catch{ data = { text: raw }; }
+      if(!res.ok){
+        this.open('Fitness Copilot', 'API error: ' + res.status + '\n\n' + (data.error || raw), 'Check Function logs + CORS');
+        return;
+      }
+      const text = data.text || data.result || data.message || raw;
+      this.open('Fitness Copilot', text, 'Source: Azure Function (AI inside app)');
+    } catch(e){
+      console.warn(e);
+      this.open('Fitness Copilot', 'Request failed.\n\n' + (e.message || e), 'Most common: wrong URL, function not public, CORS blocked');
+    }
+  }
+};
+
+(function(){
+  const _init = (typeof init === 'function') ? init : null;
+  if(!_init) return;
+  window.init = function(){
+    _init();
+    try{ AzureCopilot.init(); } catch(e){}
+  };
+})();
 </script>
 </body>
 </html>
-<!-- ✅ YOUR ORIGINAL HEADER REMAINS SAME -->
-<!-- ✅ I AM ONLY SHOWING THE NEW ADDITIONS EXACTLY WHERE THEY GO -->
-
-<!-- ========= ADD THIS INSIDE SIDEBAR (VERY TOP) ========= -->
-
-<div class="pr-card" style="border:1px solid var(--cyan)">
-  <div class="pr-card-title">🧠 Fitness Copilot</div>
-
-  <input id="ai-endpoint"
-    placeholder="Paste Azure Function URL"
-    style="width:100%;padding:8px;background:var(--bg);color:var(--text);border:1px solid var(--border)" />
-
-  <button onclick="saveEndpoint()">Save endpoint</button>
-
-  <button onclick="runAI('coach')">Coach Review</button>
-  <button onclick="runAI('workout')">Generate Tomorrow</button>
-  <button onclick="runAI('nutrition')">Meals & Macros</button>
-</div>
-
-<!-- ========= NOW ADD THIS AT VERY BOTTOM INSIDE YOUR MAIN <script> ========= -->
-
-// ══════════════════════════════════════════════════════════════
-/* 🧠 AZURE COPILOT INTEGRATION */
-// ══════════════════════════════════════════════════════════════
-
-function saveEndpoint(){
-  const val = document.getElementById("ai-endpoint").value;
-  localStorage.setItem("api", val);
-  showToast("✅ Endpoint saved");
-}
-
-async function runAI(type){
-
-  const endpoint = localStorage.getItem("api");
-
-  if(!endpoint){
-    showToast("Paste endpoint first");
-    return;
-  }
-
-  try{
-    const res = await fetch(endpoint,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({
-        task:type,
-        readiness: state.streak || 70
-      })
-    });
-
-    const data = await res.json();
-
-    // ✅ show result inside your UI (not alert)
-    showToast(data.text || "No response");
-
-  }catch(e){
-    console.log(e);
-    showToast("API error");
-  }
-}
