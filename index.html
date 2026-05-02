@@ -1204,11 +1204,17 @@ const DAYS = [
     runConfig:{ type:"long", intervals:null, target:"75–100 min @ Zone 2 · 6:00–6:30/km" }
   },
   {
-    name:"Sunday", code:"SUN", type:"rest", badge:"badge-rest", label:"Full Rest",
-    duration:"—", note:"Sleep · eat · recover · muscle grows on rest days",
-    colour:"var(--muted)", isRest:true
-  }
-];
+ name: "Sunday",
+ code:"SUN",
+ type:"run",
+ badge:"badge-run",
+ label:"Flexible Run / Recovery",
+ duration:"30–90 min",
+ note:"Optional run or full rest — you decide",
+ colour:"var(--green)",
+ isRun:true,
+ runConfig:{ type:"flex", target:"Optional easy run or rest day" }
+}
 
 // ══════════════════════════════════════════════════════════════
 // STATE
