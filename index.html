@@ -1309,7 +1309,31 @@ function renderWeekGrid() {
 // RENDER SESSION
 // ══════════════════════════════════════════════════════════════
 function renderSession() {
-  const day = DAYS[state.currentDay];
+  let day = DAYS[state.currentDay];
+
+// ✅ Sunday fallback: if Saturday long run not saved, make Sunday act like Long Run
+try {
+  if (day && day.code === "SUN") {
+    const satKey = sessionKey(state.currentWeek, 5); // 5 = SAT
+    const satSess = state.sessions && state.sessions[satKey] ? state.sessions[satKey] : null;
+    const satSaved = !!(satSess && satSess.saved);
+
+    if (!satSaved) {
+      // Clone Saturday plan onto Sunday (does not modify the DAYS array)
+      const satPlan = DAYS[5];
+      if (satPlan) {
+        day = Object.assign({}, satPlan, {
+          name: "Sunday (Fallback Long Run)",
+          code: "SUN",
+          label: "Long Run (Fallback)",
+          note: "Saturday missed → do your long run today"
+        });
+      }
+    }
+  }
+} catch (e) {
+  // If anything goes wrong, just keep normal Sunday
+}
   const panel = document.getElementById('session-panel');
   const sess = currentSession();
   let html = '';
