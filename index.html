@@ -1984,9 +1984,11 @@ if(window.AI && typeof window.AI.run === 'function'){
       }
     } catch(e){
       console.warn(e);
-      AIUI.open('Fitness Copilot', 'API call failed. Falling back to copy/paste mode.
-
-' + (e.message||e), 'Fix: check endpoint URL + CORS + function logs.');
+AIUI.open(
+  'Fitness Copilot',
+  'API call failed. Falling back to copy/paste mode. ' + (e.message || e),
+  'Fix: check endpoint URL + CORS + function logs.'
+);
     }
     // fallback
     _oldRun(task);
