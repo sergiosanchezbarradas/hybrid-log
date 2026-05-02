@@ -798,6 +798,28 @@ header {
   .set-row { grid-template-columns:24px 1fr 1fr 1fr auto; }
   .header-stats { display:none; }
 }
+
+
+/* ───────────────────────────
+   AI INSIDE APP (modal + settings)
+   ─────────────────────────── */
+.ai-settings{margin-top:10px;display:flex;flex-direction:column;gap:6px;}
+.ai-settings input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:10px;padding:8px 10px;outline:none;}
+.ai-settings input:focus{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(0,229,255,0.08);} 
+.ai-settings .mini{font-size:9px;color:var(--muted);line-height:1.5;}
+.ai-settings .save{background:var(--cyan);border:none;color:var(--bg);padding:8px 10px;font-family:'Unbounded',sans-serif;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;}
+.ai-settings .save:hover{background:white;}
+
+.ai-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9999;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);} 
+.ai-modal.show{display:flex;}
+.ai-modal-card{width:min(980px,92vw);max-height:86vh;overflow:auto;background:var(--card);border:1px solid var(--border2);} 
+.ai-modal-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;background:var(--card2);border-bottom:1px solid var(--border);} 
+.ai-modal-title{font-family:'Unbounded',sans-serif;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);} 
+.ai-modal-btn{background:var(--bg);border:1px solid var(--border);color:var(--text);cursor:pointer;padding:6px 10px;font-family:'Space Mono',monospace;font-size:11px;} 
+.ai-modal-btn:hover{border-color:var(--cyan);color:var(--cyan);} 
+.ai-modal-body{padding:14px;} 
+.ai-modal-pre{white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px solid var(--border);padding:12px;font-size:11px;line-height:1.7;} 
+.ai-modal-foot{margin-top:10px;font-size:9px;color:var(--muted);line-height:1.6;} 
 </style>
 <!-- Firebase CDN -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -942,24 +964,6 @@ header {
 
   <!-- SIDEBAR -->
   <div class="sidebar">
-
-  <!-- FITNESS COPILOT -->
-  <div class="pr-card" id="fitness-copilot">
-    <div class="pr-card-title" style="color: var(--cyan);">🧠 Fitness Copilot</div>
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <button class="week-btn" style="width:100%;padding:10px 12px;border-color:var(--border2);" onclick="AI.run('coach')">Coach Review</button>
-      <button class="week-btn" style="width:100%;padding:10px 12px;border-color:var(--border2);" onclick="AI.run('workout')">Generate Tomorrow</button>
-      <button class="week-btn" style="width:100%;padding:10px 12px;border-color:var(--border2);" onclick="AI.run('nutrition')">Meals & Macros</button>
-      <div style="margin-top:6px;font-size:9px;color:var(--muted);line-height:1.6;">
-        This generates a prompt from your logged sessions. It will copy it (or show a copy box) and open Copilot.
-      </div>
-      <div style="margin-top:4px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
-        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">Readiness</div>
-        <div id="readiness-score" style="font-family:'Unbounded',sans-serif;font-size:14px;font-weight:900;color:var(--green);">—</div>
-      </div>
-    </div>
-  </div>
-
 
     <!-- Garmin -->
     <div class="garmin-card">
@@ -1203,135 +1207,6 @@ function cleanForFirestore(obj) {
 }
 
 let state = {};
-
-// ══════════════════════════════════════════════════════════════
-// FITNESS COPILOT (safe for GitHub Pages)
-// - No API keys stored
-// - Uses your existing `state` (sessions, streak, PRs)
-// ══════════════════════════════════════════════════════════════
-
-function getRecentSavedSessions(n=8) {
-  const sessions = Object.values(state.sessions || {})
-    .filter(s => s && s.saved && s.date)
-    .sort((a,b) => new Date(b.date) - new Date(a.date));
-  return sessions.slice(0, n);
-}
-
-function computeReadinessScore() {
-  let score = 100;
-  const streak = state.streak || 0;
-  if (streak >= 10) score -= 25;
-  else if (streak >= 7) score -= 15;
-
-  // last 7 days density
-  const recent = getRecentSavedSessions(30).filter(s => {
-    const d = new Date(s.date || 0).getTime();
-    return (Date.now() - d) <= 7*24*3600*1000;
-  });
-  if (recent.length >= 6) score -= 20;
-
-  // run strain proxy
-  const lastRun = getRecentSavedSessions(30).find(s => s.run && (s.run.avgHR || s.run.distance || s.run.duration));
-  const avgHR = lastRun ? (parseFloat(lastRun.run?.avgHR) || 0) : 0;
-  if (avgHR >= 155) score -= 15;
-  else if (avgHR >= 140) score -= 8;
-
-  // RPE trend
-  let rpeVals = [];
-  for (const s of getRecentSavedSessions(10)) {
-    const setsObj = s.sets || {};
-    for (const arr of Object.values(setsObj)) {
-      for (const set of (arr || [])) {
-        const r = parseFloat(set.rpe);
-        if (!isNaN(r)) rpeVals.push(r);
-      }
-    }
-    if (rpeVals.length >= 12) break;
-  }
-  if (rpeVals.length) {
-    const avg = rpeVals.reduce((a,b)=>a+b,0) / rpeVals.length;
-    if (avg >= 8.5) score -= 18;
-    else if (avg >= 7.8) score -= 10;
-  }
-
-  score = Math.max(0, Math.min(100, Math.round(score)));
-  return score;
-}
-
-function updateReadinessUI() {
-  const el = document.getElementById('readiness-score');
-  if (!el) return;
-  const score = computeReadinessScore();
-  el.textContent = score + '/100';
-  el.style.color = score >= 80 ? 'var(--green)' : (score >= 65 ? 'var(--yellow)' : 'var(--red)');
-}
-
-function buildCopilotPrompt(task) {
-  const readiness = computeReadinessScore();
-  const recent = getRecentSavedSessions(8);
-
-  const taskText = (task === 'coach')
-    ? 'Analyze the last 8 sessions. Give feedback, fatigue risk, and the next 3 actions.'
-    : (task === 'workout')
-      ? "Generate tomorrow's session under 60 min. Use progressive overload. If readiness < 70 reduce volume."
-      : (task === 'nutrition')
-        ? 'Create a 7-day meal plan with calories + macros for recomposition. High protein. Include a grocery list.'
-        : 'Help optimize training.';
-
-  return `You are an elite hybrid coach (strength + endurance) and evidence-based nutrition coach.
-
-USER
-- Age: 45
-- Weight: 71 kg
-- Goal: hybrid (muscle + fat loss, maintain endurance)
-- VO2max: 48 (target 52)
-
-READINESS
-- Score: ${readiness}/100
-
-RECENT SESSIONS (JSON)
-${JSON.stringify(recent, null, 2)}
-
-TASK
-${taskText}
-
-OUTPUT FORMAT
-1) Summary (3 bullets)
-2) Action plan (numbered)
-3) If training: workout prescription (exercise/sets/reps/RPE + notes)
-4) If nutrition: calories + macros + meal plan + grocery list
-5) Safety note
-`;
-}
-
-// Expose AI globally so your sidebar buttons work
-window.AI = {
-  run(task) {
-    try {
-      const prompt = buildCopilotPrompt(task);
-
-      // Try copy to clipboard; fallback to prompt box
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(prompt)
-          .then(() => {
-            alert('✅ Prompt copied. Paste it into Copilot.');
-            window.open('https://copilot.microsoft.com', '_blank');
-          })
-          .catch(() => {
-            window.prompt('Copy this prompt into Copilot:', prompt);
-            window.open('https://copilot.microsoft.com', '_blank');
-          });
-      } else {
-        window.prompt('Copy this prompt into Copilot:', prompt);
-        window.open('https://copilot.microsoft.com', '_blank');
-      }
-    } catch (e) {
-      console.warn('Copilot error:', e);
-      alert('Copilot prompt failed. Open console for details.');
-    }
-  }
-};
-
 /*
 state = {
   currentWeek: 1,
@@ -1449,7 +1324,6 @@ function renderSession() {
   renderStreak();
   renderPRs();
   updateDeadliftChart();
-  updateReadinessUI();
 }
 
 function renderExercise(ex, sess) {
@@ -1710,7 +1584,6 @@ function saveSession() {
   updateHeaderStats();
   renderHistory();
   showToast('SESSION SAVED ✓');
-  updateReadinessUI();
 }
 
 function showToast(msg) {
@@ -1853,6 +1726,7 @@ function renderHistory() {
 // INIT
 // ══════════════════════════════════════════════════════════════
 function init() {
+  try { AIUI.init(); } catch(e) {}
   renderWeekGrid();
   renderSession();
   renderStreak();
@@ -1966,6 +1840,136 @@ function init() {
   });
 
 })();
+
+
+// ══════════════════════════════════════════════════════════════
+// AI INSIDE APP — UI + API MODE
+// ══════════════════════════════════════════════════════════════
+
+const AIUI = {
+  lastText: '',
+  open(title, text, foot){
+    this.lastText = text || '';
+    const modal = document.getElementById('ai-modal');
+    const t = document.getElementById('ai-modal-title');
+    const c = document.getElementById('ai-modal-content');
+    const f = document.getElementById('ai-modal-foot');
+    if(t) t.textContent = title || 'Fitness Copilot';
+    if(c) c.textContent = text || '—';
+    if(f) f.textContent = foot || '';
+    if(modal) modal.classList.add('show');
+  },
+  close(){
+    const modal = document.getElementById('ai-modal');
+    if(modal) modal.classList.remove('show');
+  },
+  copy(){
+    const txt = this.lastText || '';
+    if(!txt) return;
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(txt).then(()=>showToast('COPIED ✓')).catch(()=>showToast('COPY FAILED'));
+    } else {
+      window.prompt('Copy:', txt);
+    }
+  },
+  getEndpoint(){
+    return localStorage.getItem('fitnessCopilotEndpoint') || '';
+  },
+  saveEndpoint(){
+    const inp = document.getElementById('ai-endpoint');
+    const val = (inp && inp.value || '').trim();
+    if(!val){
+      localStorage.removeItem('fitnessCopilotEndpoint');
+      this.updateEndpointStatus();
+      showToast('ENDPOINT CLEARED');
+      return;
+    }
+    localStorage.setItem('fitnessCopilotEndpoint', val);
+    this.updateEndpointStatus();
+    showToast('ENDPOINT SAVED');
+  },
+  updateEndpointStatus(){
+    const status = document.getElementById('ai-endpoint-status');
+    const ep = this.getEndpoint();
+    if(status) status.textContent = ep ? 'Mode: AI inside app (endpoint set)' : 'Mode: Copy/Paste (no endpoint set)';
+  },
+  init(){
+    const inp = document.getElementById('ai-endpoint');
+    const ep = this.getEndpoint();
+    if(inp && ep) inp.value = ep;
+    this.updateEndpointStatus();
+  }
+};
+
+async function callFitnessCopilotAPI(task){
+  const endpoint = AIUI.getEndpoint();
+  if(!endpoint) return null;
+
+  const payload = {
+    task,
+    readiness: (typeof computeReadinessScore === 'function') ? computeReadinessScore() : null,
+    recentSessions: (typeof getRecentSavedSessions === 'function') ? getRecentSavedSessions(8) : [],
+    currentWeek: state.currentWeek,
+    currentDay: state.currentDay,
+    dayLabel: (typeof DAYS !== 'undefined' && DAYS[state.currentDay]) ? DAYS[state.currentDay].label : null,
+    prs: state.prs || {}
+  };
+
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(payload)
+  });
+
+  if(!res.ok){
+    const t = await res.text();
+    throw new Error('API error: ' + res.status + ' ' + t);
+  }
+  const data = await res.json();
+  return data;
+}
+
+// Wrap AI.run: prefer API mode; fallback to Copilot prompt
+if(window.AI && typeof window.AI.run === 'function'){
+  const _oldRun = window.AI.run.bind(window.AI);
+  window.AI.run = async function(task){
+    try{
+      const ep = AIUI.getEndpoint();
+      if(ep){
+        AIUI.open('Fitness Copilot', 'Working…', 'Calling your secure endpoint.');
+        const data = await callFitnessCopilotAPI(task);
+        const text = (data && (data.text || data.result || data.message)) ? (data.text || data.result || data.message) : JSON.stringify(data, null, 2);
+        AIUI.open('Fitness Copilot', text, 'Source: your endpoint (AI inside app).');
+        return;
+      }
+    } catch(e){
+      console.warn(e);
+      AIUI.open('Fitness Copilot', 'API call failed. Falling back to copy/paste mode.
+
+' + (e.message||e), 'Fix: check endpoint URL + CORS + function logs.');
+    }
+    // fallback
+    _oldRun(task);
+  };
+}
 </script>
+
+<!-- AI RESULT MODAL -->
+<div class="ai-modal" id="ai-modal" role="dialog" aria-modal="true">
+  <div class="ai-modal-card">
+    <div class="ai-modal-h">
+      <div class="ai-modal-title" id="ai-modal-title">Fitness Copilot</div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="ai-modal-btn" onclick="AIUI.copy()">COPY</button>
+        <button class="ai-modal-btn" onclick="AIUI.close()">CLOSE</button>
+      </div>
+    </div>
+    <div class="ai-modal-body">
+      <div class="ai-modal-pre" id="ai-modal-content">—</div>
+      <div class="ai-modal-foot" id="ai-modal-foot">—</div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
