@@ -11,42 +11,428 @@
 <body>
 <div class="container">
 <div class="header"><div><h1>Sergio Hybrid Log V7.3.4</h1><div class="subtitle">Fast date picker fixed · same weight/reps/RPE logging · smart progression coach</div></div><div class="pill">V7.3.4 Faster Logging</div></div>
+
 <div class="grid">
 <div class="card full"><h2>Weekly Structure</h2><div class="row4"><div class="result purple"><b>Mon</b><br>Upper Strength + Chest</div><div class="result green"><b>Tue</b><br>Easy Run</div><div class="result amber"><b>Wed</b><br>Lower + Pull</div><div class="result red"><b>Thu</b><br>Quality Run</div></div><div class="row3" style="margin-top:10px"><div class="result purple"><b>Fri</b><br>Performance Upper + Grip</div><div class="result green"><b>Sat</b><br>Long Run</div><div class="result"><b>Sun</b><br>Recovery / Mobility</div></div></div>
+
 <div class="card"><h2>Readiness Check</h2><div class="row"><div><label>Sleep 1-10</label><input id="sleep" type="number" min="1" max="10" value="7"></div><div><label>Energy 1-10</label><input id="energy" type="number" min="1" max="10" value="7"></div><div><label>Soreness 1-10</label><input id="soreness" type="number" min="1" max="10" value="4"></div><div><label>Leg freshness 1-10</label><input id="legs" type="number" min="1" max="10" value="7"></div><div><label>Stress 1-10</label><input id="stress" type="number" min="1" max="10" value="4"></div><div><label>Resting HR</label><select id="rhr"><option value="0">Normal</option><option value="-5">Slightly high</option><option value="-12">High</option></select></div></div><label>Current Day</label><select id="daySelect"></select><button onclick="renderAll()">Calculate Recommendation</button><div id="readinessBox"></div></div>
+
 <div class="card"><h2>Run Fatigue Tracker</h2><label>Last run type</label><select id="runType"><option value="0">None / Rest</option><option value="1">Easy / Recovery (+1)</option><option value="3">Intervals / Tempo (+3)</option><option value="4">Long Run (+4)</option></select><label>Last run RPE</label><input id="runRpe" type="number" min="1" max="10" value="5"><button onclick="logRunFatigue()">Log Run Fatigue</button><button class="btn2" onclick="resetRunFatigue()">Reset Weekly Run Fatigue</button><div id="runFatigueBox"></div></div>
+
 <div class="card"><h2>Smart Engine Output</h2><div id="engineBox"></div><h3>Weekly Volume</h3><div id="volumeBox"></div></div>
+
 <div class="card wide"><h2>Training Session</h2><div class="tabs" id="tabs"></div><div class="row"><div class="dateWrap" onclick="event.stopPropagation()"><label>Session date / backfill date</label><div class="dateInputRow"><input id="sessionDate" type="text" readonly onclick="event.stopPropagation();toggleSessionCalendar(true)" placeholder="Select date"><button class="btn2" onclick="event.stopPropagation();toggleSessionCalendar(true)">📅</button></div><div id="sessionMiniCalendar" class="miniCal" onclick="event.stopPropagation()"></div></div><div><label>Backfill helper</label><button class="btn2" onclick="setSessionDateToday()">Use Today</button></div></div><p class="small">Tip: enter the first set values, then use Same Wt / Same Reps / Same RPE to copy the values to all sets for that exercise.</p><div id="sessionBox"></div><button class="btnGreen" onclick="completeSession()">Save / Complete Session</button><button class="btn2" onclick="copyLastWeights()">Copy Last Logged Weights</button><button class="btnAmber" onclick="fillAllExerciseWeights()">Same Wt All</button><button class="btnAmber" onclick="fillAllExerciseReps()">Same Reps All</button><button class="btnAmber" onclick="fillAllExerciseRpe()">Same RPE All</button><button class="btnAmber" onclick="deloadToday()">Apply Deload Inputs</button></div>
+
 <div class="card"><h2>Progression Rules</h2><div class="result green"><b>Increase</b><br>All sets hit top reps with RPE ≤ 8.5.</div><div class="result amber"><b>Hold</b><br>Mid-range reps or RPE high but controlled.</div><div class="result red"><b>Reduce / Deload</b><br>Below minimum reps, RPE ≥ 9.5, deload week or fatigue high.</div></div>
+
 <div class="card full"><h2>Smart Progression Coach</h2><div class="row3"><div><label>Cycle start date</label><input id="cycleStart" type="date"></div><div><label>Current cycle week</label><input id="cycleWeek" type="number" min="1" max="12" value="3"></div><div><label>Smallest plate jump kg</label><input id="plateJump" type="number" min="0.5" step="0.5" value="2.5"></div></div><div class="row"><button onclick="setCycleStartToday()">Set Cycle Start Today</button><button class="btn2" onclick="setCycleStartForCurrentWeek()">Use Current Week Number</button></div><div class="row"><button class="btnAmber" onclick="forceDeloadWeek()">Force Deload This Week</button><button class="btn2" onclick="clearForcedWeek()">Return To Date-Based Week</button></div><div id="cycleBox" style="margin-top:12px"></div><h3>Next Weight Suggestions</h3><div id="weightSuggestionBox"></div></div>
+
 <div class="card half"><h2>Calendar</h2><div class="calHead"><button class="btn2" onclick="moveMonth(-1)">◀</button><div><b id="calendarTitle">Month Year</b><div class="small">Gym, run and manual log entries appear here</div></div><button class="btn2" onclick="moveMonth(1)">▶</button></div><button class="btn2" onclick="goToday()">Today</button><div id="calendar" class="calendar"></div></div>
+
 <div class="card half"><h2>History + Export</h2><div id="historyBox"></div><button onclick="exportJSON()">Export JSON</button><button onclick="exportCSV()">Export CSV</button><button class="btnRed" onclick="clearData()">Clear Data</button></div>
+
 <div class="card half"><h2>Daily Training Log</h2><div class="row"><div><label>Date</label><input id="logDate" type="date"></div><div><label>Type</label><select id="logType"><option>Gym</option><option>Run</option><option>Recovery</option><option>Bodyweight</option><option>Nutrition</option><option>General Note</option></select></div></div><label>Title</label><input id="logTitle" placeholder="e.g. Friday upper felt strong"><label>Notes</label><textarea id="logNotes" rows="4"></textarea><button class="btnGreen" onclick="saveTrainingLog()">Save Log Entry</button><div id="trainingLogBox" class="logList"></div></div>
+
 <div class="card half"><h2>Mobile / Cloud Sync</h2><p class="small">Local save works on one browser only. Use Firebase sync if you want mobile + laptop to see the same data.</p><label>Athlete Sync ID</label><input id="syncId" value="sergio-main"><label>Firebase config JSON</label><textarea id="firebaseConfig" rows="7" placeholder='Paste Firebase web config JSON here'></textarea><div class="row"><button onclick="enableCloudSync()">Enable Cloud Sync</button><button class="btn2" onclick="downloadFromCloud()">Download</button></div><button class="btnGreen" onclick="uploadToCloud()">Upload Current Data</button><div id="cloudBox" class="result amber">Cloud sync not enabled yet. Local logging still works.</div></div>
+
 <div class="card full"><h2>Coach Review</h2><div id="coachBox"></div></div>
-</div><div class="footer">Sergio Hybrid Log V7.3.4 · same weight/reps/RPE logging · smart progression</div>
 </div>
+<div class="footer">Sergio Hybrid Log V7.3.4 · same weight/reps/RPE logging · smart progression</div>
+</div>
+
 <script>
-const $=id=>document.getElementById(id);function todayKey(){const d=new Date();const tz=d.getTimezoneOffset()*60000;return new Date(d-tz).toISOString().slice(0,10)}const stateKey='sergioHybridV734SameAllFastDate';let activeDay='Mon';let calDate=new Date();let sessionPickDate=new Date();const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-const plans={Mon:[['Bench Press','chest',3,5,8,180],['Incline DB Press','upper chest',3,8,10,120],['Weighted Pull-ups','back',3,6,8,150],['Chest Supported Row','back',3,8,12,120],['Lateral Raise','side delts',3,12,20,60],['Rope Pushdown','triceps',3,10,15,60],['Pushups','chest',2,15,25,45]],Tue:[['Runna Easy Run','run',1,1,1,0,'run']],Wed:[['Deadlift','posterior chain',3,3,5,180],['Leg Press','quads',3,8,10,120],['Weighted Pull-ups','back',3,5,8,150],['DB Bulgarian Split Squat','quads',2,8,10,120],['Hamstring Curl','hamstrings',2,10,15,75],['Standing Calf Raise','calves',3,12,15,60],['Hanging Leg Raise','core',3,10,15,45]],Thu:[['Runna Quality Run','run',1,1,1,0,'run']],Fri:[['Explosive Pushups','power',2,3,5,60],['Weighted Pull-ups','back',4,4,6,150],['Barbell Row','back',3,6,8,120],['Incline Bench Press','chest',3,8,12,120],['DB Shoulder Press','shoulders',3,8,10,90],['Farmers Walk','grip/core',3,30,45,120,'time'],['EZ Bar Curl','biceps',3,10,12,60],['Overhead Tricep Extension','triceps',3,10,15,60]],Sat:[['Runna Long Run','run',1,1,1,0,'run']],Sun:[['Recovery / Mobility','recovery',1,1,1,0,'recovery']]};
-let data=JSON.parse(localStorage.getItem(stateKey)||'{"sessions":[],"runFatigue":0,"logs":[],"cloud":{},"settings":{}}');if(!data.sessions)data.sessions=[];if(!data.logs)data.logs=[];if(!data.settings)data.settings={};function save(){localStorage.setItem(stateKey,JSON.stringify(data))}
-function localDateKey(y,m,d){const dt=new Date(y,m,d);const tz=dt.getTimezoneOffset()*60000;return new Date(dt-tz).toISOString().slice(0,10)}function formatDisplayDate(key){if(!key)return'';const[y,m,d]=key.split('-');return`${d}/${m}/${y}`}function parseDisplayDate(value){if(!value)return todayKey();if(value.includes('-'))return value;const p=value.split('/');return p.length===3?`${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`:todayKey()}function setSessionDateKey(key){$('sessionDate').value=formatDisplayDate(key);const[y,m,d]=key.split('-').map(Number);sessionPickDate=new Date(y,m-1,d);renderSessionMiniCalendar()}function setSessionDateToday(){setSessionDateKey(todayKey());toggleSessionCalendar(false)}function toggleSessionCalendar(show){const cal=$('sessionMiniCalendar');if(!cal)return;if(show===false){cal.classList.remove('show');return}renderSessionMiniCalendar();cal.classList.add('show')}function moveSessionPickMonth(delta){sessionPickDate.setMonth(sessionPickDate.getMonth()+delta);renderSessionMiniCalendar();$('sessionMiniCalendar').classList.add('show')}function renderSessionMiniCalendar(){const cal=$('sessionMiniCalendar');if(!cal)return;const y=sessionPickDate.getFullYear(),m=sessionPickDate.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0),current=parseDisplayDate($('sessionDate')?.value||todayKey());let html=`<div class="miniCalHead"><button class="btn2" onclick="event.stopPropagation();moveSessionPickMonth(-1)">◀</button><b>${first.toLocaleString(undefined,{month:'long',year:'numeric'})}</b><button class="btn2" onclick="event.stopPropagation();moveSessionPickMonth(1)">▶</button></div>`;html+='<div class="miniCalGrid">'+['S','M','T','W','T','F','S'].map(d=>`<div class="miniCalWeekday">${d}</div>`).join('');for(let i=0;i<first.getDay();i++)html+='<div class="miniCalBlank"></div>';for(let d=1;d<=last.getDate();d++){const key=localDateKey(y,m,d);html+=`<button class="miniCalDay ${key===current?'selected':''} ${key===todayKey()?'todayPick':''}" onclick="event.stopPropagation();setSessionDateKey('${key}');toggleSessionCalendar(false)">${d}</button>`}html+='</div><div class="row" style="margin-top:8px"><button class="btn2" onclick="event.stopPropagation();setSessionDateKey(todayKey());toggleSessionCalendar(false)">Today</button><button class="btn2" onclick="event.stopPropagation();toggleSessionCalendar(false)">Close</button></div>';cal.innerHTML=html}document.addEventListener('click',e=>{const wrap=document.querySelector('.dateWrap'),cal=$('sessionMiniCalendar');if(wrap&&cal&&!wrap.contains(e.target))cal.classList.remove('show')});
-function readinessScore(){return Math.max(0,Math.round(+$('sleep').value*12 + +$('energy').value*12 + +$('legs').value*8 - +$('soreness').value*6 - +$('stress').value*4 + +$('rhr').value))}function zone(s){return s>=150?['green','Excellent']:s>=110?['green','Good']:s>=80?['amber','Moderate']:['red','Low']}function engine(){const score=readinessScore(),run=+data.runFatigue||0,legs=+$('legs').value;let setMultiplier=1,loadChange=0,capRpe=9,notes=[];if(score<80){setMultiplier=.75;loadChange=-10;capRpe=7;notes.push('Low readiness: reduce accessory sets and cap RPE at 7.')}else if(score<110){setMultiplier=.85;loadChange=-5;capRpe=8;notes.push('Moderate readiness: reduce accessory volume slightly.')}else notes.push('Readiness supports full programmed work.');if(activeDay==='Wed'&&(run>=5||legs<=5)){loadChange-=5;notes.push('Lower-body risk detected: reduce lower load another 5%.')}return{score,setMultiplier,loadChange,capRpe,notes}}
-function adjustedPlan(day){const e=engine();let p=plans[day].map(x=>[...x]);if(['Tue','Thu','Sat','Sun'].includes(day))return p;return p.map((x,i)=>{if(i>2)x[2]=Math.max(1,Math.round(x[2]*e.setMultiplier));return x})}function initSelectors(){$('daySelect').innerHTML=days.map(d=>`<option ${d===activeDay?'selected':''}>${d}</option>`).join('');$('daySelect').onchange=e=>{activeDay=e.target.value;renderAll()};$('tabs').innerHTML=days.map(d=>`<button class="tab ${d===activeDay?'active':''}" onclick="activeDay='${d}';renderAll()">${d}</button>`).join('')}
-function renderReadiness(){const e=engine(),z=zone(e.score);$('readinessBox').innerHTML=`<div class="result ${z[0]}"><b>Readiness Score: ${e.score}</b><br>Status: ${z[1]}<br>RPE cap: ${e.capRpe}<br>Load adjustment: ${e.loadChange}%</div>`;$('engineBox').innerHTML=e.notes.map(n=>`<div class="result ${z[0]}">${n}</div>`).join('')}function renderRunFatigue(){const f=+data.runFatigue||0,cls=f>=7?'red':f>=4?'amber':'green';$('runFatigueBox').innerHTML=`<div class="result ${cls}"><b>Weekly run fatigue: ${f}</b><br>${f>=7?'High: protect legs.':f>=4?'Moderate: monitor quality runs.':'Low: normal training available.'}</div>`}
-function renderSession(){const p=adjustedPlan(activeDay);const note=activeDay==='Fri'?'<div class="result purple"><b>Friday full session visible:</b> smart engine adjusts sets/intensity only.</div>':'';$('sessionBox').innerHTML=note+p.map((ex,idx)=>{const[name,group,sets,min,max,rest,type]=ex;if(type==='run')return`<div class="exercise"><div class="exName">${name}</div><span class="tag">Runna / Garmin source of truth</span><label>Distance km</label><input data-ex="${idx}" data-field="distance" type="number" step="0.01"><label>Duration min</label><input data-ex="${idx}" data-field="duration" type="number"><label>Run RPE</label><input data-ex="${idx}" data-field="rpe" type="number" min="1" max="10" value="5"></div>`;if(type==='recovery')return`<div class="exercise"><div class="exName">${name}</div><p class="small">Walk, mobility, easy spin or full rest.</p><textarea data-ex="${idx}" data-field="notes"></textarea></div>`;return`<div class="exercise"><div class="exHead"><div><div class="exName">${name}</div><span class="tag">${group} · ${sets} sets · ${min}-${max}${type==='time'?' sec':' reps'} · ${rest}s rest</span></div><div class="exBtns"><button class="btn2" onclick="addSet(${idx})">+ Set</button><button class="btnAmber" onclick="fillSameWeight(${idx})">Same Wt</button><button class="btnAmber" onclick="fillSameReps(${idx})">Same Reps</button><button class="btnAmber" onclick="fillSameRpe(${idx})">Same RPE</button></div></div><div id="sets-${idx}">${renderSets(idx,sets,type)}</div></div>`}).join('')}function renderSets(idx,sets,type){let out='';for(let s=1;s<=sets;s++)out+=`<div class="setrow"><span>#${s}</span><input placeholder="Weight" data-ex="${idx}" data-set="${s}" data-field="weight" type="number" step="0.5"><input placeholder="${type==='time'?'Seconds':'Reps'}" data-ex="${idx}" data-set="${s}" data-field="reps" type="number"><input placeholder="RPE" data-ex="${idx}" data-set="${s}" data-field="rpe" type="number" step="0.5" min="1" max="10"><button class="btnRed" onclick="this.parentElement.remove()">−</button></div>`;return out}function addSet(idx){const wrap=$('sets-'+idx);const n=wrap.querySelectorAll('.setrow').length+1;wrap.insertAdjacentHTML('beforeend',renderSets(idx,1,adjustedPlan(activeDay)[idx][6]).replace('#1','#'+n))}
-function fillSameField(idx,field,label){const inputs=[...document.querySelectorAll(`#sets-${idx} [data-field="${field}"]`)];const source=inputs.find(i=>i.value!==''&&i.value!=null);if(!source){alert(`Enter the first set ${label} first, then click Same ${label}.`);return false}inputs.forEach(i=>i.value=source.value);return true}function fillSameWeight(idx){fillSameField(idx,'weight','Wt')}function fillSameReps(idx){fillSameField(idx,'reps','Reps')}function fillSameRpe(idx){fillSameField(idx,'rpe','RPE')}function fillAllExerciseField(field,label){adjustedPlan(activeDay).forEach((ex,idx)=>{if(!['run','recovery'].includes(ex[6]))fillSameField(idx,field,label)})}function fillAllExerciseWeights(){fillAllExerciseField('weight','Wt')}function fillAllExerciseReps(){fillAllExerciseField('reps','Reps')}function fillAllExerciseRpe(){fillAllExerciseField('rpe','RPE')}
-function completeSession(){const p=adjustedPlan(activeDay),inputs=[...document.querySelectorAll('#sessionBox input,#sessionBox textarea')],entry={date:parseDisplayDate($('sessionDate')?.value||todayKey()),day:activeDay,readiness:readinessScore(),runFatigue:+data.runFatigue||0,items:[]};p.forEach((ex,idx)=>{let item={name:ex[0],group:ex[1],sets:[]};inputs.filter(i=>i.dataset.ex==idx).forEach(i=>{let s=i.dataset.set||'single';if(!item.sets[s])item.sets[s]={};item.sets[s][i.dataset.field]=i.value});item.sets=Object.values(item.sets);item.suggestion=progressionSuggestion(ex,item.sets);entry.items.push(item)});data.sessions.push(entry);save();renderAll();alert('Session saved for '+entry.date+'. Smart suggestions updated.')}function copyLastWeights(){const last=[...data.sessions].reverse().find(s=>s.day===activeDay);if(!last){alert('No previous session found.');return}[...document.querySelectorAll('[data-field="weight"]')].forEach(inp=>{const item=last.items[inp.dataset.ex],set=item&&item.sets[+inp.dataset.set-1];if(set&&set.weight)inp.value=set.weight})}function deloadToday(){$('sleep').value=6;$('energy').value=5;$('soreness').value=7;$('legs').value=5;renderAll()}function logRunFatigue(){let add=+$('runType').value;if(+$('runRpe').value>=8)add+=1;data.runFatigue=(+data.runFatigue||0)+add;save();renderAll()}function resetRunFatigue(){data.runFatigue=0;save();renderAll()}
-function roundToJump(v,j){return(!v||isNaN(v))?'':Math.round(v/j)*j}function exerciseClass(name){const n=name.toLowerCase();if(n.includes('deadlift'))return{inc:.025,dec:.05};if(n.includes('bench')||n.includes('pull-up')||n.includes('pullups')||n.includes('row')||n.includes('leg press'))return{inc:.025,dec:.05};if(n.includes('farmers')||n.includes('explosive'))return{inc:0,dec:0};return{inc:.02,dec:.05}}function flat(sets){return(sets||[]).filter(s=>s&&(s.weight||s.reps||s.rpe)).map(s=>({weight:+s.weight||0,reps:+s.reps||0,rpe:+s.rpe||0}))}function getCycleWeek(){if(data.settings.forceWeek)return data.settings.forceWeek;const start=data.settings.cycleStart;if(!start)return 3;const diff=Math.floor((new Date(todayKey())-new Date(start))/(7*24*60*60*1000));return Math.min(12,Math.max(1,diff+1))}function isDeloadWeek(w){return[4,8,12].includes(+w)}function setCycleStartToday(){data.settings.cycleStart=todayKey();data.settings.forceWeek=null;save();renderAll()}function setCycleStartForCurrentWeek(){const w=+($('cycleWeek')?.value||3),start=new Date();start.setDate(start.getDate()-((Math.max(1,w)-1)*7));const tz=start.getTimezoneOffset()*60000;data.settings.cycleStart=new Date(start-tz).toISOString().slice(0,10);data.settings.forceWeek=null;save();renderAll()}function forceDeloadWeek(){data.settings.forceWeek=4;save();renderAll()}function clearForcedWeek(){data.settings.forceWeek=null;save();renderAll()}
-function calculateNextWeight(ex,sets,eng=engine()){const[name,group,targetSets,min,max,rest,type]=ex;if(type==='run'||type==='recovery')return{action:'Log only',nextWeightText:'Use Runna/Garmin',reason:'Running progression is controlled outside the strength engine.'};if(type==='time')return{action:'Progress slowly',nextWeightText:`${min}-${max} sec`,reason:'Carries progress best by posture, duration or small load jumps.'};const valid=flat(sets);if(!valid.length)return{action:'Set baseline',nextWeightText:'Enter first session',reason:'No logged performance yet.'};const jump=+($('plateJump')?.value||2.5),weights=valid.filter(s=>s.weight>0).map(s=>s.weight),last=weights.length?weights[weights.length-1]:0,avg=valid.reduce((a,s)=>a+(s.rpe||8),0)/valid.length,allTop=valid.every(s=>s.reps>=max&&(s.rpe||8)<=8.5),anyLow=valid.some(s=>s.reps<min||(s.rpe||0)>=9.5),cls=exerciseClass(name),deload=isDeloadWeek(+($('cycleWeek')?.value||getCycleWeek()))||eng.score<80||(activeDay==='Wed'&&(+data.runFatigue||0)>=7);let next=last,action='Hold',reason='Stay at the same load and add reps.';if(!last)return{action:'Set baseline',nextWeightText:'Use comfortable load',reason:'No previous weight entered.'};if(deload){next=roundToJump(last*.9,jump);action='Deload / reduce';reason='Deload week, low readiness or high run fatigue detected.'}else if(anyLow){next=roundToJump(last*(1-cls.dec),jump);action='Reduce or repeat';reason='Missed minimum reps or RPE was too high.'}else if(allTop){next=roundToJump(last*(1+cls.inc),jump);action='Increase';reason='Top of rep range achieved with controlled RPE.'}else if(avg>=9){action='Hold';reason='Average RPE is high. Improve execution before increasing.'}return{action,nextWeightText:next?`${next} kg`:'Use same load',reason,lastWeight:last,avgRpe:avg.toFixed(1)}}function progressionSuggestion(ex,sets){const r=calculateNextWeight(ex,sets);return`${r.action}: ${r.nextWeightText}. ${r.reason}`}function lastPerf(name){for(const s of [...data.sessions].reverse()){const item=(s.items||[]).find(i=>i.name===name);if(item)return{session:s,item}}return null}
-function renderCycleProgression(){if(!$('cycleStart').value)$('cycleStart').value=data.settings.cycleStart||todayKey();if(!data.settings.cycleStart)data.settings.cycleStart=$('cycleStart').value;const week=getCycleWeek();$('cycleWeek').value=week;let html='<div class="cycleBox">';for(let i=1;i<=12;i++)html+=`<div class="cycleWeek ${i===week?'cycleNow':''} ${isDeloadWeek(i)?'cycleDeload':''}"><b>W${i}</b><br>${isDeloadWeek(i)?'Deload':'Build'}</div>`;html+='</div>';html+=`<div class="result ${isDeloadWeek(week)?'amber':'green'}"><b>Current phase:</b> Week ${week} · ${isDeloadWeek(week)?'Deload / absorb fatigue':'Build / progress carefully'}</div>`;$('cycleBox').innerHTML=html;save()}function renderWeightSuggestions(){const p=adjustedPlan(activeDay),eng=engine();$('weightSuggestionBox').innerHTML=p.filter(ex=>!['run','recovery'].includes(ex[6])).map(ex=>{const perf=lastPerf(ex[0]),rec=perf?calculateNextWeight(ex,perf.item.sets,eng):{action:'Set baseline',nextWeightText:'Enter first session',reason:'No previous logged performance for this exercise yet.'};const cls=rec.action.includes('Increase')?'green':rec.action.includes('Reduce')||rec.action.includes('Deload')?'red':rec.action.includes('baseline')?'purple':'amber';return`<div class="suggestionCard ${cls}"><b>${ex[0]}</b><br><span class="mini">Target: ${ex[2]} sets · ${ex[3]}-${ex[4]}${ex[6]==='time'?' sec':' reps'}</span><div class="suggestionGrid"><div><span class="mini">Last</span><br><b>${rec.lastWeight?rec.lastWeight+' kg':'—'}</b></div><div><span class="mini">Next suggestion</span><br><b>${rec.nextWeightText}</b></div><div><span class="mini">Action</span><br><b>${rec.action}</b></div></div><p class="small">${rec.reason}</p></div>`}).join('')||'<p class="small">No weight suggestions for run/recovery days.</p>'}
-function renderVolume(){const p=[...plans.Mon,...plans.Wed,...plans.Fri],vol={};p.forEach(x=>vol[x[1]]=(vol[x[1]]||0)+(+x[2]||0));$('volumeBox').innerHTML=Object.entries(vol).map(([k,v])=>`<div class="metric"><span>${k}</span><b>${v} sets</b></div>`).join('')}function renderHistory(){const recent=[...data.sessions].reverse().slice(0,8);$('historyBox').innerHTML=recent.length?`<table><tr><th>Date</th><th>Day</th><th>Readiness</th></tr>${recent.map(s=>`<tr><td>${s.date}</td><td>${s.day}</td><td>${s.readiness}</td></tr>`).join('')}</table>`:'<p class="small">No sessions logged yet.</p>'}
-function moveMonth(delta){calDate.setMonth(calDate.getMonth()+delta);renderCalendar()}function goToday(){calDate=new Date();renderCalendar()}function entriesForDate(key){const sessions=(data.sessions||[]).filter(s=>s.date===key).map(s=>({type:['Tue','Thu','Sat'].includes(s.day)?'Run':'Gym',title:`${s.day} session`}));const logs=(data.logs||[]).filter(l=>l.date===key).map(l=>({type:l.type,title:l.title||l.type}));return[...sessions,...logs]}function renderCalendar(){const y=calDate.getFullYear(),m=calDate.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0);$('calendarTitle').textContent=first.toLocaleString(undefined,{month:'long',year:'numeric'});let html=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>`<div class="weekday">${d}</div>`).join('');for(let i=0;i<first.getDay();i++)html+='<div></div>';for(let d=1;d<=last.getDate();d++){let key=localDateKey(y,m,d),entries=entriesForDate(key),dots=entries.slice(0,4).map(e=>`<span class="dot ${e.type==='Run'?'dotRun':e.type==='Gym'?'dotGym':''}"></span>`).join(''),label=entries.slice(0,2).map(e=>e.title).join('<br>');html+=`<div class="daybox ${entries.length?'done':''} ${key===todayKey()?'today':''}" onclick="prefillLogDate('${key}')"><b>${d}</b><br>${dots}<div class="small">${label}</div></div>`}$('calendar').innerHTML=html}
-function prefillLogDate(key){$('logDate').value=key;setSessionDateKey(key);$('logTitle').focus()}function saveTrainingLog(){const e={id:Date.now(),date:$('logDate').value||todayKey(),type:$('logType').value,title:$('logTitle').value.trim(),notes:$('logNotes').value.trim(),createdAt:new Date().toISOString()};if(!e.title&&!e.notes){alert('Add a title or note first.');return}data.logs.push(e);save();$('logTitle').value='';$('logNotes').value='';renderAll()}function deleteLog(id){data.logs=data.logs.filter(l=>l.id!==id);save();renderAll()}function renderTrainingLogs(){if(!$('logDate').value)$('logDate').value=todayKey();const logs=[...data.logs].sort((a,b)=>(b.date+b.createdAt).localeCompare(a.date+a.createdAt)).slice(0,20);$('trainingLogBox').innerHTML=logs.length?logs.map(l=>`<div class="logItem"><b>${l.date} · ${l.type}</b><br>${l.title||''}<p class="small">${(l.notes||'').replaceAll('<','&lt;')}</p><button class="btnRed" onclick="deleteLog(${l.id})">Delete</button></div>`).join(''):'<p class="small">No manual log entries yet.</p>'}function renderCoach(){const e=engine();let list=[];if(activeDay==='Wed')list.push('Wednesday priority: quality deadlift reps, no grinders. Thursday Runna quality matters.');if(activeDay==='Fri')list.push('Friday priority: performance upper, grip, posture and chest hypertrophy without damaging Saturday long run.');if((data.runFatigue||0)>=7)list.push('Run fatigue is high. Protect legs and avoid chasing PRs.');if(e.score<80)list.push('Low readiness: maintenance stimulus today.');$('coachBox').innerHTML=list.map(x=>`<div class="result purple">${x}</div>`).join('')||'<div class="result green">Training state looks balanced. Execute the plan.</div>'}
-function exportJSON(){download(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),'sergio-hybrid-v7-3-4-data.json')}function exportCSV(){let rows=['date,day,readiness,runFatigue,exercise,suggestion'];data.sessions.forEach(s=>(s.items||[]).forEach(i=>rows.push([s.date,s.day,s.readiness,s.runFatigue,i.name,i.suggestion].map(x=>'"'+String(x||'').replaceAll('"','""')+'"').join(','))));download(new Blob([rows.join('\n')],{type:'text/csv'}),'sergio-hybrid-v7-3-4-data.csv')}function download(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}function clearData(){if(confirm('Clear all V7.3.4 local data?')){data={sessions:[],runFatigue:0,logs:[],cloud:{},settings:{}};save();renderAll()}}
-function setCloudStatus(msg,cls='amber'){$('cloudBox').className='result '+cls;$('cloudBox').innerHTML=msg}function getHybridData(){return data}function setHybridData(newData){data=newData||data;if(!data.sessions)data.sessions=[];if(!data.logs)data.logs=[];if(!data.settings)data.settings={};save();renderAll()}window.getHybridData=getHybridData;window.setHybridData=setHybridData;window.setCloudStatus=setCloudStatus;function renderAll(){initSelectors();if($('sessionDate')&&!$('sessionDate').value)setSessionDateKey(todayKey());renderReadiness();renderRunFatigue();renderVolume();renderSession();renderHistory();renderCalendar();renderTrainingLogs();renderCycleProgression();renderWeightSuggestions();renderCoach()}renderAll();
+const $=id=>document.getElementById(id);
+function todayKey(){const d=new Date();const tz=d.getTimezoneOffset()*60000;return new Date(d-tz).toISOString().slice(0,10)}
+
+const stateKey='sergioHybridV734SameAllFastDate';
+const importedFlagKey='sergioHybridV734JsonImportedOnce';
+const jsonSeedPath='./sergio-hybrid-v7-3-4-data.json';
+
+let activeDay='Mon';
+let calDate=new Date();
+let sessionPickDate=new Date();
+const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+const plans={
+  Mon:[['Bench Press','chest',3,5,8,180],['Incline DB Press','upper chest',3,8,10,120],['Weighted Pull-ups','back',3,6,8,150],['Chest Supported Row','back',3,8,12,120],['Lateral Raise','side delts',3,12,20,60],['Rope Pushdown','triceps',3,10,15,60],['Pushups','chest',2,15,25,45]],
+  Tue:[['Runna Easy Run','run',1,1,1,0,'run']],
+  Wed:[['Deadlift','posterior chain',3,3,5,180],['Leg Press','quads',3,8,10,120],['Weighted Pull-ups','back',3,5,8,150],['DB Bulgarian Split Squat','quads',2,8,10,120],['Hamstring Curl','hamstrings',2,10,15,75],['Standing Calf Raise','calves',3,12,15,60],['Hanging Leg Raise','core',3,10,15,45]],
+  Thu:[['Runna Quality Run','run',1,1,1,0,'run']],
+  Fri:[['Explosive Pushups','power',2,3,5,60],['Weighted Pull-ups','back',4,4,6,150],['Barbell Row','back',3,6,8,120],['Incline Bench Press','chest',3,8,12,120],['DB Shoulder Press','shoulders',3,8,10,90],['Farmers Walk','grip/core',3,30,45,120,'time'],['EZ Bar Curl','biceps',3,10,12,60],['Overhead Tricep Extension','triceps',3,10,15,60]],
+  Sat:[['Runna Long Run','run',1,1,1,0,'run']],
+  Sun:[['Recovery / Mobility','recovery',1,1,1,0,'recovery']]
+};
+
+function blankData(){
+  return {sessions:[],runFatigue:0,logs:[],cloud:{},settings:{}};
+}
+
+function normalizeData(obj){
+  const safe=obj&&typeof obj==='object'?obj:{};
+  if(!Array.isArray(safe.sessions)) safe.sessions=[];
+  if(typeof safe.runFatigue==='undefined' || safe.runFatigue===null || isNaN(+safe.runFatigue)) safe.runFatigue=0;
+  if(!Array.isArray(safe.logs)) safe.logs=[];
+  if(!safe.cloud || typeof safe.cloud!=='object') safe.cloud={};
+  if(!safe.settings || typeof safe.settings!=='object') safe.settings={};
+  return safe;
+}
+
+function loadLocalData(){
+  try{
+    const raw=localStorage.getItem(stateKey);
+    if(!raw) return blankData();
+    return normalizeData(JSON.parse(raw));
+  }catch(e){
+    return blankData();
+  }
+}
+
+let data=loadLocalData();
+
+function save(){localStorage.setItem(stateKey,JSON.stringify(data))}
+
+function hasMeaningfulData(obj){
+  const safe=normalizeData(obj||{});
+  return safe.sessions.length>0 || safe.logs.length>0 || (+safe.runFatigue||0)>0 || !!safe.settings.cycleStart || !!safe.settings.forceWeek;
+}
+
+async function importJsonFileToAppOnce(){
+  try{
+    if(hasMeaningfulData(data)){
+      localStorage.setItem(importedFlagKey,'kept-local');
+      return;
+    }
+
+    const alreadyImported=localStorage.getItem(importedFlagKey);
+    if(alreadyImported==='yes') return;
+
+    const response=await fetch(jsonSeedPath,{cache:'no-store'});
+    if(!response.ok) return;
+
+    const imported=normalizeData(await response.json());
+    if(!hasMeaningfulData(imported)) return;
+
+    data=imported;
+    save();
+    localStorage.setItem(importedFlagKey,'yes');
+    renderAll();
+
+    if(typeof setCloudStatus==='function'){
+      setCloudStatus('Local data imported from JSON seed file.','green');
+    }
+    console.log('Training data imported from JSON seed file.');
+  }catch(err){
+    console.log('JSON seed import skipped:', err?.message || err);
+  }
+}
+
+function localDateKey(y,m,d){const dt=new Date(y,m,d);const tz=dt.getTimezoneOffset()*60000;return new Date(dt-tz).toISOString().slice(0,10)}
+function formatDisplayDate(key){if(!key)return'';const[y,m,d]=key.split('-');return`${d}/${m}/${y}`}
+function parseDisplayDate(value){if(!value)return todayKey();if(value.includes('-'))return value;const p=value.split('/');return p.length===3?`${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`:todayKey()}
+function setSessionDateKey(key){$('sessionDate').value=formatDisplayDate(key);const[y,m,d]=key.split('-').map(Number);sessionPickDate=new Date(y,m-1,d);renderSessionMiniCalendar()}
+function setSessionDateToday(){setSessionDateKey(todayKey());toggleSessionCalendar(false)}
+function toggleSessionCalendar(show){const cal=$('sessionMiniCalendar');if(!cal)return;if(show===false){cal.classList.remove('show');return}renderSessionMiniCalendar();cal.classList.add('show')}
+function moveSessionPickMonth(delta){sessionPickDate.setMonth(sessionPickDate.getMonth()+delta);renderSessionMiniCalendar();$('sessionMiniCalendar').classList.add('show')}
+function renderSessionMiniCalendar(){
+  const cal=$('sessionMiniCalendar');if(!cal)return;
+  const y=sessionPickDate.getFullYear(),m=sessionPickDate.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0),current=parseDisplayDate($('sessionDate')?.value||todayKey());
+  let html=`<div class="miniCalHead"><button class="btn2" onclick="event.stopPropagation();moveSessionPickMonth(-1)">◀</button><b>${first.toLocaleString(undefined,{month:'long',year:'numeric'})}</b><button class="btn2" onclick="event.stopPropagation();moveSessionPickMonth(1)">▶</button></div>`;
+  html+='<div class="miniCalGrid">'+['S','M','T','W','T','F','S'].map(d=>`<div class="miniCalWeekday">${d}</div>`).join('');
+  for(let i=0;i<first.getDay();i++) html+='<div class="miniCalBlank"></div>';
+  for(let d=1;d<=last.getDate();d++){
+    const key=localDateKey(y,m,d);
+    html+=`<button class="miniCalDay ${key===current?'selected':''} ${key===todayKey()?'todayPick':''}" onclick="event.stopPropagation();setSessionDateKey('${key}');toggleSessionCalendar(false)">${d}</button>`;
+  }
+  html+='</div><div class="row" style="margin-top:8px"><button class="btn2" onclick="event.stopPropagation();setSessionDateKey(todayKey());toggleSessionCalendar(false)">Today</button><button class="btn2" onclick="event.stopPropagation();toggleSessionCalendar(false)">Close</button></div>';
+  cal.innerHTML=html;
+}
+document.addEventListener('click',e=>{const wrap=document.querySelector('.dateWrap'),cal=$('sessionMiniCalendar');if(wrap&&cal&&!wrap.contains(e.target))cal.classList.remove('show')});
+
+function readinessScore(){return Math.max(0,Math.round(+$('sleep').value*12 + +$('energy').value*12 + +$('legs').value*8 - +$('soreness').value*6 - +$('stress').value*4 + +$('rhr').value))}
+function zone(s){return s>=150?['green','Excellent']:s>=110?['green','Good']:s>=80?['amber','Moderate']:['red','Low']}
+function engine(){
+  const score=readinessScore(),run=+data.runFatigue||0,legs=+$('legs').value;
+  let setMultiplier=1,loadChange=0,capRpe=9,notes=[];
+  if(score<80){setMultiplier=.75;loadChange=-10;capRpe=7;notes.push('Low readiness: reduce accessory sets and cap RPE at 7.')}
+  else if(score<110){setMultiplier=.85;loadChange=-5;capRpe=8;notes.push('Moderate readiness: reduce accessory volume slightly.')}
+  else notes.push('Readiness supports full programmed work.');
+  if(activeDay==='Wed'&&(run>=5||legs<=5)){loadChange-=5;notes.push('Lower-body risk detected: reduce lower load another 5%.')}
+  return{score,setMultiplier,loadChange,capRpe,notes}
+}
+
+function adjustedPlan(day){
+  const e=engine(); let p=plans[day].map(x=>[...x]);
+  if(['Tue','Thu','Sat','Sun'].includes(day)) return p;
+  return p.map((x,i)=>{if(i>2)x[2]=Math.max(1,Math.round(x[2]*e.setMultiplier));return x})
+}
+function initSelectors(){
+  $('daySelect').innerHTML=days.map(d=>`<option ${d===activeDay?'selected':''}>${d}</option>`).join('');
+  $('daySelect').onchange=e=>{activeDay=e.target.value;renderAll()};
+  $('tabs').innerHTML=days.map(d=>`<button class="tab ${d===activeDay?'active':''}" onclick="activeDay='${d}';renderAll()">${d}</button>`).join('');
+}
+
+function renderReadiness(){
+  const e=engine(),z=zone(e.score);
+  $('readinessBox').innerHTML=`<div class="result ${z[0]}"><b>Readiness Score: ${e.score}</b><br>Status: ${z[1]}<br>RPE cap: ${e.capRpe}<br>Load adjustment: ${e.loadChange}%</div>`;
+  $('engineBox').innerHTML=e.notes.map(n=>`<div class="result ${z[0]}">${n}</div>`).join('');
+}
+function renderRunFatigue(){
+  const f=+data.runFatigue||0,cls=f>=7?'red':f>=4?'amber':'green';
+  $('runFatigueBox').innerHTML=`<div class="result ${cls}"><b>Weekly run fatigue: ${f}</b><br>${f>=7?'High: protect legs.':f>=4?'Moderate: monitor quality runs.':'Low: normal training available.'}</div>`;
+}
+
+function renderSession(){
+  const p=adjustedPlan(activeDay);
+  const note=activeDay==='Fri'?'<div class="result purple"><b>Friday full session visible:</b> smart engine adjusts sets/intensity only.</div>':'';
+  $('sessionBox').innerHTML=note+p.map((ex,idx)=>{
+    const[name,group,sets,min,max,rest,type]=ex;
+    if(type==='run') return `<div class="exercise"><div class="exName">${name}</div><span class="tag">Runna / Garmin source of truth</span><label>Distance km</label><input data-ex="${idx}" data-field="distance" type="number" step="0.01"><label>Duration min</label><input data-ex="${idx}" data-field="duration" type="number"><label>Run RPE</label><input data-ex="${idx}" data-field="rpe" type="number" min="1" max="10" value="5"></div>`;
+    if(type==='recovery') return `<div class="exercise"><div class="exName">${name}</div><p class="small">Walk, mobility, easy spin or full rest.</p><textarea data-ex="${idx}" data-field="notes"></textarea></div>`;
+    return `<div class="exercise"><div class="exHead"><div><div class="exName">${name}</div><span class="tag">${group} · ${sets} sets · ${min}-${max}${type==='time'?' sec':' reps'} · ${rest}s rest</span></div><div class="exBtns"><button class="btn2" onclick="addSet(${idx})">+ Set</button><button class="btnAmber" onclick="fillSameWeight(${idx})">Same Wt</button><button class="btnAmber" onclick="fillSameReps(${idx})">Same Reps</button><button class="btnAmber" onclick="fillSameRpe(${idx})">Same RPE</button></div></div><div id="sets-${idx}">${renderSets(idx,sets,type)}</div></div>`;
+  }).join('');
+}
+function renderSets(idx,sets,type){
+  let out='';
+  for(let s=1;s<=sets;s++) out+=`<div class="setrow"><span>#${s}</span><input placeholder="Weight" data-ex="${idx}" data-set="${s}" data-field="weight" type="number" step="0.5"><input placeholder="${type==='time'?'Seconds':'Reps'}" data-ex="${idx}" data-set="${s}" data-field="reps" type="number"><input placeholder="RPE" data-ex="${idx}" data-set="${s}" data-field="rpe" type="number" step="0.5" min="1" max="10"><button class="btnRed" onclick="this.parentElement.remove()">−</button></div>`;
+  return out;
+}
+function addSet(idx){
+  const wrap=$('sets-'+idx);
+  const n=wrap.querySelectorAll('.setrow').length+1;
+  wrap.insertAdjacentHTML('beforeend',renderSets(idx,1,adjustedPlan(activeDay)[idx][6]).replace('#1','#'+n));
+}
+
+function fillSameField(idx,field,label){
+  const inputs=[...document.querySelectorAll(`#sets-${idx} [data-field="${field}"]`)];
+  const source=inputs.find(i=>i.value!==''&&i.value!=null);
+  if(!source){alert(`Enter the first set ${label} first, then click Same ${label}.`);return false}
+  inputs.forEach(i=>i.value=source.value);
+  return true;
+}
+function fillSameWeight(idx){fillSameField(idx,'weight','Wt')}
+function fillSameReps(idx){fillSameField(idx,'reps','Reps')}
+function fillSameRpe(idx){fillSameField(idx,'rpe','RPE')}
+function fillAllExerciseField(field,label){adjustedPlan(activeDay).forEach((ex,idx)=>{if(!['run','recovery'].includes(ex[6]))fillSameField(idx,field,label)})}
+function fillAllExerciseWeights(){fillAllExerciseField('weight','Wt')}
+function fillAllExerciseReps(){fillAllExerciseField('reps','Reps')}
+function fillAllExerciseRpe(){fillAllExerciseField('rpe','RPE')}
+
+function completeSession(){
+  const p=adjustedPlan(activeDay),inputs=[...document.querySelectorAll('#sessionBox input,#sessionBox textarea')],entry={date:parseDisplayDate($('sessionDate')?.value||todayKey()),day:activeDay,readiness:readinessScore(),runFatigue:+data.runFatigue||0,items:[]};
+  p.forEach((ex,idx)=>{
+    let item={name:ex[0],group:ex[1],sets:[]};
+    inputs.filter(i=>i.dataset.ex==idx).forEach(i=>{let s=i.dataset.set||'single';if(!item.sets[s])item.sets[s]={};item.sets[s][i.dataset.field]=i.value});
+    item.sets=Object.values(item.sets);
+    item.suggestion=progressionSuggestion(ex,item.sets);
+    entry.items.push(item);
+  });
+  data.sessions.push(entry);
+  save();
+  renderAll();
+  alert('Session saved for '+entry.date+'. Smart suggestions updated.');
+}
+function copyLastWeights(){
+  const last=[...data.sessions].reverse().find(s=>s.day===activeDay);
+  if(!last){alert('No previous session found.');return}
+  [...document.querySelectorAll('[data-field="weight"]')].forEach(inp=>{
+    const item=last.items[inp.dataset.ex],set=item&&item.sets[+inp.dataset.set-1];
+    if(set&&set.weight) inp.value=set.weight;
+  });
+}
+function deloadToday(){$('sleep').value=6;$('energy').value=5;$('soreness').value=7;$('legs').value=5;renderAll()}
+function logRunFatigue(){let add=+$('runType').value;if(+$('runRpe').value>=8)add+=1;data.runFatigue=(+data.runFatigue||0)+add;save();renderAll()}
+function resetRunFatigue(){data.runFatigue=0;save();renderAll()}
+
+function roundToJump(v,j){return(!v||isNaN(v))?'':Math.round(v/j)*j}
+function exerciseClass(name){const n=name.toLowerCase();if(n.includes('deadlift'))return{inc:.025,dec:.05};if(n.includes('bench')||n.includes('pull-up')||n.includes('pullups')||n.includes('row')||n.includes('leg press'))return{inc:.025,dec:.05};if(n.includes('farmers')||n.includes('explosive'))return{inc:0,dec:0};return{inc:.02,dec:.05}}
+function flat(sets){return(sets||[]).filter(s=>s&&(s.weight||s.reps||s.rpe)).map(s=>({weight:+s.weight||0,reps:+s.reps||0,rpe:+s.rpe||0}))}
+function getCycleWeek(){if(data.settings.forceWeek)return data.settings.forceWeek;const start=data.settings.cycleStart;if(!start)return 3;const diff=Math.floor((new Date(todayKey())-new Date(start))/(7*24*60*60*1000));return Math.min(12,Math.max(1,diff+1))}
+function isDeloadWeek(w){return[4,8,12].includes(+w)}
+function setCycleStartToday(){data.settings.cycleStart=todayKey();data.settings.forceWeek=null;save();renderAll()}
+function setCycleStartForCurrentWeek(){const w=+($('cycleWeek')?.value||3),start=new Date();start.setDate(start.getDate()-((Math.max(1,w)-1)*7));const tz=start.getTimezoneOffset()*60000;data.settings.cycleStart=new Date(start-tz).toISOString().slice(0,10);data.settings.forceWeek=null;save();renderAll()}
+function forceDeloadWeek(){data.settings.forceWeek=4;save();renderAll()}
+function clearForcedWeek(){data.settings.forceWeek=null;save();renderAll()}
+
+function calculateNextWeight(ex,sets,eng=engine()){
+  const[name,group,targetSets,min,max,rest,type]=ex;
+  if(type==='run'||type==='recovery')return{action:'Log only',nextWeightText:'Use Runna/Garmin',reason:'Running progression is controlled outside the strength engine.'};
+  if(type==='time')return{action:'Progress slowly',nextWeightText:`${min}-${max} sec`,reason:'Carries progress best by posture, duration or small load jumps.'};
+  const valid=flat(sets);
+  if(!valid.length)return{action:'Set baseline',nextWeightText:'Enter first session',reason:'No logged performance yet.'};
+  const jump=+($('plateJump')?.value||2.5),weights=valid.filter(s=>s.weight>0).map(s=>s.weight),last=weights.length?weights[weights.length-1]:0,avg=valid.reduce((a,s)=>a+(s.rpe||8),0)/valid.length,allTop=valid.every(s=>s.reps>=max&&(s.rpe||8)<=8.5),anyLow=valid.some(s=>s.reps<min||(s.rpe||0)>=9.5),cls=exerciseClass(name),deload=isDeloadWeek(+($('cycleWeek')?.value||getCycleWeek()))||eng.score<80||(activeDay==='Wed'&&(+data.runFatigue||0)>=7);
+  let next=last,action='Hold',reason='Stay at the same load and add reps.';
+  if(!last)return{action:'Set baseline',nextWeightText:'Use comfortable load',reason:'No previous weight entered.'};
+  if(deload){next=roundToJump(last*.9,jump);action='Deload / reduce';reason='Deload week, low readiness or high run fatigue detected.'}
+  else if(anyLow){next=roundToJump(last*(1-cls.dec),jump);action='Reduce or repeat';reason='Missed minimum reps or RPE was too high.'}
+  else if(allTop){next=roundToJump(last*(1+cls.inc),jump);action='Increase';reason='Top of rep range achieved with controlled RPE.'}
+  else if(avg>=9){action='Hold';reason='Average RPE is high. Improve execution before increasing.'}
+  return{action,nextWeightText:next?`${next} kg`:'Use same load',reason,lastWeight:last,avgRpe:avg.toFixed(1)};
+}
+function progressionSuggestion(ex,sets){const r=calculateNextWeight(ex,sets);return`${r.action}: ${r.nextWeightText}. ${r.reason}`}
+function lastPerf(name){for(const s of [...data.sessions].reverse()){const item=(s.items||[]).find(i=>i.name===name);if(item)return{session:s,item}}return null}
+
+function renderCycleProgression(){
+  if(!$('cycleStart').value) $('cycleStart').value=data.settings.cycleStart||todayKey();
+  if(!data.settings.cycleStart) data.settings.cycleStart=$('cycleStart').value;
+  const week=getCycleWeek();
+  $('cycleWeek').value=week;
+  let html='<div class="cycleBox">';
+  for(let i=1;i<=12;i++) html+=`<div class="cycleWeek ${i===week?'cycleNow':''} ${isDeloadWeek(i)?'cycleDeload':''}"><b>W${i}</b><br>${isDeloadWeek(i)?'Deload':'Build'}</div>`;
+  html+='</div>';
+  html+=`<div class="result ${isDeloadWeek(week)?'amber':'green'}"><b>Current phase:</b> Week ${week} · ${isDeloadWeek(week)?'Deload / absorb fatigue':'Build / progress carefully'}</div>`;
+  $('cycleBox').innerHTML=html;
+  save();
+}
+function renderWeightSuggestions(){
+  const p=adjustedPlan(activeDay),eng=engine();
+  $('weightSuggestionBox').innerHTML=p.filter(ex=>!['run','recovery'].includes(ex[6])).map(ex=>{
+    const perf=lastPerf(ex[0]),rec=perf?calculateNextWeight(ex,perf.item.sets,eng):{action:'Set baseline',nextWeightText:'Enter first session',reason:'No previous logged performance for this exercise yet.'};
+    const cls=rec.action.includes('Increase')?'green':rec.action.includes('Reduce')||rec.action.includes('Deload')?'red':rec.action.toLowerCase().includes('baseline')?'purple':'amber';
+    return `<div class="suggestionCard ${cls}"><b>${ex[0]}</b><br><span class="mini">Target: ${ex[2]} sets · ${ex[3]}-${ex[4]}${ex[6]==='time'?' sec':' reps'}</span><div class="suggestionGrid"><div><span class="mini">Last</span><br><b>${rec.lastWeight?rec.lastWeight+' kg':'—'}</b></div><div><span class="mini">Next suggestion</span><br><b>${rec.nextWeightText}</b></div><div><span class="mini">Action</span><br><b>${rec.action}</b></div></div><p class="small">${rec.reason}</p></div>`;
+  }).join('')||'<p class="small">No weight suggestions for run/recovery days.</p>';
+}
+
+function renderVolume(){
+  const p=[...plans.Mon,...plans.Wed,...plans.Fri],vol={};
+  p.forEach(x=>vol[x[1]]=(vol[x[1]]||0)+(+x[2]||0));
+  $('volumeBox').innerHTML=Object.entries(vol).map(([k,v])=>`<div class="metric"><span>${k}</span><b>${v} sets</b></div>`).join('');
+}
+function renderHistory(){
+  const recent=[...data.sessions].reverse().slice(0,8);
+  $('historyBox').innerHTML=recent.length?`<table><tr><th>Date</th><th>Day</th><th>Readiness</th></tr>${recent.map(s=>`<tr><td>${s.date}</td><td>${s.day}</td><td>${s.readiness}</td></tr>`).join('')}</table>`:'<p class="small">No sessions logged yet.</p>';
+}
+
+function moveMonth(delta){calDate.setMonth(calDate.getMonth()+delta);renderCalendar()}
+function goToday(){calDate=new Date();renderCalendar()}
+function entriesForDate(key){
+  const sessions=(data.sessions||[]).filter(s=>s.date===key).map(s=>({type:['Tue','Thu','Sat'].includes(s.day)?'Run':'Gym',title:`${s.day} session`}));
+  const logs=(data.logs||[]).filter(l=>l.date===key).map(l=>({type:l.type,title:l.title||l.type}));
+  return [...sessions,...logs];
+}
+function renderCalendar(){
+  const y=calDate.getFullYear(),m=calDate.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0);
+  $('calendarTitle').textContent=first.toLocaleString(undefined,{month:'long',year:'numeric'});
+  let html=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>`<div class="weekday">${d}</div>`).join('');
+  for(let i=0;i<first.getDay();i++) html+='<div></div>';
+  for(let d=1;d<=last.getDate();d++){
+    let key=localDateKey(y,m,d),entries=entriesForDate(key),dots=entries.slice(0,4).map(e=>`<span class="dot ${e.type==='Run'?'dotRun':e.type==='Gym'?'dotGym':''}"></span>`).join(''),label=entries.slice(0,2).map(e=>e.title).join('<br>');
+    html+=`<div class="daybox ${entries.length?'done':''} ${key===todayKey()?'today':''}" onclick="prefillLogDate('${key}')"><b>${d}</b><br>${dots}<div class="small">${label}</div></div>`;
+  }
+  $('calendar').innerHTML=html;
+}
+
+function prefillLogDate(key){$('logDate').value=key;setSessionDateKey(key);$('logTitle').focus()}
+function saveTrainingLog(){
+  const e={id:Date.now(),date:$('logDate').value||todayKey(),type:$('logType').value,title:$('logTitle').value.trim(),notes:$('logNotes').value.trim(),createdAt:new Date().toISOString()};
+  if(!e.title&&!e.notes){alert('Add a title or note first.');return}
+  data.logs.push(e);
+  save();
+  $('logTitle').value='';
+  $('logNotes').value='';
+  renderAll();
+}
+function deleteLog(id){data.logs=data.logs.filter(l=>l.id!==id);save();renderAll()}
+function renderTrainingLogs(){
+  if(!$('logDate').value) $('logDate').value=todayKey();
+  const logs=[...data.logs].sort((a,b)=>(b.date+b.createdAt).localeCompare(a.date+a.createdAt)).slice(0,20);
+  $('trainingLogBox').innerHTML=logs.length?logs.map(l=>`<div class="logItem"><b>${l.date} · ${l.type}</b><br>${l.title||''}<p class="small">${(l.notes||'').replaceAll('<','&lt;')}</p><button class="btnRed" onclick="deleteLog(${l.id})">Delete</button></div>`).join(''):'<p class="small">No manual log entries yet.</p>';
+}
+function renderCoach(){
+  const e=engine(); let list=[];
+  if(activeDay==='Wed') list.push('Wednesday priority: quality deadlift reps, no grinders. Thursday Runna quality matters.');
+  if(activeDay==='Fri') list.push('Friday priority: performance upper, grip, posture and chest hypertrophy without damaging Saturday long run.');
+  if((data.runFatigue||0)>=7) list.push('Run fatigue is high. Protect legs and avoid chasing PRs.');
+  if(e.score<80) list.push('Low readiness: maintenance stimulus today.');
+  $('coachBox').innerHTML=list.map(x=>`<div class="result purple">${x}</div>`).join('')||'<div class="result green">Training state looks balanced. Execute the plan.</div>';
+}
+
+function exportJSON(){download(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),'sergio-hybrid-v7-3-4-data.json')}
+function exportCSV(){
+  let rows=['date,day,readiness,runFatigue,exercise,suggestion'];
+  data.sessions.forEach(s=>(s.items||[]).forEach(i=>rows.push([s.date,s.day,s.readiness,s.runFatigue,i.name,i.suggestion].map(x=>'"'+String(x||'').replaceAll('"','""')+'"').join(','))));
+  download(new Blob([rows.join('\n')],{type:'text/csv'}),'sergio-hybrid-v7-3-4-data.csv');
+}
+function download(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}
+function clearData(){
+  if(confirm('Clear all V7.3.4 local data?')){
+    data=blankData();
+    save();
+    localStorage.removeItem(importedFlagKey);
+    renderAll();
+  }
+}
+
+function setCloudStatus(msg,cls='amber'){$('cloudBox').className='result '+cls;$('cloudBox').innerHTML=msg}
+function getHybridData(){return data}
+function setHybridData(newData){
+  data=normalizeData(newData||data);
+  save();
+  renderAll();
+}
+window.getHybridData=getHybridData;
+window.setHybridData=setHybridData;
+window.setCloudStatus=setCloudStatus;
+
+function renderAll(){
+  initSelectors();
+  if($('sessionDate')&&!$('sessionDate').value) setSessionDateKey(todayKey());
+  renderReadiness();
+  renderRunFatigue();
+  renderVolume();
+  renderSession();
+  renderHistory();
+  renderCalendar();
+  renderTrainingLogs();
+  renderCycleProgression();
+  renderWeightSuggestions();
+  renderCoach();
+}
+
+renderAll();
+importJsonFileToAppOnce();
 </script>
+
 <script type="module">
-let app=null,db=null,dbRef=null,dbSet=null,dbGet=null;async function initFirebase(){const cfgText=document.getElementById('firebaseConfig')?.value?.trim(),syncId=document.getElementById('syncId')?.value?.trim()||'sergio-main';if(!cfgText){window.setCloudStatus('Paste Firebase web config JSON first.','red');return false}let config;try{config=JSON.parse(cfgText)}catch(e){window.setCloudStatus('Firebase config is not valid JSON.','red');return false}try{const appMod=await import('https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js');const dbMod=await import('https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js');app=appMod.initializeApp(config);db=dbMod.getDatabase(app);dbRef=p=>dbMod.ref(db,p);dbSet=dbMod.set;dbGet=dbMod.get;window._syncPath='trainingLogs/'+syncId;window.setCloudStatus('Cloud sync enabled. You can Upload or Download now.','green');return true}catch(e){window.setCloudStatus('Cloud sync failed: '+e.message,'red');return false}}window.enableCloudSync=async()=>{await initFirebase()};window.uploadToCloud=async()=>{if(!db&&!(await initFirebase()))return;const payload=window.getHybridData();payload.cloud={lastUpload:new Date().toISOString(),syncId:document.getElementById('syncId').value||'sergio-main'};await dbSet(dbRef(window._syncPath),payload);window.setCloudStatus('Uploaded to cloud at '+new Date().toLocaleString()+'.','green')};window.downloadFromCloud=async()=>{if(!db&&!(await initFirebase()))return;const snap=await dbGet(dbRef(window._syncPath));if(!snap.exists()){window.setCloudStatus('No cloud data found for this Athlete Sync ID.','amber');return}window.setHybridData(snap.val());window.setCloudStatus('Downloaded cloud data at '+new Date().toLocaleString()+'.','green')};
+let app=null,db=null,dbRef=null,dbSet=null,dbGet=null;
+async function initFirebase(){
+  const cfgText=document.getElementById('firebaseConfig')?.value?.trim(),syncId=document.getElementById('syncId')?.value?.trim()||'sergio-main';
+  if(!cfgText){window.setCloudStatus('Paste Firebase web config JSON first.','red');return false}
+  let config;
+  try{config=JSON.parse(cfgText)}catch(e){window.setCloudStatus('Firebase config is not valid JSON.','red');return false}
+  try{
+    const appMod=await import('https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js');
+    const dbMod=await import('https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js');
+    app=appMod.initializeApp(config);
+    db=dbMod.getDatabase(app);
+    dbRef=p=>dbMod.ref(db,p);
+    dbSet=dbMod.set;
+    dbGet=dbMod.get;
+    window._syncPath='trainingLogs/'+syncId;
+    window.setCloudStatus('Cloud sync enabled. You can Upload or Download now.','green');
+    return true
+  }catch(e){
+    window.setCloudStatus('Cloud sync failed: '+e.message,'red');
+    return false
+  }
+}
+window.enableCloudSync=async()=>{await initFirebase()};
+window.uploadToCloud=async()=>{
+  if(!db&&!(await initFirebase()))return;
+  const payload=window.getHybridData();
+  payload.cloud={lastUpload:new Date().toISOString(),syncId:document.getElementById('syncId').value||'sergio-main'};
+  await dbSet(dbRef(window._syncPath),payload);
+  window.setCloudStatus('Uploaded to cloud at '+new Date().toLocaleString()+'.','green');
+};
+window.downloadFromCloud=async()=>{
+  if(!db&&!(await initFirebase()))return;
+  const snap=await dbGet(dbRef(window._syncPath));
+  if(!snap.exists()){
+    window.setCloudStatus('No cloud data found for this Athlete Sync ID.','amber');
+    return
+  }
+  window.setHybridData(snap.val());
+  window.setCloudStatus('Downloaded cloud data at '+new Date().toLocaleString()+'.','green');
+};
 </script>
-</body></html>
+</body>
+</html>
