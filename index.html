@@ -3,67 +3,948 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sergio Hybrid Log V7.7.3</title>
+<title>Sergio Hybrid Log V7.7.4</title>
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--card2:#334155;--text:#f8fafc;--muted:#94a3b8;--border:rgba(148,163,184,.22);--blue:#3b82f6;--green:#16a34a;--amber:#f59e0b;--red:#dc2626;--purple:#8b5cf6}*{box-sizing:border-box}body{margin:0;padding:14px;background:linear-gradient(180deg,#020617,#0f172a 55%,#111827);color:var(--text);font-family:Arial,Helvetica,sans-serif}.container{max-width:1280px;margin:0 auto}.header{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:16px}h1{font-size:clamp(28px,4vw,44px);margin:0}.subtitle,.small{color:var(--muted)}.pill{border:1px solid var(--border);border-radius:999px;background:rgba(30,41,59,.78);padding:8px 12px;font-weight:800}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{grid-column:span 4;background:rgba(30,41,59,.95);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 14px 30px rgba(0,0,0,.28)}.wide{grid-column:span 8}.half{grid-column:span 6}.full{grid-column:1/-1}h2{margin:0 0 14px;font-size:20px}h3{margin:16px 0 8px;color:#dbeafe;font-size:16px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}label{display:block;font-size:13px;color:#cbd5e1;margin-top:8px}input,select,textarea,button{width:100%;margin-top:6px;padding:10px;border-radius:10px;border:1px solid var(--border);background:#0b1220;color:var(--text)}button{background:var(--blue);border:0;font-weight:800;cursor:pointer}.btn2{background:#475569}.btnGreen{background:var(--green)}.btnAmber{background:var(--amber);color:#111827}.btnRed{background:var(--red)}button:hover{filter:brightness(1.08)}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.tab{width:auto;background:#334155}.tab.active{background:var(--blue)}.result,.exercise,.suggestionCard,.logItem{border:1px solid var(--border);border-radius:14px;padding:12px;margin-top:10px;background:#0b1220}.exercise{background:rgba(51,65,85,.82)}.green{background:rgba(22,163,74,.18);border-color:rgba(22,163,74,.45)}.amber{background:rgba(245,158,11,.18);border-color:rgba(245,158,11,.45)}.red{background:rgba(220,38,38,.18);border-color:rgba(220,38,38,.45)}.purple{background:rgba(139,92,246,.18);border-color:rgba(139,92,246,.45)}.tag{display:inline-block;font-size:11px;color:#dbeafe;background:rgba(59,130,246,.18);border:1px solid rgba(59,130,246,.28);border-radius:999px;padding:4px 8px;margin-top:5px}.exHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.exName{font-weight:900}.exBtns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.exBtns button{width:auto;margin-top:0;padding:8px 10px}.setrow{display:grid;grid-template-columns:38px 1fr 1fr 1fr 38px;gap:8px;align-items:end;margin-top:8px}.setrow span{font-size:12px;color:var(--muted);padding-bottom:10px}.metric{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:8px 0}.calHead{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px}.calHead button{width:auto}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.weekday{text-align:center;color:#cbd5e1;font-size:12px;font-weight:900}.daybox{min-height:68px;border:1px solid var(--border);border-radius:10px;background:#0b1220;padding:6px;font-size:12px}.today{outline:2px solid var(--blue)}.done{background:rgba(22,163,74,.2)}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);margin-right:3px}.dotGym{background:var(--purple)}.dotRun{background:var(--green)}.cycleBox{display:grid;grid-template-columns:repeat(12,1fr);gap:5px}.cycleWeek{border:1px solid var(--border);border-radius:10px;text-align:center;padding:8px 3px;background:#0b1220;font-size:12px}.cycleNow{outline:2px solid var(--blue)}.cycleDeload{background:rgba(245,158,11,.18)}.suggestionGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}.mini{font-size:12px;color:#cbd5e1}.logList{max-height:300px;overflow:auto}.dateWrap{position:relative}.dateInputRow{display:flex;gap:8px;align-items:center}.dateInputRow button{width:auto;min-width:48px}.miniCal{position:absolute;z-index:50;left:0;right:0;top:76px;background:#0b1220;border:1px solid var(--border);border-radius:16px;padding:12px;box-shadow:0 20px 45px rgba(0,0,0,.45);display:none}.miniCal.show{display:block}.miniCalHead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}.miniCalHead button{width:auto}.miniCalGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.miniCalWeekday{text-align:center;font-size:11px;color:#94a3b8;font-weight:900}.miniCalDay{min-height:38px;border:1px solid var(--border);border-radius:9px;background:#111827;color:#f8fafc;font-weight:800;padding:6px;cursor:pointer}.miniCalDay:hover{background:#1d4ed8}.miniCalDay.selected{outline:2px solid var(--green);background:rgba(22,163,74,.25)}.miniCalDay.todayPick{border-color:var(--blue)}.miniCalBlank{min-height:38px}.header{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}.headerMain{display:flex;flex-direction:column;gap:2px}h1{font-size:clamp(22px,3vw,30px);margin:0;line-height:1.05}.subtitle,.small{color:var(--muted)}.subtitle{font-size:12px}.pill{border:1px solid var(--border);border-radius:999px;background:rgba(30,41,59,.78);padding:6px 10px;font-weight:800;font-size:12px}.dashboardStrip{display:grid;grid-template-columns:repeat(3,minmax(220px,1fr));gap:12px;margin-bottom:16px}.dashCard{background:rgba(30,41,59,.95);border:1px solid var(--border);border-radius:16px;padding:14px 16px;box-shadow:0 10px 22px rgba(0,0,0,.18)}.dashLabel{font-size:11px;color:#cbd5e1;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.dashValue{font-size:22px;font-weight:900;margin-top:6px}.dashSub{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.45}.dashTags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.dashTags .tinyTag{background:rgba(139,92,246,.16)}.scheduleStrip{display:grid;grid-template-columns:repeat(7,minmax(180px,1fr));gap:10px;overflow-x:auto}.scheduleDay{border:1px solid var(--border);border-radius:14px;padding:12px 10px;background:#0b1220;min-height:300px;display:flex;flex-direction:column}.scheduleDay b{display:block;font-size:14px;margin-bottom:2px}.scheduleLabel{font-size:12px;color:#cbd5e1;margin-bottom:10px}.exerciseListMini{display:flex;flex-direction:column;gap:8px;overflow:auto;max-height:220px;padding-right:2px}.weekExerciseItem{border:1px solid var(--border);border-radius:10px;background:#111827;padding:8px 8px;display:flex;align-items:flex-start;gap:8px;touch-action:none;user-select:none}.weekExerciseItem.dragging{opacity:.55;transform:scale(.99)}.weekExerciseItem.dragOver{outline:2px solid var(--blue)}.weekExerciseItem.dragOverAfter{outline:2px dashed var(--green)}.weekExerciseHandle{font-size:14px;line-height:1;color:#cbd5e1;cursor:grab;padding-top:2px}.weekExerciseText{font-size:12px;line-height:1.25;color:#f8fafc}.weekStructureTools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.calendarTopLayout{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(320px,1.1fr);gap:16px;align-items:start}.calendarPanel{background:#0b1220;border:1px solid var(--border);border-radius:16px;padding:14px}.calendarActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.calendarActions button{width:auto}.daybox{cursor:pointer;transition:transform .12s ease,background .12s ease}.daybox:hover{transform:translateY(-1px);background:#101a2f}.daySelected{outline:2px solid var(--green);background:rgba(22,163,74,.16)}.dayDetailBox{display:flex;flex-direction:column;gap:10px;min-height:420px}.dayCard{border:1px solid var(--border);border-radius:14px;padding:12px;background:#111827}.dayCard h3{margin:0 0 8px;font-size:15px}.dayTags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.tinyTag{display:inline-block;font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid var(--border);background:rgba(59,130,246,.16);color:#dbeafe}.dayMeta{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 0}.dayMeta span{font-size:12px;color:#cbd5e1}.compactHeader{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}.calendar{align-items:stretch}.daybox{min-height:96px;display:flex;flex-direction:column;gap:4px;overflow:hidden}.daybox .small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25}.calendarPanel{overflow:hidden}.scheduleStrip{grid-template-columns:repeat(7,minmax(150px,1fr));overflow-x:auto}.scheduleDay.simpleDay{min-height:96px;cursor:pointer;transition:transform .12s ease,background .12s ease,outline-color .12s ease}.scheduleDay.simpleDay:hover{transform:translateY(-1px);background:#101a2f}.scheduleDay.simpleDay.activeWeekDay{outline:2px solid var(--blue)}.scheduleDay.simpleDay .scheduleLabel{font-size:18px;font-weight:900;color:#f8fafc;margin-top:6px;margin-bottom:0;line-height:1.15}.scheduleDay.simpleDay .scheduleSub{font-size:12px;color:#cbd5e1;margin-top:8px}.mealSummaryGrid{display:grid;grid-template-columns:repeat(3,minmax(160px,1fr));gap:10px;margin-top:10px}.mealSummaryTile{border:1px solid var(--border);border-radius:12px;padding:10px;background:#0b1220}.mealSummaryTile .label{font-size:11px;color:#cbd5e1;text-transform:uppercase;letter-spacing:.05em;font-weight:800}.mealSummaryTile .value{font-size:20px;font-weight:900;margin-top:4px}.mealSummaryTile .sub{font-size:12px;color:var(--muted);margin-top:6px}.mealMeal{border:1px solid var(--border);border-radius:14px;padding:12px;background:#0b1220;margin-top:10px}.mealMealTitle{font-weight:900}.mealKicker{font-size:12px;color:#cbd5e1;margin-top:4px}.mealNotes{margin-top:10px}.mealNotes .small{margin-top:6px}.mealBadges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}@media(max-width:900px){.mealSummaryGrid{grid-template-columns:1fr}.scheduleStrip{grid-template-columns:repeat(7,minmax(140px,1fr))}}.footer{text-align:center;color:var(--muted);font-size:12px;margin:22px 0 8px}@media(max-width:1100px){.calendarTopLayout{grid-template-columns:1fr}.dayDetailBox{min-height:auto}.scheduleStrip{grid-template-columns:repeat(7,minmax(160px,1fr))}}@media(max-width:900px){.card,.wide,.half{grid-column:1/-1}.row,.row3,.row4{grid-template-columns:1fr}.setrow{grid-template-columns:28px 1fr 1fr 1fr 34px}.cycleBox{grid-template-columns:repeat(6,1fr)}.scheduleStrip{grid-template-columns:repeat(7,minmax(170px,1fr))}.dashboardStrip{grid-template-columns:1fr}body{padding:10px}.card{padding:14px}}
+:root{--bg:#0f172a;--card:#1e293b;--card2:#334155;--text:#f8fafc;--muted:#94a3b8;--border:rgba(148,163,184,.22);--blue:#3b82f6;--green:#16a34a;--amber:#f59e0b;--red:#dc2626;--purple:#8b5cf6}
+*{box-sizing:border-box}
+body{margin:0;padding:14px;background:linear-gradient(180deg,#020617,#0f172a 55%,#111827);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+.container{max-width:1280px;margin:0 auto}
+.header{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.headerMain{display:flex;flex-direction:column;gap:2px}
+h1{font-size:clamp(22px,3vw,30px);margin:0;line-height:1.05}
+.subtitle,.small{color:var(--muted)}
+.subtitle{font-size:12px}
+.pill{border:1px solid var(--border);border-radius:999px;background:rgba(30,41,59,.78);padding:6px 10px;font-weight:800;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{grid-column:span 4;background:rgba(30,41,59,.95);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 14px 30px rgba(0,0,0,.28)}
+.wide{grid-column:span 8}
+.half{grid-column:span 6}
+.full{grid-column:1/-1}
+h2{margin:0 0 14px;font-size:20px}
+h3{margin:16px 0 8px;color:#dbeafe;font-size:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+label{display:block;font-size:13px;color:#cbd5e1;margin-top:8px}
+input,select,textarea,button{width:100%;margin-top:6px;padding:10px;border-radius:10px;border:1px solid var(--border);background:#0b1220;color:var(--text)}
+button{background:var(--blue);border:0;font-weight:800;cursor:pointer}
+.btn2{background:#475569}
+.btnGreen{background:var(--green)}
+.btnAmber{background:var(--amber);color:#111827}
+.btnRed{background:var(--red)}
+button:hover{filter:brightness(1.08)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.tab{width:auto;background:#334155}
+.tab.active{background:var(--blue)}
+.result,.exercise,.suggestionCard,.logItem{border:1px solid var(--border);border-radius:14px;padding:12px;margin-top:10px;background:#0b1220}
+.exercise{background:rgba(51,65,85,.82)}
+.green{background:rgba(22,163,74,.18);border-color:rgba(22,163,74,.45)}
+.amber{background:rgba(245,158,11,.18);border-color:rgba(245,158,11,.45)}
+.red{background:rgba(220,38,38,.18);border-color:rgba(220,38,38,.45)}
+.purple{background:rgba(139,92,246,.18);border-color:rgba(139,92,246,.45)}
+.tag{display:inline-block;font-size:11px;color:#dbeafe;background:rgba(59,130,246,.18);border:1px solid rgba(59,130,246,.28);border-radius:999px;padding:4px 8px;margin-top:5px}
+.exHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.exName{font-weight:900}
+.exBtns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.exBtns button{width:auto;margin-top:0;padding:8px 10px}
+.setrow{display:grid;grid-template-columns:38px 1fr 1fr 1fr 38px;gap:8px;align-items:end;margin-top:8px}
+.setrow span{font-size:12px;color:var(--muted);padding-bottom:10px}
+.metric{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:8px 0}
+.calHead{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px}
+.calHead button{width:auto}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:stretch}
+.weekday{text-align:center;color:#cbd5e1;font-size:12px;font-weight:900}
+.daybox{min-height:96px;border:1px solid var(--border);border-radius:10px;background:#0b1220;padding:6px;font-size:12px;cursor:pointer;transition:transform .12s ease,background .12s ease;display:flex;flex-direction:column;gap:4px;overflow:hidden}
+.daybox:hover{transform:translateY(-1px);background:#101a2f}
+.daybox .small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25}
+.today{outline:2px solid var(--blue)}
+.done{background:rgba(22,163,74,.2)}
+.daySelected{outline:2px solid var(--green);background:rgba(22,163,74,.16)}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);margin-right:3px}
+.dotGym{background:var(--purple)}
+.dotRun{background:var(--green)}
+.cycleBox{display:grid;grid-template-columns:repeat(12,1fr);gap:5px}
+.cycleWeek{border:1px solid var(--border);border-radius:10px;text-align:center;padding:8px 3px;background:#0b1220;font-size:12px}
+.cycleNow{outline:2px solid var(--blue)}
+.cycleDeload{background:rgba(245,158,11,.18)}
+.suggestionGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+.mini{font-size:12px;color:#cbd5e1}
+.logList{max-height:300px;overflow:auto}
+.dateWrap{position:relative}
+.dateInputRow{display:flex;gap:8px;align-items:center}
+.dateInputRow button{width:auto;min-width:48px}
+.miniCal{position:absolute;z-index:50;left:0;right:0;top:76px;background:#0b1220;border:1px solid var(--border);border-radius:16px;padding:12px;box-shadow:0 20px 45px rgba(0,0,0,.45);display:none}
+.miniCal.show{display:block}
+.miniCalHead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.miniCalHead button{width:auto}
+.miniCalGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.miniCalWeekday{text-align:center;font-size:11px;color:#94a3b8;font-weight:900}
+.miniCalDay{min-height:38px;border:1px solid var(--border);border-radius:9px;background:#111827;color:#f8fafc;font-weight:800;padding:6px;cursor:pointer}
+.miniCalDay:hover{background:#1d4ed8}
+.miniCalDay.selected{outline:2px solid var(--green);background:rgba(22,163,74,.25)}
+.miniCalDay.todayPick{border-color:var(--blue)}
+.miniCalBlank{min-height:38px}
+.dashboardStrip{display:grid;grid-template-columns:repeat(3,minmax(220px,1fr));gap:12px;margin-bottom:16px}
+.dashCard{background:rgba(30,41,59,.95);border:1px solid var(--border);border-radius:16px;padding:14px 16px;box-shadow:0 10px 22px rgba(0,0,0,.18)}
+.dashLabel{font-size:11px;color:#cbd5e1;text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+.dashValue{font-size:22px;font-weight:900;margin-top:6px}
+.dashSub{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.45}
+.dashTags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.dashTags .tinyTag{background:rgba(139,92,246,.16)}
+.scheduleStrip{display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:10px;overflow-x:auto}
+.scheduleDay{border:1px solid var(--border);border-radius:14px;padding:12px 10px;background:#0b1220;min-height:96px;display:flex;flex-direction:column;cursor:pointer;transition:transform .12s ease,background .12s ease,outline-color .12s ease}
+.scheduleDay:hover{transform:translateY(-1px);background:#101a2f}
+.scheduleDay.activeWeekDay{outline:2px solid var(--blue)}
+.scheduleDay b{display:block;font-size:14px;margin-bottom:2px}
+.scheduleLabel{font-size:18px;font-weight:900;color:#f8fafc;margin-top:6px;margin-bottom:0;line-height:1.15}
+.scheduleSub{font-size:12px;color:#cbd5e1;margin-top:8px}
+.weekStructureTools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.calendarTopLayout{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(320px,1.1fr);gap:16px;align-items:start}
+.calendarPanel{background:#0b1220;border:1px solid var(--border);border-radius:16px;padding:14px;overflow:hidden}
+.calendarActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.calendarActions button{width:auto}
+.dayDetailBox{display:flex;flex-direction:column;gap:10px;min-height:420px}
+.dayCard{border:1px solid var(--border);border-radius:14px;padding:12px;background:#111827}
+.dayCard h3{margin:0 0 8px;font-size:15px}
+.dayTags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tinyTag{display:inline-block;font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid var(--border);background:rgba(59,130,246,.16);color:#dbeafe}
+.dayMeta{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 0}
+.dayMeta span{font-size:12px;color:#cbd5e1}
+.compactHeader{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.mealSummaryGrid{display:grid;grid-template-columns:repeat(3,minmax(160px,1fr));gap:10px;margin-top:10px}
+.mealSummaryTile{border:1px solid var(--border);border-radius:12px;padding:10px;background:#0b1220}
+.mealSummaryTile .label{font-size:11px;color:#cbd5e1;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
+.mealSummaryTile .value{font-size:20px;font-weight:900;margin-top:4px}
+.mealSummaryTile .sub{font-size:12px;color:var(--muted);margin-top:6px}
+.mealMeal{border:1px solid var(--border);border-radius:14px;padding:12px;background:#0b1220;margin-top:10px}
+.mealMealTitle{font-weight:900}
+.mealKicker{font-size:12px;color:#cbd5e1;margin-top:4px}
+.mealNotes{margin-top:10px}
+.mealNotes .small{margin-top:6px}
+.mealBadges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.footer{text-align:center;color:var(--muted);font-size:12px;margin:22px 0 8px}
+@media(max-width:1100px){
+  .calendarTopLayout{grid-template-columns:1fr}
+  .dayDetailBox{min-height:auto}
+  .scheduleStrip{grid-template-columns:repeat(7,minmax(160px,1fr))}
+}
+@media(max-width:900px){
+  .card,.wide,.half{grid-column:1/-1}
+  .row,.row3,.row4{grid-template-columns:1fr}
+  .setrow{grid-template-columns:28px 1fr 1fr 1fr 34px}
+  .cycleBox{grid-template-columns:repeat(6,1fr)}
+  .scheduleStrip{grid-template-columns:repeat(7,minmax(170px,1fr))}
+  .dashboardStrip{grid-template-columns:1fr}
+  .mealSummaryGrid{grid-template-columns:1fr}
+  body{padding:10px}
+  .card{padding:14px}
+}
 </style>
 </head>
 <body>
 <div class="container">
-<div class="header"><div class="headerMain"><h1>Sergio Hybrid Log V7.7.3</h1><div class="subtitle">Compact header · improved calendar · simple weekly structure · basic logging restored · day meal plan</div></div><div class="pill">V7.7.3 Basic Logger Fix + Day Meal Plan</div></div>
-<div id="dashboardStrip" class="dashboardStrip"></div>
-<div class="grid">
-<div class="card full"><div class="compactHeader"><div><h2 style="margin:0">Calendar</h2><div class="small">Tap a day to load that date into your session log and instantly review what you did.</div></div><div class="calendarActions"><button class="btn2" onclick="moveMonth(-1)">◀ Month</button><button class="btn2" onclick="goToday()">Today</button><button class="btn2" onclick="moveMonth(1)">Month ▶</button></div></div><div class="calendarTopLayout"><div class="calendarPanel"><div class="calHead"><div><b id="calendarTitle">Month Year</b><div class="small">Gym, run and manual entries are marked on the calendar</div></div></div><div id="calendar" class="calendar"></div></div><div class="calendarPanel"><div class="compactHeader"><div><b id="dayDetailTitle">Selected day</b><div class="small">Smart review of sessions, runs and notes for the day you choose</div></div><button class="btn2" onclick="selectCalendarDate(todayKey())">Go to today</button></div><div id="dayDetailBox" class="dayDetailBox"></div></div></div></div>
-<div class="card full"><div class="compactHeader"><div><h2 style="margin:0">Weekly Structure</h2><div class="small">Simple weekly view. Tap a day to switch the logging page and the meal plan below will update to that day.</div></div><div class="pill">7-day overview</div></div><div id="weeklyStructureStrip" class="scheduleStrip"></div></div>
+  <div class="header">
+    <div class="headerMain">
+      <h1>Sergio Hybrid Log V7.7.4</h1>
+      <div class="subtitle">Compact header · improved calendar · simple weekly structure · basic logging restored · day meal plan · safe JSON auto-import</div>
+    </div>
+    <div class="pill">V7.7.4 Basic Logger Fix + Day Meal Plan + Auto Import</div>
+  </div>
 
+  <div id="dashboardStrip" class="dashboardStrip"></div>
 
-<div class="card"><h2>Smart Engine Output</h2><div id="engineBox"></div><h3>Weekly Volume</h3><div id="volumeBox"></div></div>
-<div class="card wide"><h2>Training Session</h2><div class="tabs" id="tabs"></div><div class="row"><div class="dateWrap" onclick="event.stopPropagation()"><label>Session date / backfill date</label><div class="dateInputRow"><input id="sessionDate" type="text" readonly onclick="event.stopPropagation();toggleSessionCalendar(true)" placeholder="Select date"><button class="btn2" onclick="event.stopPropagation();toggleSessionCalendar(true)">📅</button></div><div id="sessionMiniCalendar" class="miniCal" onclick="event.stopPropagation()"></div></div><div><label>Backfill helper</label><button class="btn2" onclick="setSessionDateToday()">Use Today</button></div></div><p class="small">Tip: enter the first set values, then use Same Wt / Same Reps / Same RPE to copy the values to all sets for that exercise.</p><div id="sessionBox"></div><button class="btnGreen" onclick="completeSession()">Save / Complete Session</button><button class="btn2" onclick="copyLastWeights()">Copy Last Logged Weights</button><button class="btnAmber" onclick="fillAllExerciseWeights()">Same Wt All</button><button class="btnAmber" onclick="fillAllExerciseReps()">Same Reps All</button><button class="btnAmber" onclick="fillAllExerciseRpe()">Same RPE All</button><button class="btnAmber" onclick="deloadToday()">Apply Deload Inputs</button></div>
-<div class="card full"><div class="compactHeader"><div><h2 style="margin:0">Daily Fuel Plan</h2><div class="small">Exact meal plan for the currently selected day.</div></div><div class="pill">Day matched</div></div><div id="mealPlanBox"></div></div>
-<div class="card"><h2>Progression Rules</h2><div class="result green"><b>Increase</b><br>All sets hit top reps with RPE ≤ 8.5.</div><div class="result amber"><b>Hold</b><br>Mid-range reps or RPE high but controlled.</div><div class="result red"><b>Reduce / Deload</b><br>Below minimum reps, RPE ≥ 9.5, deload week or fatigue high.</div></div>
-<div class="card full"><h2>Smart Progression Coach</h2><div class="row3"><div><label>Cycle start date</label><input id="cycleStart" type="date"></div><div><label>Current cycle week</label><input id="cycleWeek" type="number" min="1" max="12" value="3"></div><div><label>Smallest plate jump kg</label><input id="plateJump" type="number" min="0.5" step="0.5" value="2.5"></div></div><div class="row"><button onclick="setCycleStartToday()">Set Cycle Start Today</button><button class="btn2" onclick="setCycleStartForCurrentWeek()">Use Current Week Number</button></div><div class="row"><button class="btnAmber" onclick="forceDeloadWeek()">Force Deload This Week</button><button class="btn2" onclick="clearForcedWeek()">Return To Date-Based Week</button></div><div id="cycleBox" style="margin-top:12px"></div><h3>Next Weight Suggestions</h3><div id="weightSuggestionBox"></div></div>
-<div class="card half"><h2>History + Export</h2><div id="historyBox"></div><button onclick="exportJSON()">Export JSON</button><button onclick="exportCSV()">Export CSV</button><button class="btnRed" onclick="clearData()">Clear Data</button></div>
-<div class="card half"><h2>Daily Training Log</h2><div class="row"><div><label>Date</label><input id="logDate" type="date"></div><div><label>Type</label><select id="logType"><option>Gym</option><option>Run</option><option>Recovery</option><option>Bodyweight</option><option>Nutrition</option><option>General Note</option></select></div></div><label>Title</label><input id="logTitle" placeholder="e.g. Friday upper felt strong"><label>Notes</label><textarea id="logNotes" rows="4"></textarea><button class="btnGreen" onclick="saveTrainingLog()">Save Log Entry</button><div id="trainingLogBox" class="logList"></div></div>
-<div class="card half"><h2>Mobile / Cloud Sync</h2><p class="small">Local save works on one browser only. Use Firebase sync if you want mobile + laptop to see the same data.</p><label>Athlete Sync ID</label><input id="syncId" value="sergio-main"><label>Firebase config JSON</label><textarea id="firebaseConfig" rows="7" placeholder='Paste Firebase web config JSON here'></textarea><div class="row"><button onclick="enableCloudSync()">Enable Cloud Sync</button><button class="btn2" onclick="downloadFromCloud()">Download</button></div><button class="btnGreen" onclick="uploadToCloud()">Upload Current Data</button><div id="cloudBox" class="result amber">Cloud sync not enabled yet. Local logging still works.</div></div>
-<div class="card full"><h2>Coach Review</h2><div id="coachBox"></div></div>
-</div><div class="footer">Sergio Hybrid Log V7.7.3 · basic logging restored · simple weekly structure · exact meal plan by day</div>
+  <div class="grid">
+    <div class="card full">
+      <div class="compactHeader">
+        <div>
+          <h2 style="margin:0">Calendar</h2>
+          <div class="small">Tap a day to load that date into your session log and instantly review what you did.</div>
+        </div>
+        <div class="calendarActions">
+          <button class="btn2" onclick="moveMonth(-1)">◀ Month</button>
+          <button class="btn2" onclick="goToday()">Today</button>
+          <button class="btn2" onclick="moveMonth(1)">Month ▶</button>
+        </div>
+      </div>
+      <div class="calendarTopLayout">
+        <div class="calendarPanel">
+          <div class="calHead">
+            <div>
+              <b id="calendarTitle">Month Year</b>
+              <div class="small">Gym, run and manual entries are marked on the calendar</div>
+            </div>
+          </div>
+          <div id="calendar" class="calendar"></div>
+        </div>
+        <div class="calendarPanel">
+          <div class="compactHeader">
+            <div>
+              <b id="dayDetailTitle">Selected day</b>
+              <div class="small">Smart review of sessions, runs and notes for the day you choose</div>
+            </div>
+            <button class="btn2" onclick="selectCalendarDate(todayKey())">Go to today</button>
+          </div>
+          <div id="dayDetailBox" class="dayDetailBox"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <div class="compactHeader">
+        <div>
+          <h2 style="margin:0">Weekly Structure</h2>
+          <div class="small">Simple weekly view. Tap a day to switch the logging page and the meal plan below will update to that day.</div>
+        </div>
+        <div class="pill">7-day overview</div>
+      </div>
+      <div id="weeklyStructureStrip" class="scheduleStrip"></div>
+    </div>
+
+    <div class="card">
+      <h2>Smart Engine Output</h2>
+      <div id="engineBox"></div>
+      <h3>Weekly Volume</h3>
+      <div id="volumeBox"></div>
+    </div>
+
+    <div class="card wide">
+      <h2>Training Session</h2>
+      <div class="tabs" id="tabs"></div>
+      <div class="row">
+        <div class="dateWrap" onclick="event.stopPropagation()">
+          <label>Session date / backfill date</label>
+          <div class="dateInputRow">
+            <input id="sessionDate" type="text" readonly onclick="event.stopPropagation();toggleSessionCalendar(true)" placeholder="Select date">
+            <button class="btn2" onclick="event.stopPropagation();toggleSessionCalendar(true)">📅</button>
+          </div>
+          <div id="sessionMiniCalendar" class="miniCal" onclick="event.stopPropagation()"></div>
+        </div>
+        <div>
+          <label>Backfill helper</label>
+          <button class="btn2" onclick="setSessionDateToday()">Use Today</button>
+        </div>
+      </div>
+      <p class="small">Tip: enter the first set values, then use Same Wt / Same Reps / Same RPE to copy the values to all sets for that exercise.</p>
+      <div id="sessionBox"></div>
+      <button class="btnGreen" onclick="completeSession()">Save / Complete Session</button>
+      <button class="btn2" onclick="copyLastWeights()">Copy Last Logged Weights</button>
+      <button class="btnAmber" onclick="fillAllExerciseWeights()">Same Wt All</button>
+      <button class="btnAmber" onclick="fillAllExerciseReps()">Same Reps All</button>
+      <button class="btnAmber" onclick="fillAllExerciseRpe()">Same RPE All</button>
+      <button class="btnAmber" onclick="deloadToday()">Apply Deload Inputs</button>
+    </div>
+
+    <div class="card full">
+      <div class="compactHeader">
+        <div>
+          <h2 style="margin:0">Daily Fuel Plan</h2>
+          <div class="small">Exact meal plan for the currently selected day.</div>
+        </div>
+        <div class="pill">Day matched</div>
+      </div>
+      <div id="mealPlanBox"></div>
+    </div>
+
+    <div class="card">
+      <h2>Progression Rules</h2>
+      <div class="result green"><b>Increase</b><br>All sets hit top reps with RPE ≤ 8.5.</div>
+      <div class="result amber"><b>Hold</b><br>Mid-range reps or RPE high but controlled.</div>
+      <div class="result red"><b>Reduce / Deload</b><br>Below minimum reps, RPE ≥ 9.5, deload week or fatigue high.</div>
+    </div>
+
+    <div class="card full">
+      <h2>Smart Progression Coach</h2>
+      <div class="row3">
+        <div><label>Cycle start date</label><input id="cycleStart" type="date"></div>
+        <div><label>Current cycle week</label><input id="cycleWeek" type="number" min="1" max="12" value="3"></div>
+        <div><label>Smallest plate jump kg</label><input id="plateJump" type="number" min="0.5" step="0.5" value="2.5"></div>
+      </div>
+      <div class="row">
+        <button onclick="setCycleStartToday()">Set Cycle Start Today</button>
+        <button class="btn2" onclick="setCycleStartForCurrentWeek()">Use Current Week Number</button>
+      </div>
+      <div class="row">
+        <button class="btnAmber" onclick="forceDeloadWeek()">Force Deload This Week</button>
+        <button class="btn2" onclick="clearForcedWeek()">Return To Date-Based Week</button>
+      </div>
+      <div id="cycleBox" style="margin-top:12px"></div>
+      <h3>Next Weight Suggestions</h3>
+      <div id="weightSuggestionBox"></div>
+    </div>
+
+    <div class="card half">
+      <h2>History + Export</h2>
+      <div id="historyBox"></div>
+      <button onclick="exportJSON()">Export JSON</button>
+      <button onclick="exportCSV()">Export CSV</button>
+      <button class="btnRed" onclick="clearData()">Clear Data</button>
+    </div>
+
+    <div class="card half">
+      <h2>Daily Training Log</h2>
+      <div class="row">
+        <div><label>Date</label><input id="logDate" type="date"></div>
+        <div>
+          <label>Type</label>
+          <select id="logType">
+            <option>Gym</option>
+            <option>Run</option>
+            <option>Recovery</option>
+            <option>Bodyweight</option>
+            <option>Nutrition</option>
+            <option>General Note</option>
+          </select>
+        </div>
+      </div>
+      <label>Title</label>
+      <input id="logTitle" placeholder="e.g. Friday upper felt strong">
+      <label>Notes</label>
+      <textarea id="logNotes" rows="4"></textarea>
+      <button class="btnGreen" onclick="saveTrainingLog()">Save Log Entry</button>
+      <div id="trainingLogBox" class="logList"></div>
+    </div>
+
+    <div class="card half">
+      <h2>Mobile / Cloud Sync</h2>
+      <p class="small">Local save works on one browser only. Use Firebase sync if you want mobile + laptop to see the same data.</p>
+      <label>Athlete Sync ID</label>
+      <input id="syncId" value="sergio-main">
+      <label>Firebase config JSON</label>
+      <textarea id="firebaseConfig" rows="7" placeholder='Paste Firebase web config JSON here'></textarea>
+      <div class="row">
+        <button onclick="enableCloudSync()">Enable Cloud Sync</button>
+        <button class="btn2" onclick="downloadFromCloud()">Download</button>
+      </div>
+      <button class="btnGreen" onclick="uploadToCloud()">Upload Current Data</button>
+      <div id="cloudBox" class="result amber">Cloud sync not enabled yet. Local logging still works.</div>
+    </div>
+
+    <div class="card full">
+      <h2>Coach Review</h2>
+      <div id="coachBox"></div>
+    </div>
+  </div>
+
+  <div class="footer">Sergio Hybrid Log V7.7.4 · basic logging restored · simple weekly structure · exact meal plan by day · safe JSON auto-import</div>
 </div>
+
 <script>
-const $=id=>document.getElementById(id);function todayKey(){const d=new Date();const tz=d.getTimezoneOffset()*60000;return new Date(d-tz).toISOString().slice(0,10)}const stateKey='sergioHybridV734SameAllFastDate';let activeDay='Mon';let calDate=new Date();let sessionPickDate=new Date();let selectedCalendarDate=todayKey();const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-const basePlans={Mon:[['Bench Press','chest',3,5,8,180],['Incline DB Press','upper chest',3,8,10,120],['Weighted Pull-ups','back',3,6,8,150],['Chest Supported Row','back',3,8,12,120],['Lateral Raise','side delts',3,12,20,60],['Rope Pushdown','triceps',3,10,15,60],['Pushups','chest',2,15,25,45]],Tue:[['Runna Easy Run','run',1,1,1,0,'run']],Wed:[['Deadlift','posterior chain',3,3,5,180],['Leg Press','quads',3,8,10,120],['Weighted Pull-ups','back',3,5,8,150],['DB Bulgarian Split Squat','quads',2,8,10,120],['Hamstring Curl','hamstrings',2,10,15,75],['Standing Calf Raise','calves',3,12,15,60],['Hanging Leg Raise','core',3,10,15,45]],Thu:[['Runna Quality Run','run',1,1,1,0,'run']],Fri:[['Explosive Pushups','power',2,3,5,60],['Weighted Pull-ups','back',4,4,6,150],['Barbell Row','back',3,6,8,120],['Incline Bench Press','chest',3,8,12,120],['DB Shoulder Press','shoulders',3,8,10,90],['Farmers Walk','grip/core',3,30,45,120,'time'],['EZ Bar Curl','biceps',3,10,12,60],['Overhead Tricep Extension','triceps',3,10,15,60]],Sat:[['Runna Long Run','run',1,1,1,0,'run']],Sun:[['Recovery / Mobility','recovery',1,1,1,0,'recovery']]};
-const dayMeta={Mon:{label:'Upper Strength + Chest',cls:'purple',sub:'Upper'},Tue:{label:'Easy Run',cls:'green',sub:'Run'},Wed:{label:'Lower + Pull',cls:'amber',sub:'Lower'},Thu:{label:'Quality Run',cls:'red',sub:'Run'},Fri:{label:'Performance Upper + Grip',cls:'purple',sub:'Upper Power'},Sat:{label:'Long Run',cls:'green',sub:'Run'},Sun:{label:'Recovery / Mobility',cls:'',sub:'Recovery'}};
+const $=id=>document.getElementById(id);
+function todayKey(){const d=new Date();const tz=d.getTimezoneOffset()*60000;return new Date(d-tz).toISOString().slice(0,10)}
+
+const stateKey='sergioHybridV734SameAllFastDate';
+const importedFlagKey='sergioHybridV774JsonImportedOnce';
+const jsonSeedPath='./sergio-hybrid-v7-3-4-data.json';
+
+let activeDay='Mon';
+let calDate=new Date();
+let sessionPickDate=new Date();
+let selectedCalendarDate=todayKey();
+
+const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+const basePlans={
+  Mon:[['Bench Press','chest',3,5,8,180],['Incline DB Press','upper chest',3,8,10,120],['Weighted Pull-ups','back',3,6,8,150],['Chest Supported Row','back',3,8,12,120],['Lateral Raise','side delts',3,12,20,60],['Rope Pushdown','triceps',3,10,15,60],['Pushups','chest',2,15,25,45]],
+  Tue:[['Runna Easy Run','run',1,1,1,0,'run']],
+  Wed:[['Deadlift','posterior chain',3,3,5,180],['Leg Press','quads',3,8,10,120],['Weighted Pull-ups','back',3,5,8,150],['DB Bulgarian Split Squat','quads',2,8,10,120],['Hamstring Curl','hamstrings',2,10,15,75],['Standing Calf Raise','calves',3,12,15,60],['Hanging Leg Raise','core',3,10,15,45]],
+  Thu:[['Runna Quality Run','run',1,1,1,0,'run']],
+  Fri:[['Explosive Pushups','power',2,3,5,60],['Weighted Pull-ups','back',4,4,6,150],['Barbell Row','back',3,6,8,120],['Incline Bench Press','chest',3,8,12,120],['DB Shoulder Press','shoulders',3,8,10,90],['Farmers Walk','grip/core',3,30,45,120,'time'],['EZ Bar Curl','biceps',3,10,12,60],['Overhead Tricep Extension','triceps',3,10,15,60]],
+  Sat:[['Runna Long Run','run',1,1,1,0,'run']],
+  Sun:[['Recovery / Mobility','recovery',1,1,1,0,'recovery']]
+};
+
+const dayMeta={
+  Mon:{label:'Upper Strength + Chest',cls:'purple',sub:'Upper'},
+  Tue:{label:'Easy Run',cls:'green',sub:'Run'},
+  Wed:{label:'Lower + Pull',cls:'amber',sub:'Lower'},
+  Thu:{label:'Quality Run',cls:'red',sub:'Run'},
+  Fri:{label:'Performance Upper + Grip',cls:'purple',sub:'Upper Power'},
+  Sat:{label:'Long Run',cls:'green',sub:'Run'},
+  Sun:{label:'Recovery / Mobility',cls:'',sub:'Recovery'}
+};
+
+const mealPlanByDay={
+  Mon:{title:'Monday · Upper Hypertrophy',targetKcal:2150,focus:'Moderate-high carb · high protein',meals:[{label:'Breakfast',food:'Oats 60g + Whey 40g + Creatine 5g + Frozen berries 150g + Almonds 25g',macros:'50g protein · 57g carbs · 22g fat · 626 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 180g cooked + Frozen veg 1 cup + Olive oil 2 tbsp',macros:'56.7g protein · 51g carbs · 33g fat · 728 kcal'},{label:'Pre-train 5pm',food:'Banana 120g + Rice cakes x2',macros:'2.9g protein · 41g carbs · 0.8g fat · 183 kcal'},{label:'Dinner',food:'Eggs x2 + Egg whites 200g + Rice 120g cooked + Frozen veg 1 cup + Olive oil 1 tbsp',macros:'39.3g protein · 39.2g carbs · 24.6g fat · 535 kcal'},{label:'Snack',food:'Cottage cheese 150g',macros:'18g protein · 5g carbs · 3g fat · 119 kcal'}],notes:['Best upper-body day.','If the PM lift feels flat, add an extra rice cake or fruit pre-training.'],badges:['Upper hypertrophy','Moderate-high carb','PM lift support']},
+  Tue:{title:'Tuesday · Zone 2 Easy Run',targetKcal:2000,focus:'Moderate carb · steady protein',meals:[{label:'Breakfast',food:'Oats 50g + Whey 40g + Creatine 5g + Frozen berries 150g',macros:'39.2g protein · 49g carbs · 6.5g fat · 411 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 150g cooked + Frozen veg 1 cup + Olive oil 2 tbsp',macros:'56.7g protein · 44g carbs · 33g fat · 700 kcal'},{label:'Pre-run 5pm',food:'Banana 120g',macros:'1.3g protein · 27g carbs · 0.4g fat · 117 kcal'},{label:'Dinner',food:'Lean beef mince 200g + Rice 150g cooked + Frozen veg 1 cup + Olive oil 1 tsp',macros:'47.2g protein · 44g carbs · 18.7g fat · 533 kcal'},{label:'Snack',food:'Greek yoghurt 200g',macros:'17g protein · 10g carbs · 6.6g fat · 167 kcal'}],notes:['Good for an easy aerobic day.','No need to fuel this like a long run.'],badges:['Zone 2','Moderate carb','Easy aerobic']},
+  Wed:{title:'Wednesday · Lower Strength',targetKcal:2150,focus:'Moderate-high carb · support heavy lower-body work',meals:[{label:'Breakfast',food:'Oats 60g + Whey 40g + Creatine 5g + Frozen berries 150g + Almonds 25g',macros:'50g protein · 57g carbs · 22g fat · 626 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 180g cooked + Frozen veg 1 cup + Olive oil 2 tbsp',macros:'56.7g protein · 51g carbs · 33g fat · 728 kcal'},{label:'Pre-train 5pm',food:'Banana 120g + Rice cakes x2',macros:'2.9g protein · 41g carbs · 0.8g fat · 183 kcal'},{label:'Dinner',food:'Eggs x2 + Egg whites 250g + Rice 100g cooked + Frozen veg 1 cup + Olive oil 1 tbsp',macros:'44.7g protein · 33.6g carbs · 24.6g fat · 535 kcal'},{label:'Snack',food:'Cottage cheese 150g',macros:'18g protein · 5g carbs · 3g fat · 119 kcal'}],notes:['Heavy lower-body day.','Reliable pre-lift carbs matter here.'],badges:['Lower strength','Pre-lift carbs','Recovery support']},
+  Thu:{title:'Thursday · VO2 / Quality Run',targetKcal:2050,focus:'Higher carb around the run',meals:[{label:'Breakfast',food:'Oats 50g + Whey 45g + Creatine 5g + Frozen berries 150g',macros:'43.2g protein · 49.5g carbs · 6.8g fat · 432 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 100g cooked + Frozen veg 2 cups + Olive oil 2 tbsp',macros:'57.8g protein · 33g carbs · 29.7g fat · 630 kcal'},{label:'Pre-run 5pm',food:'Banana 120g + Rice cakes x3',macros:'3.7g protein · 48g carbs · 1g fat · 216 kcal'},{label:'Dinner',food:'Chicken 200g + Rice 150g cooked + Frozen veg 1 cup + Olive oil 1 tbsp',macros:'51.2g protein · 44g carbs · 20.3g fat · 564 kcal'},{label:'Snack',food:'Greek yoghurt 200g',macros:'17g protein · 10g carbs · 6.6g fat · 167 kcal'}],notes:['Do the mandatory pre-run carbs before this quality session.','If the session is especially hard, add more easy carbs afterwards.'],badges:['Quality run','Pre-run carbs','Recovery carbs']},
+  Fri:{title:'Friday · Upper Power + Back',targetKcal:2150,focus:'Moderate carb with dinner carb reload',meals:[{label:'Breakfast',food:'Oats 50g + Whey 40g + Creatine 5g + Frozen berries 150g',macros:'39.2g protein · 49g carbs · 6.5g fat · 411 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 150g cooked + Frozen veg 1 cup + Olive oil 2 tbsp',macros:'56.7g protein · 44g carbs · 33g fat · 700 kcal'},{label:'Pre-train',food:'Banana 120g',macros:'1.3g protein · 27g carbs · 0.4g fat · 117 kcal'},{label:'Dinner / carb reload',food:'Chicken 220g + Potatoes 350g + Frozen veg 1 cup + Olive oil 1 tsp',macros:'60.5g protein · 71g carbs · 11.5g fat · 632 kcal'},{label:'Snack',food:'Cottage cheese 150g',macros:'18g protein · 5g carbs · 3g fat · 119 kcal'}],notes:['Use the dinner carb reload if the next day is still the long run.','If Saturday becomes easier, you can reduce the reload slightly.'],badges:['Upper power','Carb reload','Supports next day']},
+  Sat:{title:'Saturday · Long Run',targetKcal:2000,focus:'Highest carb priority before, during and after the run',meals:[{label:'Breakfast (about 2h pre-run)',food:'Oats 60g + Whey 40g + Frozen berries 150g + Banana 120g',macros:'40.9g protein · 86g carbs · 7.7g fat · 577 kcal'},{label:'During run (90 min+)',food:'1 energy gel',macros:'0g protein · 25g carbs · 0g fat · 100 kcal'},{label:'Post-run lunch',food:'Chicken 220g + Rice 180g cooked + Frozen veg 1 cup + Olive oil 1 tsp',macros:'56.7g protein · 51g carbs · 11.4g fat · 533 kcal'},{label:'Dinner',food:'Lean mince 200g + Rice 150g cooked + Frozen veg 1 cup',macros:'47.2g protein · 44g carbs · 14.2g fat · 493 kcal'}],notes:['If the long run exceeds 90 minutes, add another gel or extra post-run carbs.','This is the day most likely to need a carb top-up beyond the base plan.'],badges:['Long run','Highest carb priority','During-run fuel']},
+  Sun:{title:'Sunday · Full Rest',targetKcal:1900,focus:'Lower carb · recovery and appetite control',meals:[{label:'Breakfast',food:'Oats 50g + Whey 40g + Creatine 5g + Frozen berries 150g',macros:'39.2g protein · 49g carbs · 6.5g fat · 411 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 120g cooked + Frozen veg 1 cup + Olive oil 1 tbsp',macros:'56.7g protein · 37g carbs · 20.1g fat · 556 kcal'},{label:'Dinner',food:'Eggs x2 + Egg whites 250g + Frozen veg 2 cups + Olive oil 2 tbsp',macros:'44.7g protein · 22.2g carbs · 37.1g fat · 602 kcal'},{label:'Bedtime',food:'Cottage cheese 200g',macros:'24g protein · 7g carbs · 4g fat · 160 kcal'}],notes:['Good low-carb recovery day.','Keep creatine daily even on rest days.'],badges:['Full rest','Lower carb','Recovery day']}
+};
+
+function blankData(){
+  return {sessions:[],runFatigue:0,logs:[],cloud:{},settings:{}};
+}
+function normalizeData(obj){
+  const safe=obj&&typeof obj==='object'?obj:{};
+  if(!Array.isArray(safe.sessions)) safe.sessions=[];
+  if(typeof safe.runFatigue==='undefined' || safe.runFatigue===null || isNaN(+safe.runFatigue)) safe.runFatigue=0;
+  if(!Array.isArray(safe.logs)) safe.logs=[];
+  if(!safe.cloud || typeof safe.cloud!=='object') safe.cloud={};
+  if(!safe.settings || typeof safe.settings!=='object') safe.settings={};
+  return safe;
+}
+function loadLocalData(){
+  try{
+    const raw=localStorage.getItem(stateKey);
+    if(!raw) return blankData();
+    return normalizeData(JSON.parse(raw));
+  }catch(e){
+    return blankData();
+  }
+}
+let data=loadLocalData();
+
+function save(){localStorage.setItem(stateKey,JSON.stringify(data))}
+
+function hasMeaningfulData(obj){
+  const safe=normalizeData(obj||{});
+  return safe.sessions.length>0 || safe.logs.length>0 || (+safe.runFatigue||0)>0 || !!safe.settings.cycleStart || !!safe.settings.forceWeek;
+}
+
+async function importJsonFileToAppOnce(){
+  try{
+    if(hasMeaningfulData(data)){
+      localStorage.setItem(importedFlagKey,'kept-local');
+      return;
+    }
+    const alreadyImported=localStorage.getItem(importedFlagKey);
+    if(alreadyImported==='yes') return;
+
+    const response=await fetch(jsonSeedPath,{cache:'no-store'});
+    if(!response.ok) return;
+
+    const imported=normalizeData(await response.json());
+    if(!hasMeaningfulData(imported)) return;
+
+    data=imported;
+    save();
+    localStorage.setItem(importedFlagKey,'yes');
+    renderAll();
+    if(typeof setCloudStatus==='function') setCloudStatus('Local data imported from JSON seed file.','green');
+    console.log('V7.7.4 imported data from JSON seed file.');
+  }catch(err){
+    console.log('JSON seed import skipped:', err?.message || err);
+  }
+}
+
 function planForDay(day){return (basePlans[day]||[]).map(ex=>[...ex]);}
 function getExerciseOrder(day){return planForDay(day).map(ex=>ex[0]);}
 function resetExerciseOrder(day=activeDay){activeDay=day;renderAll();}
 function resetAllExerciseOrders(){renderAll();}
 function moveExerciseBetweenDays(){return;}
 function reorderExercise(){return;}
-const mealPlanByDay={
-Mon:{title:'Monday · Upper Hypertrophy',targetKcal:2150,focus:'Moderate-high carb · high protein',meals:[{label:'Breakfast',food:'Oats 60g + Whey 40g + Creatine 5g + Frozen berries 150g + Almonds 25g',macros:'50g protein · 57g carbs · 22g fat · 626 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 180g cooked + Frozen veg 1 cup + Olive oil 2 tbsp',macros:'56.7g protein · 51g carbs · 33g fat · 728 kcal'},{label:'Pre-train 5pm',food:'Banana 120g + Rice cakes x2',macros:'2.9g protein · 41g carbs · 0.8g fat · 183 kcal'},{label:'Dinner',food:'Eggs x2 + Egg whites 200g + Rice 120g cooked + Frozen veg 1 cup + Olive oil 1 tbsp',macros:'39.3g protein · 39.2g carbs · 24.6g fat · 535 kcal'},{label:'Snack',food:'Cottage cheese 150g',macros:'18g protein · 5g carbs · 3g fat · 119 kcal'}],notes:['Best upper-body day.','If the PM lift feels flat, add an extra rice cake or fruit pre-training.'],badges:['Upper hypertrophy','Moderate-high carb','PM lift support']},
-Tue:{title:'Tuesday · Zone 2 Easy Run',targetKcal:2000,focus:'Moderate carb · steady protein',meals:[{label:'Breakfast',food:'Oats 50g + Whey 40g + Creatine 5g + Frozen berries 150g',macros:'39.2g protein · 49g carbs · 6.5g fat · 411 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 150g cooked + Frozen veg 1 cup + Olive oil 2 tbsp',macros:'56.7g protein · 44g carbs · 33g fat · 700 kcal'},{label:'Pre-run 5pm',food:'Banana 120g',macros:'1.3g protein · 27g carbs · 0.4g fat · 117 kcal'},{label:'Dinner',food:'Lean beef mince 200g + Rice 150g cooked + Frozen veg 1 cup + Olive oil 1 tsp',macros:'47.2g protein · 44g carbs · 18.7g fat · 533 kcal'},{label:'Snack',food:'Greek yoghurt 200g',macros:'17g protein · 10g carbs · 6.6g fat · 167 kcal'}],notes:['Good for an easy aerobic day.','No need to fuel this like a long run.'],badges:['Zone 2','Moderate carb','Easy aerobic']},
-Wed:{title:'Wednesday · Lower Strength',targetKcal:2150,focus:'Moderate-high carb · support heavy lower-body work',meals:[{label:'Breakfast',food:'Oats 60g + Whey 40g + Creatine 5g + Frozen berries 150g + Almonds 25g',macros:'50g protein · 57g carbs · 22g fat · 626 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 180g cooked + Frozen veg 1 cup + Olive oil 2 tbsp',macros:'56.7g protein · 51g carbs · 33g fat · 728 kcal'},{label:'Pre-train 5pm',food:'Banana 120g + Rice cakes x2',macros:'2.9g protein · 41g carbs · 0.8g fat · 183 kcal'},{label:'Dinner',food:'Eggs x2 + Egg whites 250g + Rice 100g cooked + Frozen veg 1 cup + Olive oil 1 tbsp',macros:'44.7g protein · 33.6g carbs · 24.6g fat · 535 kcal'},{label:'Snack',food:'Cottage cheese 150g',macros:'18g protein · 5g carbs · 3g fat · 119 kcal'}],notes:['Heavy lower-body day.','Reliable pre-lift carbs matter here.'],badges:['Lower strength','Pre-lift carbs','Recovery support']},
-Thu:{title:'Thursday · VO2 / Quality Run',targetKcal:2050,focus:'Higher carb around the run',meals:[{label:'Breakfast',food:'Oats 50g + Whey 45g + Creatine 5g + Frozen berries 150g',macros:'43.2g protein · 49.5g carbs · 6.8g fat · 432 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 100g cooked + Frozen veg 2 cups + Olive oil 2 tbsp',macros:'57.8g protein · 33g carbs · 29.7g fat · 630 kcal'},{label:'Pre-run 5pm',food:'Banana 120g + Rice cakes x3',macros:'3.7g protein · 48g carbs · 1g fat · 216 kcal'},{label:'Dinner',food:'Chicken 200g + Rice 150g cooked + Frozen veg 1 cup + Olive oil 1 tbsp',macros:'51.2g protein · 44g carbs · 20.3g fat · 564 kcal'},{label:'Snack',food:'Greek yoghurt 200g',macros:'17g protein · 10g carbs · 6.6g fat · 167 kcal'}],notes:['Do the mandatory pre-run carbs before this quality session.','If the session is especially hard, add more easy carbs afterwards.'],badges:['Quality run','Pre-run carbs','Recovery carbs']},
-Fri:{title:'Friday · Upper Power + Back',targetKcal:2150,focus:'Moderate carb with dinner carb reload',meals:[{label:'Breakfast',food:'Oats 50g + Whey 40g + Creatine 5g + Frozen berries 150g',macros:'39.2g protein · 49g carbs · 6.5g fat · 411 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 150g cooked + Frozen veg 1 cup + Olive oil 2 tbsp',macros:'56.7g protein · 44g carbs · 33g fat · 700 kcal'},{label:'Pre-train',food:'Banana 120g',macros:'1.3g protein · 27g carbs · 0.4g fat · 117 kcal'},{label:'Dinner / carb reload',food:'Chicken 220g + Potatoes 350g + Frozen veg 1 cup + Olive oil 1 tsp',macros:'60.5g protein · 71g carbs · 11.5g fat · 632 kcal'},{label:'Snack',food:'Cottage cheese 150g',macros:'18g protein · 5g carbs · 3g fat · 119 kcal'}],notes:['Use the dinner carb reload if the next day is still the long run.','If Saturday becomes easier, you can reduce the reload slightly.'],badges:['Upper power','Carb reload','Supports next day']},
-Sat:{title:'Saturday · Long Run',targetKcal:2000,focus:'Highest carb priority before, during and after the run',meals:[{label:'Breakfast (about 2h pre-run)',food:'Oats 60g + Whey 40g + Frozen berries 150g + Banana 120g',macros:'40.9g protein · 86g carbs · 7.7g fat · 577 kcal'},{label:'During run (90 min+)',food:'1 energy gel',macros:'0g protein · 25g carbs · 0g fat · 100 kcal'},{label:'Post-run lunch',food:'Chicken 220g + Rice 180g cooked + Frozen veg 1 cup + Olive oil 1 tsp',macros:'56.7g protein · 51g carbs · 11.4g fat · 533 kcal'},{label:'Dinner',food:'Lean mince 200g + Rice 150g cooked + Frozen veg 1 cup',macros:'47.2g protein · 44g carbs · 14.2g fat · 493 kcal'}],notes:['If the long run exceeds 90 minutes, add another gel or extra post-run carbs.','This is the day most likely to need a carb top-up beyond the base plan.'],badges:['Long run','Highest carb priority','During-run fuel']},
-Sun:{title:'Sunday · Full Rest',targetKcal:1900,focus:'Lower carb · recovery and appetite control',meals:[{label:'Breakfast',food:'Oats 50g + Whey 40g + Creatine 5g + Frozen berries 150g',macros:'39.2g protein · 49g carbs · 6.5g fat · 411 kcal'},{label:'Lunch',food:'Chicken 220g + Rice 120g cooked + Frozen veg 1 cup + Olive oil 1 tbsp',macros:'56.7g protein · 37g carbs · 20.1g fat · 556 kcal'},{label:'Dinner',food:'Eggs x2 + Egg whites 250g + Frozen veg 2 cups + Olive oil 2 tbsp',macros:'44.7g protein · 22.2g carbs · 37.1g fat · 602 kcal'},{label:'Bedtime',food:'Cottage cheese 200g',macros:'24g protein · 7g carbs · 4g fat · 160 kcal'}],notes:['Good low-carb recovery day.','Keep creatine daily even on rest days.'],badges:['Full rest','Lower carb','Recovery day']}
-};
-function renderMealPlan(){if(!$('mealPlanBox')) return;const plan=mealPlanByDay[activeDay]||mealPlanByDay.Mon;const badges=(plan.badges||[]).map(b=>`<span class="tinyTag">${b}</span>`).join('');$('mealPlanBox').innerHTML=`<div class="result green"><b>${plan.title}</b><br>Target: ${plan.targetKcal} kcal<br>Focus: ${plan.focus}<div class="mealBadges">${badges}</div></div><div class="mealSummaryGrid"><div class="mealSummaryTile"><div class="label">Current day</div><div class="value">${activeDay}</div><div class="sub">Meal plan updates when you switch to another day.</div></div><div class="mealSummaryTile"><div class="label">Protein</div><div class="value">High daily</div><div class="sub">Protein stays high every day to support recovery and muscle rebuild.</div></div><div class="mealSummaryTile"><div class="label">Carb strategy</div><div class="value">${activeDay==='Sat'?'Highest':activeDay==='Sun'?'Lower':'Matched'}</div><div class="sub">Carb intake is aligned to the selected day’s workload.</div></div></div>${plan.meals.map(meal=>`<div class="mealMeal"><div class="mealMealTitle">${meal.label}</div><div class="mealKicker">${meal.food}</div><div class="small">${meal.macros}</div></div>`).join('')}<div class="result amber mealNotes"><b>Suggestions</b>${plan.notes.map(n=>`<div class="small">• ${n}</div>`).join('')}</div>`;}
-let data=JSON.parse(localStorage.getItem(stateKey)||'{"sessions":[],"runFatigue":0,"logs":[],"cloud":{},"settings":{}}');if(!data.sessions)data.sessions=[];if(!data.logs)data.logs=[];if(!data.settings)data.settings={};function save(){localStorage.setItem(stateKey,JSON.stringify(data))}
-function localDateKey(y,m,d){const dt=new Date(y,m,d);const tz=dt.getTimezoneOffset()*60000;return new Date(dt-tz).toISOString().slice(0,10)}function formatDisplayDate(key){if(!key)return'';const[y,m,d]=key.split('-');return`${d}/${m}/${y}`}function parseDisplayDate(value){if(!value)return todayKey();if(value.includes('-'))return value;const p=value.split('/');return p.length===3?`${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`:todayKey()}function setSessionDateKey(key){$('sessionDate').value=formatDisplayDate(key);const[y,m,d]=key.split('-').map(Number);sessionPickDate=new Date(y,m-1,d);renderSessionMiniCalendar()}function setSessionDateToday(){setSessionDateKey(todayKey());toggleSessionCalendar(false)}function toggleSessionCalendar(show){const cal=$('sessionMiniCalendar');if(!cal)return;if(show===false){cal.classList.remove('show');return}renderSessionMiniCalendar();cal.classList.add('show')}function moveSessionPickMonth(delta){sessionPickDate.setMonth(sessionPickDate.getMonth()+delta);renderSessionMiniCalendar();$('sessionMiniCalendar').classList.add('show')}function renderSessionMiniCalendar(){const cal=$('sessionMiniCalendar');if(!cal)return;const y=sessionPickDate.getFullYear(),m=sessionPickDate.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0),current=parseDisplayDate($('sessionDate')?.value||todayKey());let html=`<div class="miniCalHead"><button class="btn2" onclick="event.stopPropagation();moveSessionPickMonth(-1)">◀</button><b>${first.toLocaleString(undefined,{month:'long',year:'numeric'})}</b><button class="btn2" onclick="event.stopPropagation();moveSessionPickMonth(1)">▶</button></div>`;html+='<div class="miniCalGrid">'+['S','M','T','W','T','F','S'].map(d=>`<div class="miniCalWeekday">${d}</div>`).join('');for(let i=0;i<first.getDay();i++)html+='<div class="miniCalBlank"></div>';for(let d=1;d<=last.getDate();d++){const key=localDateKey(y,m,d);html+=`<button class="miniCalDay ${key===current?'selected':''} ${key===todayKey()?'todayPick':''}" onclick="event.stopPropagation();setSessionDateKey('${key}');toggleSessionCalendar(false)">${d}</button>`}html+='</div><div class="row" style="margin-top:8px"><button class="btn2" onclick="event.stopPropagation();setSessionDateKey(todayKey());toggleSessionCalendar(false)">Today</button><button class="btn2" onclick="event.stopPropagation();toggleSessionCalendar(false)">Close</button></div>';cal.innerHTML=html}document.addEventListener('click',e=>{const wrap=document.querySelector('.dateWrap'),cal=$('sessionMiniCalendar');if(wrap&&cal&&!wrap.contains(e.target))cal.classList.remove('show')});
-function readinessScore(){return 0}function zone(){return ['green','Ready']}function engine(){return{score:0,setMultiplier:1,loadChange:0,capRpe:9,notes:['Garmin is your source of truth for readiness and fatigue.']}}function adjustedPlan(day){const e=engine();let p=planForDay(day);if(['Tue','Thu','Sat','Sun'].includes(day))return p;return p.map((x,i)=>{if(i>2)x[2]=Math.max(1,Math.round(x[2]*e.setMultiplier));return x})}function initSelectors(){const daySel=$('daySelect');if(daySel){daySel.innerHTML=days.map(d=>`<option ${d===activeDay?'selected':''}>${d}</option>`).join('');daySel.onchange=e=>{activeDay=e.target.value;renderAll()}}$('tabs').innerHTML=days.map(d=>`<button class="tab ${d===activeDay?'active':''}" onclick="activeDay='${d}';renderAll()">${d}</button>`).join('')}
-function renderWeeklyStructure(){const strip=$('weeklyStructureStrip');if(!strip)return;strip.innerHTML=days.map(day=>{const meta=dayMeta[day]||{label:day,cls:'',sub:''};return `<div class="scheduleDay simpleDay ${meta.cls} ${day===activeDay?'activeWeekDay':''}" onclick="activeDay='${day}';renderAll()"><b>${day}</b><div class="scheduleLabel">${meta.label}</div><div class="scheduleSub">${meta.sub||'Training'}</div></div>`}).join('')}function renderReadiness(){const e=engine();if($('engineBox'))$('engineBox').innerHTML=e.notes.map(n=>`<div class="result green">${n}</div>`).join('');if($('readinessBox'))$('readinessBox').innerHTML=''}function renderRunFatigue(){if($('runFatigueBox'))$('runFatigueBox').innerHTML=''}
-function renderSession(){const p=adjustedPlan(activeDay);const note=activeDay==='Fri'?'<div class="result purple"><b>Friday full session visible:</b> smart engine adjusts sets/intensity only.</div>':'';$('sessionBox').innerHTML=note+p.map((ex,idx)=>{const[name,group,sets,min,max,rest,type]=ex;if(type==='run')return`<div class="exercise"><div class="exName">${name}</div><span class="tag">Runna / Garmin source of truth</span><label>Distance km</label><input data-ex="${idx}" data-field="distance" type="number" step="0.01"><label>Duration min</label><input data-ex="${idx}" data-field="duration" type="number"><label>Run RPE</label><input data-ex="${idx}" data-field="rpe" type="number" min="1" max="10" value="5"></div>`;if(type==='recovery')return`<div class="exercise"><div class="exName">${name}</div><p class="small">Walk, mobility, easy spin or full rest.</p><textarea data-ex="${idx}" data-field="notes"></textarea></div>`;return`<div class="exercise"><div class="exHead"><div><div class="exName">${name}</div><span class="tag">${group} · ${sets} sets · ${min}-${max}${type==='time'?' sec':' reps'} · ${rest}s rest</span></div><div class="exBtns"><button class="btn2" onclick="addSet(${idx})">+ Set</button><button class="btnAmber" onclick="fillSameWeight(${idx})">Same Wt</button><button class="btnAmber" onclick="fillSameReps(${idx})">Same Reps</button><button class="btnAmber" onclick="fillSameRpe(${idx})">Same RPE</button></div></div><div id="sets-${idx}">${renderSets(idx,sets,type)}</div></div>`}).join('')}function renderSets(idx,sets,type){let out='';for(let s=1;s<=sets;s++)out+=`<div class="setrow"><span>#${s}</span><input placeholder="Weight" data-ex="${idx}" data-set="${s}" data-field="weight" type="number" step="0.5"><input placeholder="${type==='time'?'Seconds':'Reps'}" data-ex="${idx}" data-set="${s}" data-field="reps" type="number"><input placeholder="RPE" data-ex="${idx}" data-set="${s}" data-field="rpe" type="number" step="0.5" min="1" max="10"><button class="btnRed" onclick="this.parentElement.remove()">−</button></div>`;return out}function addSet(idx){const wrap=$('sets-'+idx);const n=wrap.querySelectorAll('.setrow').length+1;wrap.insertAdjacentHTML('beforeend',renderSets(idx,1,adjustedPlan(activeDay)[idx][6]).replace('#1','#'+n))}
-function fillSameField(idx,field,label){const inputs=[...document.querySelectorAll(`#sets-${idx} [data-field="${field}"]`)];const source=inputs.find(i=>i.value!==''&&i.value!=null);if(!source){alert(`Enter the first set ${label} first, then click Same ${label}.`);return false}inputs.forEach(i=>i.value=source.value);return true}function fillSameWeight(idx){fillSameField(idx,'weight','Wt')}function fillSameReps(idx){fillSameField(idx,'reps','Reps')}function fillSameRpe(idx){fillSameField(idx,'rpe','RPE')}function fillAllExerciseField(field,label){adjustedPlan(activeDay).forEach((ex,idx)=>{if(!['run','recovery'].includes(ex[6]))fillSameField(idx,field,label)})}function fillAllExerciseWeights(){fillAllExerciseField('weight','Wt')}function fillAllExerciseReps(){fillAllExerciseField('reps','Reps')}function fillAllExerciseRpe(){fillAllExerciseField('rpe','RPE')}
-function completeSession(){const p=adjustedPlan(activeDay),inputs=[...document.querySelectorAll('#sessionBox input,#sessionBox textarea')],entry={date:parseDisplayDate($('sessionDate')?.value||todayKey()),day:activeDay,readiness:readinessScore(),runFatigue:+data.runFatigue||0,items:[]};p.forEach((ex,idx)=>{let item={uid:ex[7]||'',name:ex[0],group:ex[1],sets:[]};inputs.filter(i=>i.dataset.ex==idx).forEach(i=>{let s=i.dataset.set||'single';if(!item.sets[s])item.sets[s]={};item.sets[s][i.dataset.field]=i.value});item.sets=Object.values(item.sets);item.suggestion=progressionSuggestion(ex,item.sets);entry.items.push(item)});data.sessions.push(entry);save();renderAll();alert('Session saved for '+entry.date+'. Smart suggestions updated.')}function copyLastWeights(){const last=[...data.sessions].reverse().find(s=>s.day===activeDay);if(!last){alert('No previous session found.');return}const uidMap=Object.fromEntries((last.items||[]).filter(i=>i.uid).map(i=>[i.uid,i]));const nameMap=Object.fromEntries((last.items||[]).map(i=>[i.name,i]));adjustedPlan(activeDay).forEach((ex,idx)=>{const item=uidMap[ex[7]]||nameMap[ex[0]];if(!item)return;[...document.querySelectorAll(`#sets-${idx} [data-field="weight"]`)].forEach(inp=>{const set=item.sets&&item.sets[+inp.dataset.set-1];if(set&&set.weight)inp.value=set.weight})})}function deloadToday(){$('sleep').value=6;$('energy').value=5;$('soreness').value=7;$('legs').value=5;renderAll()}function logRunFatigue(){return}function resetRunFatigue(){return}
-function roundToJump(v,j){return(!v||isNaN(v))?'':Math.round(v/j)*j}function exerciseClass(name){const n=name.toLowerCase();if(n.includes('deadlift'))return{inc:.025,dec:.05};if(n.includes('bench')||n.includes('pull-up')||n.includes('pullups')||n.includes('row')||n.includes('leg press'))return{inc:.025,dec:.05};if(n.includes('farmers')||n.includes('explosive'))return{inc:0,dec:0};return{inc:.02,dec:.05}}function flat(sets){return(sets||[]).filter(s=>s&&(s.weight||s.reps||s.rpe)).map(s=>({weight:+s.weight||0,reps:+s.reps||0,rpe:+s.rpe||0}))}function getCycleWeek(){if(data.settings.forceWeek)return data.settings.forceWeek;const start=data.settings.cycleStart;if(!start)return 3;const diff=Math.floor((new Date(todayKey())-new Date(start))/(7*24*60*60*1000));return Math.min(12,Math.max(1,diff+1))}function isDeloadWeek(w){return[4,8,12].includes(+w)}function setCycleStartToday(){data.settings.cycleStart=todayKey();data.settings.forceWeek=null;save();renderAll()}function setCycleStartForCurrentWeek(){const w=+($('cycleWeek')?.value||3),start=new Date();start.setDate(start.getDate()-((Math.max(1,w)-1)*7));const tz=start.getTimezoneOffset()*60000;data.settings.cycleStart=new Date(start-tz).toISOString().slice(0,10);data.settings.forceWeek=null;save();renderAll()}function forceDeloadWeek(){data.settings.forceWeek=4;save();renderAll()}function clearForcedWeek(){data.settings.forceWeek=null;save();renderAll()}
-function calculateNextWeight(ex,sets,eng=engine()){const[name,group,targetSets,min,max,rest,type]=ex;if(type==='run'||type==='recovery')return{action:'Log only',nextWeightText:'Use Runna/Garmin',reason:'Running progression is controlled outside the strength engine.'};if(type==='time')return{action:'Progress slowly',nextWeightText:`${min}-${max} sec`,reason:'Carries progress best by posture, duration or small load jumps.'};const valid=flat(sets);if(!valid.length)return{action:'Set baseline',nextWeightText:'Enter first session',reason:'No logged performance yet.'};const jump=+($('plateJump')?.value||2.5),weights=valid.filter(s=>s.weight>0).map(s=>s.weight),last=weights.length?weights[weights.length-1]:0,avg=valid.reduce((a,s)=>a+(s.rpe||8),0)/valid.length,allTop=valid.every(s=>s.reps>=max&&(s.rpe||8)<=8.5),anyLow=valid.some(s=>s.reps<min||(s.rpe||0)>=9.5),cls=exerciseClass(name),deload=isDeloadWeek(+($('cycleWeek')?.value||getCycleWeek()))||eng.score<80||(activeDay==='Wed'&&(+data.runFatigue||0)>=7);let next=last,action='Hold',reason='Stay at the same load and add reps.';if(!last)return{action:'Set baseline',nextWeightText:'Use comfortable load',reason:'No previous weight entered.'};if(deload){next=roundToJump(last*.9,jump);action='Deload / reduce';reason='Deload week, low readiness or high run fatigue detected.'}else if(anyLow){next=roundToJump(last*(1-cls.dec),jump);action='Reduce or repeat';reason='Missed minimum reps or RPE was too high.'}else if(allTop){next=roundToJump(last*(1+cls.inc),jump);action='Increase';reason='Top of rep range achieved with controlled RPE.'}else if(avg>=9){action='Hold';reason='Average RPE is high. Improve execution before increasing.'}return{action,nextWeightText:next?`${next} kg`:'Use same load',reason,lastWeight:last,avgRpe:avg.toFixed(1)}}function progressionSuggestion(ex,sets){const r=calculateNextWeight(ex,sets);return`${r.action}: ${r.nextWeightText}. ${r.reason}`}function lastPerf(name){for(const s of [...data.sessions].reverse()){const item=(s.items||[]).find(i=>i.name===name);if(item)return{session:s,item}}return null}
-function renderCycleProgression(){if(!$('cycleStart').value)$('cycleStart').value=data.settings.cycleStart||todayKey();if(!data.settings.cycleStart)data.settings.cycleStart=$('cycleStart').value;const week=getCycleWeek();$('cycleWeek').value=week;let html='<div class="cycleBox">';for(let i=1;i<=12;i++)html+=`<div class="cycleWeek ${i===week?'cycleNow':''} ${isDeloadWeek(i)?'cycleDeload':''}"><b>W${i}</b><br>${isDeloadWeek(i)?'Deload':'Build'}</div>`;html+='</div>';html+=`<div class="result ${isDeloadWeek(week)?'amber':'green'}"><b>Current phase:</b> Week ${week} · ${isDeloadWeek(week)?'Deload / absorb fatigue':'Build / progress carefully'}</div>`;$('cycleBox').innerHTML=html;save()}function renderWeightSuggestions(){const p=adjustedPlan(activeDay),eng=engine();$('weightSuggestionBox').innerHTML=p.filter(ex=>!['run','recovery'].includes(ex[6])).map(ex=>{const perf=lastPerf(ex[0]),rec=perf?calculateNextWeight(ex,perf.item.sets,eng):{action:'Set baseline',nextWeightText:'Enter first session',reason:'No previous logged performance for this exercise yet.'};const cls=rec.action.includes('Increase')?'green':rec.action.includes('Reduce')||rec.action.includes('Deload')?'red':rec.action.includes('baseline')?'purple':'amber';return`<div class="suggestionCard ${cls}"><b>${ex[0]}</b><br><span class="mini">Target: ${ex[2]} sets · ${ex[3]}-${ex[4]}${ex[6]==='time'?' sec':' reps'}</span><div class="suggestionGrid"><div><span class="mini">Last</span><br><b>${rec.lastWeight?rec.lastWeight+' kg':'—'}</b></div><div><span class="mini">Next suggestion</span><br><b>${rec.nextWeightText}</b></div><div><span class="mini">Action</span><br><b>${rec.action}</b></div></div><p class="small">${rec.reason}</p></div>`}).join('')||'<p class="small">No weight suggestions for run/recovery days.</p>'}
-function renderVolume(){const vol={};days.forEach(day=>{planForDay(day).forEach(ex=>{const group=ex[1]||'other';const sets=+ex[2]||0;if(!['run','recovery'].includes(ex[6]))vol[group]=(vol[group]||0)+sets})});$('volumeBox').innerHTML=Object.entries(vol).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="metric"><span>${k}</span><b>${v} sets</b></div>`).join('')}function renderHistory(){const recent=[...data.sessions].reverse().slice(0,8);$('historyBox').innerHTML=recent.length?`<table><tr><th>Date</th><th>Day</th><th>Readiness</th></tr>${recent.map(s=>`<tr><td>${s.date}</td><td>${s.day}</td><td>${s.readiness}</td></tr>`).join('')}</table>`:'<p class="small">No sessions logged yet.</p>'}
-function moveMonth(delta){calDate.setMonth(calDate.getMonth()+delta);renderCalendar()}function goToday(){calDate=new Date();selectedCalendarDate=todayKey();renderAll()}function entriesForDate(key){const sessions=(data.sessions||[]).filter(s=>s.date===key).map(s=>({type:['Tue','Thu','Sat'].includes(s.day)?'Run':'Gym',title:`${s.day} session`,session:s}));const logs=(data.logs||[]).filter(l=>l.date===key).map(l=>({type:l.type,title:l.title||l.type,log:l}));return[...sessions,...logs]}function summariseSet(set){if(!set)return'';const hasDistance=set.distance&&set.distance!=='';if(hasDistance)return`${set.distance||'—'} km${set.duration?` · ${set.duration} min`:''}${set.rpe?` · RPE ${set.rpe}`:''}`;const hasWeight=set.weight&&set.weight!=='';const hasReps=set.reps&&set.reps!=='';const hasRpe=set.rpe&&set.rpe!=='';if(!hasWeight&&!hasReps&&!hasRpe)return'';let out=[];if(hasWeight)out.push(`${set.weight} kg`);if(hasReps)out.push(`${set.reps} reps`);if(hasRpe)out.push(`RPE ${set.rpe}`);return out.join(' · ')}function sessionOverview(session){const names=(session.items||[]).map(i=>i.name).filter(Boolean);return names.length?names.slice(0,8):['No exercises captured']}function renderDayDetails(){const key=selectedCalendarDate||todayKey();const entries=entriesForDate(key);$('dayDetailTitle').textContent=`${formatDisplayDate(key)} · ${entries.length?entries.length+' item'+(entries.length>1?'s':''):'No entries'}`;if(!entries.length){$('dayDetailBox').innerHTML='<div class="dayCard"><h3>No training saved for this day</h3><div class="small">Tap any date to review it. If you train today, save a session or a manual log and it will appear here automatically.</div></div>';return}const sessions=(data.sessions||[]).filter(s=>s.date===key);const logs=(data.logs||[]).filter(l=>l.date===key);let blocks=[];sessions.forEach(s=>{const isRun=['Tue','Thu','Sat'].includes(s.day);let runSummary='';if(isRun){const runItem=(s.items||[])[0];const firstSet=runItem&&runItem.sets&&runItem.sets[0]?runItem.sets[0]:null;runSummary=summariseSet(firstSet)||'Run saved without detail';}const exerciseTags=sessionOverview(s).map(name=>`<span class="tinyTag">${name}</span>`).join('');blocks.push(`<div class="dayCard"><h3>${s.day} session${isRun?' · Run day':''}</h3><div class="dayMeta"><span>Readiness ${s.readiness ?? '—'}</span><span>Run fatigue ${s.runFatigue ?? 0}</span></div>${isRun?`<p class="small" style="margin-top:8px">${runSummary}</p>`:`<div class="dayTags">${exerciseTags}</div>`}</div>`)});logs.forEach(l=>{blocks.push(`<div class="dayCard"><h3>${l.type}${l.title?` · ${l.title}`:''}</h3><p class="small">${(l.notes||'No extra notes').replaceAll('<','&lt;')}</p></div>`)});$('dayDetailBox').innerHTML=blocks.join('')}function selectCalendarDate(key){selectedCalendarDate=key;prefillLogDate(key,false);const sessionsOnDate=(data.sessions||[]).filter(s=>s.date===key);if(sessionsOnDate.length===1)activeDay=sessionsOnDate[0].day;renderAll()}function renderCalendar(){if(!selectedCalendarDate)selectedCalendarDate=todayKey();const y=calDate.getFullYear(),m=calDate.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0);$('calendarTitle').textContent=first.toLocaleString(undefined,{month:'long',year:'numeric'});let html=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>`<div class="weekday">${d}</div>`).join('');for(let i=0;i<first.getDay();i++)html+='<div></div>';for(let d=1;d<=last.getDate();d++){let key=localDateKey(y,m,d),entries=entriesForDate(key),dots=entries.slice(0,4).map(e=>`<span class="dot ${e.type==='Run'?'dotRun':e.type==='Gym'?'dotGym':''}"></span>`).join(''),label=entries.slice(0,2).map(e=>e.title).join('<br>');html+=`<div class="daybox ${entries.length?'done':''} ${key===todayKey()?'today':''} ${key===selectedCalendarDate?'daySelected':''}" onclick="selectCalendarDate('${key}')"><b>${d}</b><br>${dots}<div class="small">${label}</div></div>`}$('calendar').innerHTML=html}function prefillLogDate(key,focus=true){$('logDate').value=key;setSessionDateKey(key);if(focus&&$('logTitle'))$('logTitle').focus()}function saveTrainingLog(){const e={id:Date.now(),date:$('logDate').value||todayKey(),type:$('logType').value,title:$('logTitle').value.trim(),notes:$('logNotes').value.trim(),createdAt:new Date().toISOString()};if(!e.title&&!e.notes){alert('Add a title or note first.');return}data.logs.push(e);save();$('logTitle').value='';$('logNotes').value='';renderAll()}function deleteLog(id){data.logs=data.logs.filter(l=>l.id!==id);save();renderAll()}function renderTrainingLogs(){if(!$('logDate').value)$('logDate').value=todayKey();const logs=[...data.logs].sort((a,b)=>(b.date+b.createdAt).localeCompare(a.date+a.createdAt)).slice(0,20);$('trainingLogBox').innerHTML=logs.length?logs.map(l=>`<div class="logItem"><b>${l.date} · ${l.type}</b><br>${l.title||''}<p class="small">${(l.notes||'').replaceAll('<','&lt;')}</p><button class="btnRed" onclick="deleteLog(${l.id})">Delete</button></div>`).join(''):'<p class="small">No manual log entries yet.</p>'}function startOfWeekKey(baseKey=todayKey()){const d=new Date(baseKey+'T00:00:00');const day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);const tz=d.getTimezoneOffset()*60000;return new Date(d-tz).toISOString().slice(0,10)}function endOfWeekKey(baseKey=todayKey()){const s=new Date(startOfWeekKey(baseKey)+'T00:00:00');s.setDate(s.getDate()+6);const tz=s.getTimezoneOffset()*60000;return new Date(s-tz).toISOString().slice(0,10)}function inRange(key,start,end){return key>=start&&key<=end}function computePRSummary(){const best={};(data.sessions||[]).forEach(s=>(s.items||[]).forEach(item=>(item.sets||[]).forEach(set=>{const w=+(set.weight||0);if(!w)return;const name=item.name||'Exercise';if(!best[name]||w>best[name].weight){best[name]={weight:w,date:s.date}}})));const entries=Object.entries(best).sort((a,b)=>b[1].weight-a[1].weight);return{count:entries.length,top:entries.slice(0,3).map(([name,v])=>`${name} ${v.weight} kg`)}}function renderDashboard(){const today=todayKey();const todayEntries=entriesForDate(today);const todaySessions=(data.sessions||[]).filter(s=>s.date===today);const todayLogs=(data.logs||[]).filter(l=>l.date===today);const start=startOfWeekKey(today),end=endOfWeekKey(today);const weekSessions=(data.sessions||[]).filter(s=>inRange(s.date,start,end));const weekLogs=(data.logs||[]).filter(l=>inRange(l.date,start,end));const runDays=weekSessions.filter(s=>['Tue','Thu','Sat'].includes(s.day)).length;const gymDays=weekSessions.filter(s=>!['Tue','Thu','Sat'].includes(s.day)).length;const pr=computePRSummary();const todayText=todayEntries.length?todayEntries.slice(0,3).map(e=>e.title).join(' · '):'No entries saved yet';const todayMeta=todaySessions.length?`${todaySessions.length} session${todaySessions.length>1?'s':''} saved`:todayLogs.length?`${todayLogs.length} note${todayLogs.length>1?'s':''} saved`:'Ready to log';const prTags=pr.top.length?pr.top.map(t=>`<span class="tinyTag">${t}</span>`).join(''):'<span class="tinyTag">Log weight to build PR tracking</span>';$('dashboardStrip').innerHTML=`<div class="dashCard"><div class="dashLabel">Today</div><div class="dashValue">${todayEntries.length}</div><div class="dashSub">${todayMeta}<br>${todayText}</div></div><div class="dashCard"><div class="dashLabel">This Week</div><div class="dashValue">${gymDays} gym / ${runDays} run</div><div class="dashSub">${weekSessions.length} total sessions · ${weekLogs.length} manual log${weekLogs.length!==1?'s':''}<br>${formatDisplayDate(start)} to ${formatDisplayDate(end)}</div></div><div class="dashCard"><div class="dashLabel">PRs</div><div class="dashValue">${pr.count}</div><div class="dashSub">Tracked all-time best lifts from your saved history.</div><div class="dashTags">${prTags}</div></div>`}function renderCoach(){const e=engine();let list=[];if(activeDay==='Wed')list.push('Wednesday priority: quality deadlift reps, no grinders. Thursday Runna quality matters.');if(activeDay==='Fri')list.push('Friday priority: performance upper, grip, posture and chest hypertrophy without damaging Saturday long run.');if((data.runFatigue||0)>=7)list.push('Run fatigue is high. Protect legs and avoid chasing PRs.');if(e.score<80)list.push('Low readiness: maintenance stimulus today.');$('coachBox').innerHTML=list.map(x=>`<div class="result purple">${x}</div>`).join('')||'<div class="result green">Training state looks balanced. Execute the plan.</div>'}
-function exportJSON(){download(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),'sergio-hybrid-v7-3-4-data.json')}function exportCSV(){let rows=['date,day,readiness,runFatigue,exercise,suggestion'];data.sessions.forEach(s=>(s.items||[]).forEach(i=>rows.push([s.date,s.day,s.readiness,s.runFatigue,i.name,i.suggestion].map(x=>'"'+String(x||'').replaceAll('"','""')+'"').join(','))));download(new Blob([rows.join('\n')],{type:'text/csv'}),'sergio-hybrid-v7-3-4-data.csv')}function download(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}function clearData(){if(confirm('Clear all V7.3.4 local data?')){data={sessions:[],runFatigue:0,logs:[],cloud:{},settings:{}};save();renderAll()}}
-function setCloudStatus(msg,cls='amber'){$('cloudBox').className='result '+cls;$('cloudBox').innerHTML=msg}function getHybridData(){return data}function setHybridData(newData){data=newData||data;if(!data.sessions)data.sessions=[];if(!data.logs)data.logs=[];if(!data.settings)data.settings={};save();renderAll()}window.getHybridData=getHybridData;window.setHybridData=setHybridData;window.setCloudStatus=setCloudStatus;function renderAll(){initSelectors();if(!selectedCalendarDate)selectedCalendarDate=todayKey();if($('sessionDate')&&!$('sessionDate').value)setSessionDateKey(selectedCalendarDate);renderWeeklyStructure();renderDashboard();renderReadiness();renderRunFatigue();renderVolume();renderSession();renderMealPlan();renderHistory();renderCalendar();renderDayDetails();renderTrainingLogs();renderCycleProgression();renderWeightSuggestions();renderCoach()}renderAll();
+
+function renderMealPlan(){
+  if(!$('mealPlanBox')) return;
+  const plan=mealPlanByDay[activeDay]||mealPlanByDay.Mon;
+  const badges=(plan.badges||[]).map(b=>`<span class="tinyTag">${b}</span>`).join('');
+  $('mealPlanBox').innerHTML=
+    `<div class="result green"><b>${plan.title}</b><br>Target: ${plan.targetKcal} kcal<br>Focus: ${plan.focus}<div class="mealBadges">${badges}</div></div>
+     <div class="mealSummaryGrid">
+       <div class="mealSummaryTile">
+         <div class="label">Current day</div>
+         <div class="value">${activeDay}</div>
+         <div class="sub">Meal plan updates when you switch to another day.</div>
+       </div>
+       <div class="mealSummaryTile">
+         <div class="label">Protein</div>
+         <div class="value">High daily</div>
+         <div class="sub">Protein stays high every day to support recovery and muscle rebuild.</div>
+       </div>
+       <div class="mealSummaryTile">
+         <div class="label">Carb strategy</div>
+         <div class="value">${activeDay==='Sat'?'Highest':activeDay==='Sun'?'Lower':'Matched'}</div>
+         <div class="sub">Carb intake is aligned to the selected day’s workload.</div>
+       </div>
+     </div>
+     ${plan.meals.map(meal=>`<div class="mealMeal"><div class="mealMealTitle">${meal.label}</div><div class="mealKicker">${meal.food}</div><div class="small">${meal.macros}</div></div>`).join('')}
+     <div class="result amber mealNotes"><b>Suggestions</b>${plan.notes.map(n=>`<div class="small">• ${n}</div>`).join('')}</div>`;
+}
+
+function localDateKey(y,m,d){const dt=new Date(y,m,d);const tz=dt.getTimezoneOffset()*60000;return new Date(dt-tz).toISOString().slice(0,10)}
+function formatDisplayDate(key){if(!key)return'';const[y,m,d]=key.split('-');return`${d}/${m}/${y}`}
+function parseDisplayDate(value){if(!value)return todayKey();if(value.includes('-'))return value;const p=value.split('/');return p.length===3?`${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`:todayKey()}
+function setSessionDateKey(key){$('sessionDate').value=formatDisplayDate(key);const[y,m,d]=key.split('-').map(Number);sessionPickDate=new Date(y,m-1,d);renderSessionMiniCalendar()}
+function setSessionDateToday(){setSessionDateKey(todayKey());toggleSessionCalendar(false)}
+function toggleSessionCalendar(show){const cal=$('sessionMiniCalendar');if(!cal)return;if(show===false){cal.classList.remove('show');return}renderSessionMiniCalendar();cal.classList.add('show')}
+function moveSessionPickMonth(delta){sessionPickDate.setMonth(sessionPickDate.getMonth()+delta);renderSessionMiniCalendar();$('sessionMiniCalendar').classList.add('show')}
+function renderSessionMiniCalendar(){
+  const cal=$('sessionMiniCalendar');if(!cal)return;
+  const y=sessionPickDate.getFullYear(),m=sessionPickDate.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0),current=parseDisplayDate($('sessionDate')?.value||todayKey());
+  let html=`<div class="miniCalHead"><button class="btn2" onclick="event.stopPropagation();moveSessionPickMonth(-1)">◀</button><b>${first.toLocaleString(undefined,{month:'long',year:'numeric'})}</b><button class="btn2" onclick="event.stopPropagation();moveSessionPickMonth(1)">▶</button></div>`;
+  html+='<div class="miniCalGrid">'+['S','M','T','W','T','F','S'].map(d=>`<div class="miniCalWeekday">${d}</div>`).join('');
+  for(let i=0;i<first.getDay();i++) html+='<div class="miniCalBlank"></div>';
+  for(let d=1;d<=last.getDate();d++){
+    const key=localDateKey(y,m,d);
+    html+=`<button class="miniCalDay ${key===current?'selected':''} ${key===todayKey()?'todayPick':''}" onclick="event.stopPropagation();setSessionDateKey('${key}');toggleSessionCalendar(false)">${d}</button>`;
+  }
+  html+='</div><div class="row" style="margin-top:8px"><button class="btn2" onclick="event.stopPropagation();setSessionDateKey(todayKey());toggleSessionCalendar(false)">Today</button><button class="btn2" onclick="event.stopPropagation();toggleSessionCalendar(false)">Close</button></div>';
+  cal.innerHTML=html;
+}
+document.addEventListener('click',e=>{const wrap=document.querySelector('.dateWrap'),cal=$('sessionMiniCalendar');if(wrap&&cal&&!wrap.contains(e.target))cal.classList.remove('show')});
+
+function readinessScore(){return 110;}
+function zone(){return ['green','Ready'];}
+function engine(){
+  return{
+    score:110,
+    setMultiplier:1,
+    loadChange:0,
+    capRpe:9,
+    notes:['Garmin is your source of truth for readiness and fatigue. Suggestions stay neutral unless the cycle is in deload week.']
+  };
+}
+function adjustedPlan(day){
+  const e=engine();let p=planForDay(day);
+  if(['Tue','Thu','Sat','Sun'].includes(day)) return p;
+  return p.map((x,i)=>{if(i>2)x[2]=Math.max(1,Math.round(x[2]*e.setMultiplier));return x});
+}
+function initSelectors(){
+  $('tabs').innerHTML=days.map(d=>`<button class="tab ${d===activeDay?'active':''}" onclick="activeDay='${d}';renderAll()">${d}</button>`).join('');
+}
+
+function renderWeeklyStructure(){
+  const strip=$('weeklyStructureStrip');if(!strip)return;
+  strip.innerHTML=days.map(day=>{
+    const meta=dayMeta[day]||{label:day,cls:'',sub:''};
+    return `<div class="scheduleDay ${meta.cls} ${day===activeDay?'activeWeekDay':''}" onclick="activeDay='${day}';renderAll()"><b>${day}</b><div class="scheduleLabel">${meta.label}</div><div class="scheduleSub">${meta.sub||'Training'}</div></div>`;
+  }).join('');
+}
+function renderReadiness(){
+  const e=engine();
+  if($('engineBox')) $('engineBox').innerHTML=e.notes.map(n=>`<div class="result green">${n}</div>`).join('');
+}
+function renderRunFatigue(){return;}
+
+function renderSession(){
+  const p=adjustedPlan(activeDay);
+  const note=activeDay==='Fri'?'<div class="result purple"><b>Friday full session visible:</b> smart engine adjusts sets/intensity only.</div>':'';
+  $('sessionBox').innerHTML=note+p.map((ex,idx)=>{
+    const[name,group,sets,min,max,rest,type]=ex;
+    if(type==='run') return `<div class="exercise"><div class="exName">${name}</div><span class="tag">Runna / Garmin source of truth</span><label>Distance km</label><input data-ex="${idx}" data-field="distance" type="number" step="0.01"><label>Duration min</label><input data-ex="${idx}" data-field="duration" type="number"><label>Run RPE</label><input data-ex="${idx}" data-field="rpe" type="number" min="1" max="10" value="5"></div>`;
+    if(type==='recovery') return `<div class="exercise"><div class="exName">${name}</div><p class="small">Walk, mobility, easy spin or full rest.</p><textarea data-ex="${idx}" data-field="notes"></textarea></div>`;
+    return `<div class="exercise"><div class="exHead"><div><div class="exName">${name}</div><span class="tag">${group} · ${sets} sets · ${min}-${max}${type==='time'?' sec':' reps'} · ${rest}s rest</span></div><div class="exBtns"><button class="btn2" onclick="addSet(${idx})">+ Set</button><button class="btnAmber" onclick="fillSameWeight(${idx})">Same Wt</button><button class="btnAmber" onclick="fillSameReps(${idx})">Same Reps</button><button class="btnAmber" onclick="fillSameRpe(${idx})">Same RPE</button></div></div><div id="sets-${idx}">${renderSets(idx,sets,type)}</div></div>`;
+  }).join('');
+}
+function renderSets(idx,sets,type){
+  let out='';
+  for(let s=1;s<=sets;s++) out+=`<div class="setrow"><span>#${s}</span><input placeholder="Weight" data-ex="${idx}" data-set="${s}" data-field="weight" type="number" step="0.5"><input placeholder="${type==='time'?'Seconds':'Reps'}" data-ex="${idx}" data-set="${s}" data-field="reps" type="number"><input placeholder="RPE" data-ex="${idx}" data-set="${s}" data-field="rpe" type="number" step="0.5" min="1" max="10"><button class="btnRed" onclick="this.parentElement.remove()">−</button></div>`;
+  return out;
+}
+function addSet(idx){
+  const wrap=$('sets-'+idx);
+  const n=wrap.querySelectorAll('.setrow').length+1;
+  wrap.insertAdjacentHTML('beforeend',renderSets(idx,1,adjustedPlan(activeDay)[idx][6]).replace('#1','#'+n));
+}
+
+function fillSameField(idx,field,label){
+  const inputs=[...document.querySelectorAll(`#sets-${idx} [data-field="${field}"]`)];
+  const source=inputs.find(i=>i.value!==''&&i.value!=null);
+  if(!source){alert(`Enter the first set ${label} first, then click Same ${label}.`);return false}
+  inputs.forEach(i=>i.value=source.value);
+  return true;
+}
+function fillSameWeight(idx){fillSameField(idx,'weight','Wt')}
+function fillSameReps(idx){fillSameField(idx,'reps','Reps')}
+function fillSameRpe(idx){fillSameField(idx,'rpe','RPE')}
+function fillAllExerciseField(field,label){adjustedPlan(activeDay).forEach((ex,idx)=>{if(!['run','recovery'].includes(ex[6]))fillSameField(idx,field,label)})}
+function fillAllExerciseWeights(){fillAllExerciseField('weight','Wt')}
+function fillAllExerciseReps(){fillAllExerciseField('reps','Reps')}
+function fillAllExerciseRpe(){fillAllExerciseField('rpe','RPE')}
+
+function completeSession(){
+  const p=adjustedPlan(activeDay),inputs=[...document.querySelectorAll('#sessionBox input,#sessionBox textarea')],entry={date:parseDisplayDate($('sessionDate')?.value||todayKey()),day:activeDay,readiness:readinessScore(),runFatigue:+data.runFatigue||0,items:[]};
+  p.forEach((ex,idx)=>{
+    let item={uid:ex[7]||'',name:ex[0],group:ex[1],sets:[]};
+    inputs.filter(i=>i.dataset.ex==idx).forEach(i=>{let s=i.dataset.set||'single';if(!item.sets[s])item.sets[s]={};item.sets[s][i.dataset.field]=i.value});
+    item.sets=Object.values(item.sets);
+    item.suggestion=progressionSuggestion(ex,item.sets);
+    entry.items.push(item);
+  });
+  data.sessions.push(entry);
+  save();
+  renderAll();
+  alert('Session saved for '+entry.date+'. Smart suggestions updated.');
+}
+function copyLastWeights(){
+  const last=[...data.sessions].reverse().find(s=>s.day===activeDay);
+  if(!last){alert('No previous session found.');return}
+  const uidMap=Object.fromEntries((last.items||[]).filter(i=>i.uid).map(i=>[i.uid,i]));
+  const nameMap=Object.fromEntries((last.items||[]).map(i=>[i.name,i]));
+  adjustedPlan(activeDay).forEach((ex,idx)=>{
+    const item=uidMap[ex[7]]||nameMap[ex[0]];
+    if(!item) return;
+    [...document.querySelectorAll(`#sets-${idx} [data-field="weight"]`)].forEach(inp=>{
+      const set=item.sets&&item.sets[+inp.dataset.set-1];
+      if(set&&set.weight) inp.value=set.weight;
+    });
+  });
+}
+function deloadToday(){renderAll();}
+function logRunFatigue(){return;}
+function resetRunFatigue(){return;}
+
+function roundToJump(v,j){return(!v||isNaN(v))?'':Math.round(v/j)*j}
+function exerciseClass(name){
+  const n=name.toLowerCase();
+  if(n.includes('deadlift'))return{inc:.025,dec:.05};
+  if(n.includes('bench')||n.includes('pull-up')||n.includes('pullups')||n.includes('row')||n.includes('leg press'))return{inc:.025,dec:.05};
+  if(n.includes('farmers')||n.includes('explosive'))return{inc:0,dec:0};
+  return{inc:.02,dec:.05};
+}
+function flat(sets){return(sets||[]).filter(s=>s&&(s.weight||s.reps||s.rpe)).map(s=>({weight:+s.weight||0,reps:+s.reps||0,rpe:+s.rpe||0}))}
+function getCycleWeek(){
+  if(data.settings.forceWeek)return data.settings.forceWeek;
+  const start=data.settings.cycleStart;
+  if(!start)return 3;
+  const diff=Math.floor((new Date(todayKey())-new Date(start))/(7*24*60*60*1000));
+  return Math.min(12,Math.max(1,diff+1));
+}
+function isDeloadWeek(w){return[4,8,12].includes(+w)}
+function setCycleStartToday(){data.settings.cycleStart=todayKey();data.settings.forceWeek=null;save();renderAll()}
+function setCycleStartForCurrentWeek(){
+  const w=+($('cycleWeek')?.value||3),start=new Date();
+  start.setDate(start.getDate()-((Math.max(1,w)-1)*7));
+  const tz=start.getTimezoneOffset()*60000;
+  data.settings.cycleStart=new Date(start-tz).toISOString().slice(0,10);
+  data.settings.forceWeek=null;
+  save();
+  renderAll();
+}
+function forceDeloadWeek(){data.settings.forceWeek=4;save();renderAll()}
+function clearForcedWeek(){data.settings.forceWeek=null;save();renderAll()}
+
+function calculateNextWeight(ex,sets,eng=engine()){
+  const[name,group,targetSets,min,max,rest,type]=ex;
+  if(type==='run'||type==='recovery')return{action:'Log only',nextWeightText:'Use Runna/Garmin',reason:'Running progression is controlled outside the strength engine.'};
+  if(type==='time')return{action:'Progress slowly',nextWeightText:`${min}-${max} sec`,reason:'Carries progress best by posture, duration or small load jumps.'};
+  const valid=flat(sets);
+  if(!valid.length)return{action:'Set baseline',nextWeightText:'Enter first session',reason:'No logged performance yet.'};
+  const jump=+($('plateJump')?.value||2.5);
+  const weights=valid.filter(s=>s.weight>0).map(s=>s.weight);
+  const last=weights.length?weights[weights.length-1]:0;
+  const avg=valid.reduce((a,s)=>a+(s.rpe||8),0)/valid.length;
+  const allTop=valid.every(s=>s.reps>=max&&(s.rpe||8)<=8.5);
+  const anyLow=valid.some(s=>s.reps<min||(s.rpe||0)>=9.5);
+  const cls=exerciseClass(name);
+  const deload=isDeloadWeek(+($('cycleWeek')?.value||getCycleWeek())) || (activeDay==='Wed'&&(+data.runFatigue||0)>=7);
+  let next=last,action='Hold',reason='Stay at the same load and add reps.';
+  if(!last)return{action:'Set baseline',nextWeightText:'Use comfortable load',reason:'No previous weight entered.'};
+  if(deload){next=roundToJump(last*.9,jump);action='Deload / reduce';reason='Deload week or very high run fatigue detected.'}
+  else if(anyLow){next=roundToJump(last*(1-cls.dec),jump);action='Reduce or repeat';reason='Missed minimum reps or RPE was too high.'}
+  else if(allTop){next=roundToJump(last*(1+cls.inc),jump);action='Increase';reason='Top of rep range achieved with controlled RPE.'}
+  else if(avg>=9){action='Hold';reason='Average RPE is high. Improve execution before increasing.'}
+  return{action,nextWeightText:next?`${next} kg`:'Use same load',reason,lastWeight:last,avgRpe:avg.toFixed(1)};
+}
+function progressionSuggestion(ex,sets){const r=calculateNextWeight(ex,sets);return`${r.action}: ${r.nextWeightText}. ${r.reason}`}
+function lastPerf(name){
+  for(const s of [...data.sessions].reverse()){
+    const item=(s.items||[]).find(i=>i.name===name);
+    if(item)return{session:s,item};
+  }
+  return null;
+}
+
+function renderCycleProgression(){
+  if(!$('cycleStart').value) $('cycleStart').value=data.settings.cycleStart||todayKey();
+  if(!data.settings.cycleStart) data.settings.cycleStart=$('cycleStart').value;
+  const week=getCycleWeek();
+  $('cycleWeek').value=week;
+  let html='<div class="cycleBox">';
+  for(let i=1;i<=12;i++) html+=`<div class="cycleWeek ${i===week?'cycleNow':''} ${isDeloadWeek(i)?'cycleDeload':''}"><b>W${i}</b><br>${isDeloadWeek(i)?'Deload':'Build'}</div>`;
+  html+='</div>';
+  html+=`<div class="result ${isDeloadWeek(week)?'amber':'green'}"><b>Current phase:</b> Week ${week} · ${isDeloadWeek(week)?'Deload / absorb fatigue':'Build / progress carefully'}</div>`;
+  $('cycleBox').innerHTML=html;
+  save();
+}
+function renderWeightSuggestions(){
+  const p=adjustedPlan(activeDay),eng=engine();
+  $('weightSuggestionBox').innerHTML=p.filter(ex=>!['run','recovery'].includes(ex[6])).map(ex=>{
+    const perf=lastPerf(ex[0]),rec=perf?calculateNextWeight(ex,perf.item.sets,eng):{action:'Set baseline',nextWeightText:'Enter first session',reason:'No previous logged performance for this exercise yet.'};
+    const cls=rec.action.includes('Increase')?'green':rec.action.includes('Reduce')||rec.action.includes('Deload')?'red':rec.action.toLowerCase().includes('baseline')?'purple':'amber';
+    return `<div class="suggestionCard ${cls}"><b>${ex[0]}</b><br><span class="mini">Target: ${ex[2]} sets · ${ex[3]}-${ex[4]}${ex[6]==='time'?' sec':' reps'}</span><div class="suggestionGrid"><div><span class="mini">Last</span><br><b>${rec.lastWeight?rec.lastWeight+' kg':'—'}</b></div><div><span class="mini">Next suggestion</span><br><b>${rec.nextWeightText}</b></div><div><span class="mini">Action</span><br><b>${rec.action}</b></div></div><p class="small">${rec.reason}</p></div>`;
+  }).join('')||'<p class="small">No weight suggestions for run/recovery days.</p>';
+}
+
+function renderVolume(){
+  const vol={};
+  days.forEach(day=>{
+    planForDay(day).forEach(ex=>{
+      const group=ex[1]||'other';
+      const sets=+ex[2]||0;
+      if(!['run','recovery'].includes(ex[6])) vol[group]=(vol[group]||0)+sets;
+    });
+  });
+  $('volumeBox').innerHTML=Object.entries(vol).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="metric"><span>${k}</span><b>${v} sets</b></div>`).join('');
+}
+
+function renderHistory(){
+  const recent=[...data.sessions].reverse().slice(0,8);
+  $('historyBox').innerHTML=recent.length?`<table><tr><th>Date</th><th>Day</th><th>Readiness</th></tr>${recent.map(s=>`<tr><td>${s.date}</td><td>${s.day}</td><td>${s.readiness}</td></tr>`).join('')}</table>`:'<p class="small">No sessions logged yet.</p>';
+}
+
+function moveMonth(delta){calDate.setMonth(calDate.getMonth()+delta);renderCalendar()}
+function goToday(){calDate=new Date();selectedCalendarDate=todayKey();renderAll()}
+function entriesForDate(key){
+  const sessions=(data.sessions||[]).filter(s=>s.date===key).map(s=>({type:['Tue','Thu','Sat'].includes(s.day)?'Run':'Gym',title:`${s.day} session`,session:s}));
+  const logs=(data.logs||[]).filter(l=>l.date===key).map(l=>({type:l.type,title:l.title||l.type,log:l}));
+  return [...sessions,...logs];
+}
+function summariseSet(set){
+  if(!set) return '';
+  const hasDistance=set.distance&&set.distance!=='';
+  if(hasDistance) return `${set.distance||'—'} km${set.duration?` · ${set.duration} min`:''}${set.rpe?` · RPE ${set.rpe}`:''}`;
+  const hasWeight=set.weight&&set.weight!=='';
+  const hasReps=set.reps&&set.reps!=='';
+  const hasRpe=set.rpe&&set.rpe!=='';
+  if(!hasWeight&&!hasReps&&!hasRpe) return '';
+  let out=[];
+  if(hasWeight) out.push(`${set.weight} kg`);
+  if(hasReps) out.push(`${set.reps} reps`);
+  if(hasRpe) out.push(`RPE ${set.rpe}`);
+  return out.join(' · ');
+}
+function sessionOverview(session){
+  const names=(session.items||[]).map(i=>i.name).filter(Boolean);
+  return names.length?names.slice(0,8):['No exercises captured'];
+}
+function renderDayDetails(){
+  const key=selectedCalendarDate||todayKey();
+  const entries=entriesForDate(key);
+  $('dayDetailTitle').textContent=`${formatDisplayDate(key)} · ${entries.length?entries.length+' item'+(entries.length>1?'s':''):'No entries'}`;
+  if(!entries.length){
+    $('dayDetailBox').innerHTML='<div class="dayCard"><h3>No training saved for this day</h3><div class="small">Tap any date to review it. If you train today, save a session or a manual log and it will appear here automatically.</div></div>';
+    return;
+  }
+  const sessions=(data.sessions||[]).filter(s=>s.date===key);
+  const logs=(data.logs||[]).filter(l=>l.date===key);
+  let blocks=[];
+  sessions.forEach(s=>{
+    const isRun=['Tue','Thu','Sat'].includes(s.day);
+    let runSummary='';
+    if(isRun){
+      const runItem=(s.items||[])[0];
+      const firstSet=runItem&&runItem.sets&&runItem.sets[0]?runItem.sets[0]:null;
+      runSummary=summariseSet(firstSet)||'Run saved without detail';
+    }
+    const exerciseTags=sessionOverview(s).map(name=>`<span class="tinyTag">${name}</span>`).join('');
+    blocks.push(`<div class="dayCard"><h3>${s.day} session${isRun?' · Run day':''}</h3><div class="dayMeta"><span>Readiness ${s.readiness ?? '—'}</span><span>Run fatigue ${s.runFatigue ?? 0}</span></div>${isRun?`<p class="small" style="margin-top:8px">${runSummary}</p>`:`<div class="dayTags">${exerciseTags}</div>`}</div>`);
+  });
+  logs.forEach(l=>{
+    blocks.push(`<div class="dayCard"><h3>${l.type}${l.title?` · ${l.title}`:''}</h3><p class="small">${(l.notes||'No extra notes').replaceAll('<','&lt;')}</p></div>`);
+  });
+  $('dayDetailBox').innerHTML=blocks.join('');
+}
+function selectCalendarDate(key){
+  selectedCalendarDate=key;
+  prefillLogDate(key,false);
+  const sessionsOnDate=(data.sessions||[]).filter(s=>s.date===key);
+  if(sessionsOnDate.length===1) activeDay=sessionsOnDate[0].day;
+  renderAll();
+}
+function renderCalendar(){
+  if(!selectedCalendarDate) selectedCalendarDate=todayKey();
+  const y=calDate.getFullYear(),m=calDate.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0);
+  $('calendarTitle').textContent=first.toLocaleString(undefined,{month:'long',year:'numeric'});
+  let html=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>`<div class="weekday">${d}</div>`).join('');
+  for(let i=0;i<first.getDay();i++) html+='<div></div>';
+  for(let d=1;d<=last.getDate();d++){
+    let key=localDateKey(y,m,d),entries=entriesForDate(key),dots=entries.slice(0,4).map(e=>`<span class="dot ${e.type==='Run'?'dotRun':e.type==='Gym'?'dotGym':''}"></span>`).join(''),label=entries.slice(0,2).map(e=>e.title).join('<br>');
+    html+=`<div class="daybox ${entries.length?'done':''} ${key===todayKey()?'today':''} ${key===selectedCalendarDate?'daySelected':''}" onclick="selectCalendarDate('${key}')"><b>${d}</b><br>${dots}<div class="small">${label}</div></div>`;
+  }
+  $('calendar').innerHTML=html;
+}
+function prefillLogDate(key,focus=true){
+  $('logDate').value=key;
+  setSessionDateKey(key);
+  if(focus&&$('logTitle')) $('logTitle').focus();
+}
+function saveTrainingLog(){
+  const e={id:Date.now(),date:$('logDate').value||todayKey(),type:$('logType').value,title:$('logTitle').value.trim(),notes:$('logNotes').value.trim(),createdAt:new Date().toISOString()};
+  if(!e.title&&!e.notes){alert('Add a title or note first.');return}
+  data.logs.push(e);
+  save();
+  $('logTitle').value='';
+  $('logNotes').value='';
+  renderAll();
+}
+function deleteLog(id){data.logs=data.logs.filter(l=>l.id!==id);save();renderAll()}
+function renderTrainingLogs(){
+  if(!$('logDate').value) $('logDate').value=todayKey();
+  const logs=[...data.logs].sort((a,b)=>(b.date+b.createdAt).localeCompare(a.date+a.createdAt)).slice(0,20);
+  $('trainingLogBox').innerHTML=logs.length?logs.map(l=>`<div class="logItem"><b>${l.date} · ${l.type}</b><br>${l.title||''}<p class="small">${(l.notes||'').replaceAll('<','&lt;')}</p><button class="btnRed" onclick="deleteLog(${l.id})">Delete</button></div>`).join(''):'<p class="small">No manual log entries yet.</p>';
+}
+
+function startOfWeekKey(baseKey=todayKey()){
+  const d=new Date(baseKey+'T00:00:00');
+  const day=(d.getDay()+6)%7;
+  d.setDate(d.getDate()-day);
+  const tz=d.getTimezoneOffset()*60000;
+  return new Date(d-tz).toISOString().slice(0,10);
+}
+function endOfWeekKey(baseKey=todayKey()){
+  const s=new Date(startOfWeekKey(baseKey)+'T00:00:00');
+  s.setDate(s.getDate()+6);
+  const tz=s.getTimezoneOffset()*60000;
+  return new Date(s-tz).toISOString().slice(0,10);
+}
+function inRange(key,start,end){return key>=start&&key<=end}
+function computePRSummary(){
+  const best={};
+  (data.sessions||[]).forEach(s=>(s.items||[]).forEach(item=>(item.sets||[]).forEach(set=>{
+    const w=+(set.weight||0);
+    if(!w) return;
+    const name=item.name||'Exercise';
+    if(!best[name]||w>best[name].weight) best[name]={weight:w,date:s.date};
+  })));
+  const entries=Object.entries(best).sort((a,b)=>b[1].weight-a[1].weight);
+  return {count:entries.length,top:entries.slice(0,3).map(([name,v])=>`${name} ${v.weight} kg`)};
+}
+function renderDashboard(){
+  const today=todayKey();
+  const todayEntries=entriesForDate(today);
+  const todaySessions=(data.sessions||[]).filter(s=>s.date===today);
+  const todayLogs=(data.logs||[]).filter(l=>l.date===today);
+  const start=startOfWeekKey(today),end=endOfWeekKey(today);
+  const weekSessions=(data.sessions||[]).filter(s=>inRange(s.date,start,end));
+  const weekLogs=(data.logs||[]).filter(l=>inRange(l.date,start,end));
+  const runDays=weekSessions.filter(s=>['Tue','Thu','Sat'].includes(s.day)).length;
+  const gymDays=weekSessions.filter(s=>!['Tue','Thu','Sat'].includes(s.day)).length;
+  const pr=computePRSummary();
+  const todayText=todayEntries.length?todayEntries.slice(0,3).map(e=>e.title).join(' · '):'No entries saved yet';
+  const todayMeta=todaySessions.length?`${todaySessions.length} session${todaySessions.length>1?'s':''} saved`:todayLogs.length?`${todayLogs.length} note${todayLogs.length>1?'s':''} saved`:'Ready to log';
+  const prTags=pr.top.length?pr.top.map(t=>`<span class="tinyTag">${t}</span>`).join(''):'<span class="tinyTag">Log weight to build PR tracking</span>';
+  $('dashboardStrip').innerHTML=
+    `<div class="dashCard">
+       <div class="dashLabel">Today</div>
+       <div class="dashValue">${todayEntries.length}</div>
+       <div class="dashSub">${todayMeta}<br>${todayText}</div>
+     </div>
+     <div class="dashCard">
+       <div class="dashLabel">This Week</div>
+       <div class="dashValue">${gymDays} gym / ${runDays} run</div>
+       <div class="dashSub">${weekSessions.length} total sessions · ${weekLogs.length} manual log${weekLogs.length!==1?'s':''}<br>${formatDisplayDate(start)} to ${formatDisplayDate(end)}</div>
+     </div>
+     <div class="dashCard">
+       <div class="dashLabel">PRs</div>
+       <div class="dashValue">${pr.count}</div>
+       <div class="dashSub">Tracked all-time best lifts from your saved history.</div>
+       <div class="dashTags">${prTags}</div>
+     </div>`;
+}
+
+function renderCoach(){
+  const e=engine(); let list=[];
+  if(activeDay==='Wed') list.push('Wednesday priority: quality deadlift reps, no grinders. Thursday Runna quality matters.');
+  if(activeDay==='Fri') list.push('Friday priority: performance upper, grip, posture and chest hypertrophy without damaging Saturday long run.');
+  if((data.runFatigue||0)>=7) list.push('Run fatigue is high. Protect legs and avoid chasing PRs.');
+  if(e.score<80) list.push('Low readiness: maintenance stimulus today.');
+  $('coachBox').innerHTML=list.map(x=>`<div class="result purple">${x}</div>`).join('')||'<div class="result green">Training state looks balanced. Execute the plan.</div>';
+}
+
+function exportJSON(){download(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),'sergio-hybrid-v7-7-4-data.json')}
+function exportCSV(){
+  let rows=['date,day,readiness,runFatigue,exercise,suggestion'];
+  data.sessions.forEach(s=>(s.items||[]).forEach(i=>rows.push([s.date,s.day,s.readiness,s.runFatigue,i.name,i.suggestion].map(x=>'"'+String(x||'').replaceAll('"','""')+'"').join(','))));
+  download(new Blob([rows.join('\n')],{type:'text/csv'}),'sergio-hybrid-v7-7-4-data.csv');
+}
+function download(blob,name){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=name;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+function clearData(){
+  if(confirm('Clear all V7.7.4 local data?')){
+    data=blankData();
+    save();
+    localStorage.removeItem(importedFlagKey);
+    renderAll();
+  }
+}
+
+function setCloudStatus(msg,cls='amber'){
+  $('cloudBox').className='result '+cls;
+  $('cloudBox').innerHTML=msg;
+}
+function getHybridData(){return data}
+function setHybridData(newData){
+  data=normalizeData(newData||data);
+  save();
+  renderAll();
+}
+window.getHybridData=getHybridData;
+window.setHybridData=setHybridData;
+window.setCloudStatus=setCloudStatus;
+
+function renderAll(){
+  initSelectors();
+  if(!selectedCalendarDate) selectedCalendarDate=todayKey();
+  if($('sessionDate')&&!$('sessionDate').value) setSessionDateKey(selectedCalendarDate);
+  renderWeeklyStructure();
+  renderDashboard();
+  renderReadiness();
+  renderRunFatigue();
+  renderVolume();
+  renderSession();
+  renderMealPlan();
+  renderHistory();
+  renderCalendar();
+  renderDayDetails();
+  renderTrainingLogs();
+  renderCycleProgression();
+  renderWeightSuggestions();
+  renderCoach();
+}
+
+renderAll();
+importJsonFileToAppOnce();
 </script>
+
 <script type="module">
-let app=null,db=null,dbRef=null,dbSet=null,dbGet=null;async function initFirebase(){const cfgText=document.getElementById('firebaseConfig')?.value?.trim(),syncId=document.getElementById('syncId')?.value?.trim()||'sergio-main';if(!cfgText){window.setCloudStatus('Paste Firebase web config JSON first.','red');return false}let config;try{config=JSON.parse(cfgText)}catch(e){window.setCloudStatus('Firebase config is not valid JSON.','red');return false}try{const appMod=await import('https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js');const dbMod=await import('https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js');app=appMod.initializeApp(config);db=dbMod.getDatabase(app);dbRef=p=>dbMod.ref(db,p);dbSet=dbMod.set;dbGet=dbMod.get;window._syncPath='trainingLogs/'+syncId;window.setCloudStatus('Cloud sync enabled. You can Upload or Download now.','green');return true}catch(e){window.setCloudStatus('Cloud sync failed: '+e.message,'red');return false}}window.enableCloudSync=async()=>{await initFirebase()};window.uploadToCloud=async()=>{if(!db&&!(await initFirebase()))return;const payload=window.getHybridData();payload.cloud={lastUpload:new Date().toISOString(),syncId:document.getElementById('syncId').value||'sergio-main'};await dbSet(dbRef(window._syncPath),payload);window.setCloudStatus('Uploaded to cloud at '+new Date().toLocaleString()+'.','green')};window.downloadFromCloud=async()=>{if(!db&&!(await initFirebase()))return;const snap=await dbGet(dbRef(window._syncPath));if(!snap.exists()){window.setCloudStatus('No cloud data found for this Athlete Sync ID.','amber');return}window.setHybridData(snap.val());window.setCloudStatus('Downloaded cloud data at '+new Date().toLocaleString()+'.','green')};
+let app=null,db=null,dbRef=null,dbSet=null,dbGet=null;
+async function initFirebase(){
+  const cfgText=document.getElementById('firebaseConfig')?.value?.trim(),syncId=document.getElementById('syncId')?.value?.trim()||'sergio-main';
+  if(!cfgText){window.setCloudStatus('Paste Firebase web config JSON first.','red');return false}
+  let config;
+  try{config=JSON.parse(cfgText)}catch(e){window.setCloudStatus('Firebase config is not valid JSON.','red');return false}
+  try{
+    const appMod=await import('https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js');
+    const dbMod=await import('https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js');
+    app=appMod.initializeApp(config);
+    db=dbMod.getDatabase(app);
+    dbRef=p=>dbMod.ref(db,p);
+    dbSet=dbMod.set;
+    dbGet=dbMod.get;
+    window._syncPath='trainingLogs/'+syncId;
+    window.setCloudStatus('Cloud sync enabled. You can Upload or Download now.','green');
+    return true;
+  }catch(e){
+    window.setCloudStatus('Cloud sync failed: '+e.message,'red');
+    return false;
+  }
+}
+window.enableCloudSync=async()=>{await initFirebase()};
+window.uploadToCloud=async()=>{
+  if(!db&&!(await initFirebase()))return;
+  const payload=window.getHybridData();
+  payload.cloud={lastUpload:new Date().toISOString(),syncId:document.getElementById('syncId').value||'sergio-main'};
+  await dbSet(dbRef(window._syncPath),payload);
+  window.setCloudStatus('Uploaded to cloud at '+new Date().toLocaleString()+'.','green');
+};
+window.downloadFromCloud=async()=>{
+  if(!db&&!(await initFirebase()))return;
+  const snap=await dbGet(dbRef(window._syncPath));
+  if(!snap.exists()){
+    window.setCloudStatus('No cloud data found for this Athlete Sync ID.','amber');
+    return;
+  }
+  window.setHybridData(snap.val());
+  window.setCloudStatus('Downloaded cloud data at '+new Date().toLocaleString()+'.','green');
+};
 </script>
-</body></html>
+</body>
+</html>
