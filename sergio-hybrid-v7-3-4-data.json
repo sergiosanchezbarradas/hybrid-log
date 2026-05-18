@@ -1,0 +1,1762 @@
+{
+  "sessions": [
+    {
+      "date": "2026-04-27",
+      "day": "Mon",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Bench Press",
+          "group": "chest",
+          "sets": [
+            {
+              "weight": "68",
+              "reps": "8",
+              "rpe": "8"
+            },
+            {
+              "weight": "68",
+              "reps": "8",
+              "rpe": "8"
+            },
+            {
+              "weight": "68",
+              "reps": "8",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Deload / reduce: 60 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Incline DB Press",
+          "group": "upper chest",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "8"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "8"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Deload / reduce: 17.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Weighted Pull-ups",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "",
+              "rpe": ""
+            },
+            {
+              "weight": "",
+              "reps": "",
+              "rpe": ""
+            },
+            {
+              "weight": "",
+              "reps": "",
+              "rpe": ""
+            }
+          ],
+          "suggestion": "Set baseline: Enter first session. No logged performance yet."
+        },
+        {
+          "uid": "",
+          "name": "Chest Supported Row",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 17.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Lateral Raise",
+          "group": "side delts",
+          "sets": [
+            {
+              "weight": "2.5",
+              "reps": "15",
+              "rpe": "9"
+            },
+            {
+              "weight": "2.5",
+              "reps": "15",
+              "rpe": "9"
+            },
+            {
+              "weight": "2.5",
+              "reps": "15",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 2.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Rope Pushdown",
+          "group": "triceps",
+          "sets": [
+            {
+              "weight": "10",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "10",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "10",
+              "reps": "12",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 10 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Pushups",
+          "group": "chest",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "20",
+              "rpe": ""
+            },
+            {
+              "weight": "",
+              "reps": "18",
+              "rpe": ""
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        }
+      ]
+    },
+    {
+      "date": "2026-04-29",
+      "day": "Wed",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Deadlift",
+          "group": "posterior chain",
+          "sets": [
+            {
+              "weight": "100",
+              "reps": "5",
+              "rpe": "9"
+            },
+            {
+              "weight": "100",
+              "reps": "5",
+              "rpe": "9"
+            },
+            {
+              "weight": "100",
+              "reps": "5",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 90 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Leg Press",
+          "group": "quads",
+          "sets": [
+            {
+              "weight": "100",
+              "reps": "10",
+              "rpe": "7"
+            },
+            {
+              "weight": "100",
+              "reps": "10",
+              "rpe": "7"
+            },
+            {
+              "weight": "100",
+              "reps": "10",
+              "rpe": "7"
+            }
+          ],
+          "suggestion": "Deload / reduce: 90 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Weighted Pull-ups",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "5",
+              "reps": "8",
+              "rpe": "8"
+            },
+            {
+              "weight": "5",
+              "reps": "8",
+              "rpe": "8"
+            },
+            {
+              "weight": "5",
+              "reps": "8",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Deload / reduce: 5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "DB Bulgarian Split Squat",
+          "group": "quads",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "8"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Deload / reduce: 17.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Hamstring Curl",
+          "group": "hamstrings",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "",
+              "rpe": ""
+            },
+            {
+              "weight": "",
+              "reps": "",
+              "rpe": ""
+            }
+          ],
+          "suggestion": "Set baseline: Enter first session. No logged performance yet."
+        },
+        {
+          "uid": "",
+          "name": "Standing Calf Raise",
+          "group": "calves",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "9"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "9"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        },
+        {
+          "uid": "",
+          "name": "Hanging Leg Raise",
+          "group": "core",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "8"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "8"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-01",
+      "day": "Fri",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Explosive Pushups",
+          "group": "power",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "5",
+              "rpe": "7"
+            },
+            {
+              "weight": "",
+              "reps": "5",
+              "rpe": "7"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        },
+        {
+          "uid": "",
+          "name": "Weighted Pull-ups",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "5",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "5",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "5",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "5",
+              "reps": "8",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Barbell Row",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "50",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "50",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "50",
+              "reps": "8",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 45 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Incline Bench Press",
+          "group": "chest",
+          "sets": [
+            {
+              "weight": "40",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "40",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "40",
+              "reps": "12",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 35 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "DB Shoulder Press",
+          "group": "shoulders",
+          "sets": [
+            {
+              "weight": "15",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "15",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "15",
+              "reps": "10",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 12.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Farmers Walk",
+          "group": "grip/core",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "45",
+              "rpe": "10"
+            },
+            {
+              "weight": "20",
+              "reps": "45",
+              "rpe": "10"
+            },
+            {
+              "weight": "20",
+              "reps": "45",
+              "rpe": "10"
+            }
+          ],
+          "suggestion": "Progress slowly: 30-45 sec. Carries progress best by posture, duration or small load jumps."
+        },
+        {
+          "uid": "",
+          "name": "EZ Bar Curl",
+          "group": "biceps",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "20",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "20",
+              "reps": "10",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 17.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Overhead Tricep Extension",
+          "group": "triceps",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "9"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "9"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-04",
+      "day": "Mon",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Bench Press",
+          "group": "chest",
+          "sets": [
+            {
+              "weight": "62.5",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "62.5",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "62.5",
+              "reps": "8",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 57.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Incline DB Press",
+          "group": "upper chest",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 17.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Weighted Pull-ups",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "6.5",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "6.5",
+              "reps": "8",
+              "rpe": "10"
+            },
+            {
+              "weight": "6.5",
+              "reps": "8",
+              "rpe": "10"
+            }
+          ],
+          "suggestion": "Deload / reduce: 5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Chest Supported Row",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "8"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "8"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Deload / reduce: 17.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Lateral Raise",
+          "group": "side delts",
+          "sets": [
+            {
+              "weight": "5",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "5",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "5",
+              "reps": "12",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Rope Pushdown",
+          "group": "triceps",
+          "sets": [
+            {
+              "weight": "10",
+              "reps": "12",
+              "rpe": "8"
+            },
+            {
+              "weight": "10",
+              "reps": "12",
+              "rpe": "8"
+            },
+            {
+              "weight": "10",
+              "reps": "12",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Deload / reduce: 10 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Pushups",
+          "group": "chest",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "25",
+              "rpe": "9"
+            },
+            {
+              "weight": "",
+              "reps": "20",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-06",
+      "day": "Wed",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Deadlift",
+          "group": "posterior chain",
+          "sets": [
+            {
+              "weight": "105",
+              "reps": "5",
+              "rpe": "9"
+            },
+            {
+              "weight": "105",
+              "reps": "5",
+              "rpe": "9"
+            },
+            {
+              "weight": "105",
+              "reps": "5",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 95 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Leg Press",
+          "group": "quads",
+          "sets": [
+            {
+              "weight": "105",
+              "reps": "10",
+              "rpe": "8"
+            },
+            {
+              "weight": "105",
+              "reps": "10",
+              "rpe": "8"
+            },
+            {
+              "weight": "105",
+              "reps": "10",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Deload / reduce: 95 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Weighted Pull-ups",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "6",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "6",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "6",
+              "reps": "8",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "DB Bulgarian Split Squat",
+          "group": "quads",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "10",
+              "rpe": "6"
+            },
+            {
+              "weight": "20",
+              "reps": "10",
+              "rpe": "6"
+            }
+          ],
+          "suggestion": "Deload / reduce: 17.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Hamstring Curl",
+          "group": "hamstrings",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "",
+              "rpe": ""
+            },
+            {
+              "weight": "",
+              "reps": "",
+              "rpe": ""
+            }
+          ],
+          "suggestion": "Set baseline: Enter first session. No logged performance yet."
+        },
+        {
+          "uid": "",
+          "name": "Standing Calf Raise",
+          "group": "calves",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "9"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "9"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        },
+        {
+          "uid": "",
+          "name": "Hanging Leg Raise",
+          "group": "core",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "6"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "6"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "6"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-08",
+      "day": "Fri",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Explosive Pushups",
+          "group": "power",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "",
+              "rpe": ""
+            },
+            {
+              "weight": "",
+              "reps": "",
+              "rpe": ""
+            }
+          ],
+          "suggestion": "Set baseline: Enter first session. No logged performance yet."
+        },
+        {
+          "uid": "",
+          "name": "Weighted Pull-ups",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "7.5",
+              "reps": "6",
+              "rpe": "8"
+            },
+            {
+              "weight": "6.5",
+              "reps": "6",
+              "rpe": "8"
+            },
+            {
+              "weight": "6.5",
+              "reps": "6",
+              "rpe": "9"
+            },
+            {
+              "weight": "6.5",
+              "reps": "6",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Barbell Row",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "55",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "55",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "55",
+              "reps": "8",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 50 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Incline Bench Press",
+          "group": "chest",
+          "sets": [
+            {
+              "weight": "45",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "45",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "45",
+              "reps": "12",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 40 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "DB Shoulder Press",
+          "group": "shoulders",
+          "sets": [
+            {
+              "weight": "15",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "15",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "15",
+              "reps": "10",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 12.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Farmers Walk",
+          "group": "grip/core",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "30",
+              "rpe": "9"
+            },
+            {
+              "weight": "20",
+              "reps": "30",
+              "rpe": "9"
+            },
+            {
+              "weight": "20",
+              "reps": "30",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Progress slowly: 30-45 sec. Carries progress best by posture, duration or small load jumps."
+        },
+        {
+          "uid": "",
+          "name": "EZ Bar Curl",
+          "group": "biceps",
+          "sets": [
+            {
+              "weight": "2",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "2",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "2",
+              "reps": "10",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 2.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Overhead Tricep Extension",
+          "group": "triceps",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "",
+              "reps": "12",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-11",
+      "day": "Mon",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Bench Press",
+          "group": "chest",
+          "sets": [
+            {
+              "weight": "65",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "65",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "65",
+              "reps": "8",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 57.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Incline DB Press",
+          "group": "upper chest",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "8"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "8"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Deload / reduce: 17.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Weighted Pull-ups",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "6",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "6",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "6",
+              "reps": "8",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Chest Supported Row",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "7"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "7"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "7"
+            }
+          ],
+          "suggestion": "Deload / reduce: 17.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Lateral Raise",
+          "group": "side delts",
+          "sets": [
+            {
+              "weight": "5",
+              "reps": "15",
+              "rpe": "9"
+            },
+            {
+              "weight": "5",
+              "reps": "15",
+              "rpe": "9"
+            },
+            {
+              "weight": "5",
+              "reps": "15",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Rope Pushdown",
+          "group": "triceps",
+          "sets": [
+            {
+              "weight": "12.5",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "12.5",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "12.5",
+              "reps": "10",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 12.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Pushups",
+          "group": "chest",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "28",
+              "rpe": "99"
+            },
+            {
+              "weight": "",
+              "reps": "25",
+              "rpe": ""
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-13",
+      "day": "Wed",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Deadlift",
+          "group": "posterior chain",
+          "sets": [
+            {
+              "weight": "115",
+              "reps": "5",
+              "rpe": "9"
+            },
+            {
+              "weight": "115",
+              "reps": "5",
+              "rpe": "8"
+            },
+            {
+              "weight": "115",
+              "reps": "5",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 102.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Leg Press",
+          "group": "quads",
+          "sets": [
+            {
+              "weight": "120",
+              "reps": "10",
+              "rpe": "7"
+            },
+            {
+              "weight": "120",
+              "reps": "10",
+              "rpe": "8"
+            },
+            {
+              "weight": "120",
+              "reps": "10",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Deload / reduce: 107.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Weighted Pull-ups",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "6.5",
+              "reps": "8",
+              "rpe": "8"
+            },
+            {
+              "weight": "6.5",
+              "reps": "8",
+              "rpe": "8"
+            },
+            {
+              "weight": "6.5",
+              "reps": "8",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Deload / reduce: 5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "DB Bulgarian Split Squat",
+          "group": "quads",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "6"
+            },
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "6"
+            }
+          ],
+          "suggestion": "Deload / reduce: 17.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Hamstring Curl",
+          "group": "hamstrings",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "",
+              "rpe": ""
+            },
+            {
+              "weight": "",
+              "reps": "",
+              "rpe": ""
+            }
+          ],
+          "suggestion": "Set baseline: Enter first session. No logged performance yet."
+        },
+        {
+          "uid": "",
+          "name": "Standing Calf Raise",
+          "group": "calves",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "8"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "8"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        },
+        {
+          "uid": "",
+          "name": "Hanging Leg Raise",
+          "group": "core",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "6"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "6"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "6"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-15",
+      "day": "Fri",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Explosive Pushups",
+          "group": "power",
+          "sets": [
+            {
+              "weight": "",
+              "reps": "5",
+              "rpe": "5"
+            },
+            {
+              "weight": "",
+              "reps": "5",
+              "rpe": "5"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        },
+        {
+          "uid": "",
+          "name": "Weighted Pull-ups",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "7.5",
+              "reps": "6",
+              "rpe": "9"
+            },
+            {
+              "weight": "7.5",
+              "reps": "6",
+              "rpe": "9"
+            },
+            {
+              "weight": "7.5",
+              "reps": "6",
+              "rpe": "9"
+            },
+            {
+              "weight": "7.5",
+              "reps": "6",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 7.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Barbell Row",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "55",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "55",
+              "reps": "8",
+              "rpe": "9"
+            },
+            {
+              "weight": "55",
+              "reps": "8",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 50 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Incline Bench Press",
+          "group": "chest",
+          "sets": [
+            {
+              "weight": "50",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "45",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "40",
+              "reps": "12",
+              "rpe": "10"
+            }
+          ],
+          "suggestion": "Deload / reduce: 35 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "DB Shoulder Press",
+          "group": "shoulders",
+          "sets": [
+            {
+              "weight": "12.5",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "12.5",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "12.5",
+              "reps": "10",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 12.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Farmers Walk",
+          "group": "grip/core",
+          "sets": [
+            {
+              "weight": "25",
+              "reps": "45",
+              "rpe": "10"
+            },
+            {
+              "weight": "25",
+              "reps": "45",
+              "rpe": "10"
+            },
+            {
+              "weight": "25",
+              "reps": "45",
+              "rpe": "10"
+            }
+          ],
+          "suggestion": "Progress slowly: 30-45 sec. Carries progress best by posture, duration or small load jumps."
+        },
+        {
+          "uid": "",
+          "name": "EZ Bar Curl",
+          "group": "biceps",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "20",
+              "reps": "10",
+              "rpe": "9"
+            },
+            {
+              "weight": "20",
+              "reps": "10",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 17.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Overhead Tricep Extension",
+          "group": "triceps",
+          "sets": [
+            {
+              "weight": "0",
+              "reps": "13",
+              "rpe": "9"
+            },
+            {
+              "weight": "",
+              "reps": "135",
+              "rpe": "9"
+            },
+            {
+              "weight": "",
+              "reps": "15",
+              "rpe": "10"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-17",
+      "day": "Sat",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Runna Long Run",
+          "group": "run",
+          "sets": [
+            {
+              "distance": "10.01",
+              "duration": "66",
+              "rpe": "3"
+            }
+          ],
+          "suggestion": "Log only: Use Runna/Garmin. Running progression is controlled outside the strength engine."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-14",
+      "day": "Thu",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Runna Quality Run",
+          "group": "run",
+          "sets": [
+            {
+              "distance": "9.76",
+              "duration": "60",
+              "rpe": "4.5"
+            }
+          ],
+          "suggestion": "Log only: Use Runna/Garmin. Running progression is controlled outside the strength engine."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-18",
+      "day": "Mon",
+      "readiness": 0,
+      "runFatigue": 0,
+      "items": [
+        {
+          "uid": "",
+          "name": "Bench Press",
+          "group": "chest",
+          "sets": [
+            {
+              "weight": "57.5",
+              "reps": "8",
+              "rpe": "6"
+            },
+            {
+              "weight": "57.5",
+              "reps": "8",
+              "rpe": "7"
+            },
+            {
+              "weight": "57.5",
+              "reps": "8",
+              "rpe": "7.5"
+            }
+          ],
+          "suggestion": "Deload / reduce: 52.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Incline DB Press",
+          "group": "upper chest",
+          "sets": [
+            {
+              "weight": "35",
+              "reps": "8",
+              "rpe": "5"
+            },
+            {
+              "weight": "35",
+              "reps": "12",
+              "rpe": "5"
+            },
+            {
+              "weight": "35",
+              "reps": "12",
+              "rpe": "6"
+            }
+          ],
+          "suggestion": "Deload / reduce: 32.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Weighted Pull-ups",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "7.5",
+              "reps": "6",
+              "rpe": "9"
+            },
+            {
+              "weight": "7.5",
+              "reps": "6",
+              "rpe": "9"
+            },
+            {
+              "weight": "7.5",
+              "reps": "6",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Deload / reduce: 7.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Chest Supported Row",
+          "group": "back",
+          "sets": [
+            {
+              "weight": "20",
+              "reps": "12",
+              "rpe": "4"
+            },
+            {
+              "weight": "30",
+              "reps": "12",
+              "rpe": "6"
+            },
+            {
+              "weight": "30",
+              "reps": "12",
+              "rpe": "6"
+            }
+          ],
+          "suggestion": "Deload / reduce: 27.5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Lateral Raise",
+          "group": "side delts",
+          "sets": [
+            {
+              "weight": "5",
+              "reps": "20",
+              "rpe": "9"
+            },
+            {
+              "weight": "5",
+              "reps": "15",
+              "rpe": "8"
+            },
+            {
+              "weight": "5",
+              "reps": "12",
+              "rpe": "8"
+            }
+          ],
+          "suggestion": "Deload / reduce: 5 kg. Deload week, low readiness or high run fatigue detected."
+        },
+        {
+          "uid": "",
+          "name": "Rope Pushdown",
+          "group": "triceps",
+          "sets": [
+            {
+              "weight": "0",
+              "reps": "15",
+              "rpe": "8"
+            },
+            {
+              "weight": "0",
+              "reps": "12",
+              "rpe": "9"
+            },
+            {
+              "weight": "0",
+              "reps": "10",
+              "rpe": "10"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        },
+        {
+          "uid": "",
+          "name": "Pushups",
+          "group": "chest",
+          "sets": [
+            {
+              "weight": "0",
+              "reps": "35",
+              "rpe": "8"
+            },
+            {
+              "weight": "0",
+              "reps": "21",
+              "rpe": "9"
+            }
+          ],
+          "suggestion": "Set baseline: Use comfortable load. No previous weight entered."
+        }
+      ]
+    }
+  ],
+  "runFatigue": 0,
+  "logs": [],
+  "cloud": {},
+  "settings": {
+    "cycleStart": "2026-04-26",
+    "forceWeek": null
+  }
+}
